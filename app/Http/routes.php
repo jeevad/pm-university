@@ -15,5 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/key', function() {
-	return 'This is a key route from Laravel forge';
+	return 'This is a key route from Laravel forge repo';
 });
