@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('full_name');
             $table->string('email')->unique()->index();
-            $table->string('password', 60);
+            $table->string('password');
             $table->integer('role_id')->unsigned();
             $table->boolean('activated')->default(false);
             $table->string('activation_code')->nullable();

@@ -1,19 +1,43 @@
 <?php
-
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
+  |--------------------------------------------------------------------------
+  | Application Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register all of the routes for an application.
+  | It's a breeze. Simply tell Laravel the URIs it should respond to
+  | and give it the controller to call when that URI is requested.
+  |
+ */
+/**
+ * DB query debugging
+ */
+DB::listen(function($sql) {
+   //dump($sql->sql).PHP_EOL;
+//dump($sql->bindings).PHP_EOL;
+//    dump($sql->time);
+});
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/key', function() {
-	return 'This is a key route from Laravel forge repo';
+
+// Authentication routes...
+Route::auth();
+
+// Home page
+Route::get('/home', 'HomeController@index');
+//Route::get('/api/v1/test', 'Api\UserAPIController@index');
+/*
+  |--------------------------------------------------------------------------
+  | API routes
+  |--------------------------------------------------------------------------
+ */
+
+Route::group(['prefix' => 'api', 'middleware' => ['auth:api', 'api.auth.isAdmin']],
+    function () {
+    Route::group(['prefix' => 'v1/admin', 'namespace' => 'Api\V1\Admin'],
+        function () {
+        //dump(Auth::guard('api')->user());
+        require app_path('Http/api_v1_routes.php');
+    });
 });
