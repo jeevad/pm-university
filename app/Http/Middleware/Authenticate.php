@@ -4,9 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\ApiControllerTrait;
 
 class Authenticate
 {
+    use ApiControllerTrait;
     /**
      * Handle an incoming request.
      *
@@ -19,7 +21,7 @@ class Authenticate
     {
         if (Auth::guard($guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
-                return response('Unauthorized.', 401);
+                return $this->respondUnauthorized(trans('errors.unauthorized'));
             } else {
                 return redirect()->guest('login');
             }

@@ -23,7 +23,7 @@ return [
       | application. If disabled, a simple generic error page is shown.
       |
      */
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
     /*
       |--------------------------------------------------------------------------
       | Application URL
@@ -138,6 +138,11 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /**
+         * Custom Service Providers...
+         */
+        Collective\Html\HtmlServiceProvider::class,
+        Jlapp\Swaggervel\SwaggervelServiceProvider::class,
     ],
     /*
       |--------------------------------------------------------------------------
@@ -181,6 +186,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        /**
+         * Custon
+         */
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 ];
