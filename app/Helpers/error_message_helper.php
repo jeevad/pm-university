@@ -62,6 +62,14 @@ if (!function_exists('formatValidationMessages')) {
             $field    = 'levelId';
             $errors[] = getErrorMessage($field, $messages->first($field));
         }
+        if ($messages->has('tagId')) {
+            $field    = 'tagId';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('topicId')) {
+            $field    = 'topicId';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
 
         return $errors;
     }
