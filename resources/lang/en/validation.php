@@ -96,6 +96,14 @@ return [
             'required' => 'Level ID can not be blank',
             'exists' => 'Invalid level ID',
         ],
+        'tagId' => [
+            'required' => 'Tag ID can not be blank',
+            'exists' => 'Invalid tag ID',
+        ],
+        'topicId' => [
+            'required' => 'Topic ID can not be blank',
+            'exists' => 'Invalid topic ID',
+        ],
     ],
     /*
       |--------------------------------------------------------------------------

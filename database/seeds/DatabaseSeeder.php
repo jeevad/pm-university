@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
@@ -19,6 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TopicsTableSeeder::class);
         $this->call(TagsTableSeeder::class);
         $this->call(ContentTableSeeder::class);
-        $this->call(ContentTableSeeder::class);
+        $this->call(ContentTagsTableSeeder::class);
     }
 }
