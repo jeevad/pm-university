@@ -53,7 +53,7 @@ return array(
       | Turn this off to remove swagger generation on production
       |--------------------------------------------------------------------------
     */
-    "generateAlways" => true,
+    "generateAlways" => false,
 
     "api-key" => "auth_token",
 

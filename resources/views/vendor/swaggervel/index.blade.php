@@ -57,7 +57,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
                 }
                 window.swaggerUi = new SwaggerUi({
                     url: url,
-                    validatorUrl: null,
+                    //validatorUrl: null,
                     dom_id: "swagger-ui-container",
                     supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
                     onComplete: function (swaggerApi, swaggerUi) {
