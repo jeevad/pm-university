@@ -8,6 +8,6 @@
   |
  */
 Route::resource('topics', 'TopicController');
-Route::get('{levelId}/topics', 'LevelController@indexTopics');
-Route::get('topic/{topicId}/tag/{tagId}', 'ContentController@tag');
+Route::get('{levelId}/topics', 'TopicController@indexByLevel');
+Route::get('topic/{topicId}/tag/{tagId}', 'ContentController@indexByTag');
 

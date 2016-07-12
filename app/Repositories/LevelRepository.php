@@ -27,23 +27,4 @@ class LevelRepository extends BaseRepository
         $this->model = $level;
         $this->topic = $topic;
     }
-
-    /**
-     * Get topic collection by level.
-     *
-     * @param  int     $levelId
-     * @param  int     $perPage
-     * @return Illuminate\Support\Collection
-     */
-    public function indexTopics($levelId, $perPage)
-    {
-        $model = 'topic';
-        $query = $this->{$model}
-            ->with('level')
-            ->where('level_id', $levelId)
-            ->whereNull('topics.deleted_at')
-            ->latest();
-
-        return $query->paginate($perPage);
-    }
 }

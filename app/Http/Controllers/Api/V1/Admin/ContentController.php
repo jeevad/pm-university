@@ -227,7 +227,7 @@ class ContentController extends AppBaseController
      *      summary="Display the articles for a specified tag",
      *      tags={"Article"},
      *      description="Get the articles for a specified tag",
-     *      operationId="indexArticlesByTag",
+     *      operationId="indexByTag",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="api_token",
@@ -306,7 +306,7 @@ class ContentController extends AppBaseController
      *      )
      * )
      */
-    public function tag($topicId, $tagId)
+    public function indexByTag($topicId, $tagId)
     {
         // Set the locale
         $locale    = $this->request->has('locale') ? $this->request->input('locale')

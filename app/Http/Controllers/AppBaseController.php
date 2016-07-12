@@ -146,8 +146,4 @@ namespace App\Http\Controllers;
 class AppBaseController extends Controller
 {
 
-    public function test()
-    {
-        echo 'dfkdsk';
-    }
 }

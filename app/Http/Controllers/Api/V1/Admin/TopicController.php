@@ -12,7 +12,77 @@ use App\Http\Controllers\AppBaseController;
 use Auth;
 use Validator;
 
-
+/**
+ * @SWG\Tag(
+ *      name="Admin.Topic",
+ *      description="Everything about Topics"
+ * ),
+ * @SWG\Definition(
+ *     definition="ResponseTopics",
+ *     required={"id"},
+ *     type="object",
+ *     allOf={
+ *         @SWG\Schema(
+ *             ref="#definitions/responseModel"
+ *         ),
+ *         @SWG\Schema(
+ *             required={"data"},
+ *             @SWG\Property(
+ *                 property="data",
+ *                 type="array",
+ *                 @SWG\Items(ref="#/definitions/TopicData")
+ *             ),
+ *             @SWG\Schema(
+ *                 ref="#definitions/Pagination"
+ *             )
+ *         )
+ *     }
+ * ),
+ * @SWG\Definition(
+ *     definition="TopicData",
+ *     required={"data"},
+ *     type="object",
+ *     allOf={
+ *          @SWG\Schema(
+ *             ref="#definitions/Pagination"
+ *         ),
+ *          @SWG\Schema(
+ *              required={"topics"},
+ *              @SWG\Property(
+ *                 property="topics",
+ *                 type="array",
+ *                 @SWG\Items(ref="#/definitions/LevelTopic")
+ *             )
+ *          )
+ *     }
+ * ),
+ * @SWG\Definition(
+ *     definition="Topic",
+ *     required={"id", "title", "sourceUrl", "slug"},
+ *     type="object",
+ *     @SWG\Property(
+ *       property="id",
+ *       description="Topic id",
+ *       format="int64",
+ *       type="integer"
+ *     ),
+ *     @SWG\Property(
+ *         property="title",
+ *         description="Topic title",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="sourceUrl",
+ *         description="Topic's source URL",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="slug",
+ *         description="Topic slug",
+ *         type="string"
+ *     )
+ * ),
+ */
 class TopicController extends AppBaseController
 {
 
@@ -51,6 +121,86 @@ class TopicController extends AppBaseController
         $this->topicGestion = $topicRepo;
     }
 
+    /**
+     * @param int $id
+     * @return IlluminateResponse
+     *
+     * @SWG\Get(
+     *      path="/admin/{levelId}/topics",
+     *      summary="Display the topics for a specified level",
+     *      tags={"Admin.Topic"},
+     *      description="Get the topics for a specified level id",
+     *      operationId="indexTopics",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="api_token",
+     *          description="Authorization token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="levelId",
+     *          description="Level id",
+     *          type="integer",
+     *          format="int32",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="locale",
+     *          in="query",
+     *          description="User preferred language(en|hi), default en",
+     *          default="en",
+     *          enum={"en", "hi"},
+     *          type="string"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="perPage",
+     *          in="query",
+     *          description="Number of items you would like displayed per page",
+     *          default="15",
+     *          type="integer",
+     *          format="int64"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="page",
+     *          in="query",
+     *          description="Current page number to display",
+     *          default="1",
+     *          type="integer",
+     *          format="int64"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @SWG\Schema(
+     *              ref="#/definitions/ResponseTopics"
+     *          )
+     *      ),
+     *      @SWG\Response(
+     *          response=422,
+     *          description="Unsuccessful operation - Validation failed",
+     *          @SWG\Schema(
+     *              ref="#/definitions/validationErrorModel"
+     *          )
+     *      ),
+     *      @SWG\Response(
+     *          response=404,
+     *          description="Unsuccessful operation, category not found",
+     *          @SWG\Schema(
+     *              ref="#/definitions/responseModel"
+     *          ),
+     *      ),
+     *      @SWG\Response(
+     *          response=500,
+     *          description="Unexpected error",
+     *          @SWG\Schema(
+     *              ref="#/definitions/responseModel"
+     *          )
+     *      )
+     * )
+     */
     public function indexByLevel($levelId)
     {
         // Set the locale
@@ -71,9 +221,7 @@ class TopicController extends AppBaseController
         $perPage = (int) $this->request->input('perPage', 200);
         $page    = (int) $this->request->input('page', 1);
         try {
-            $topics = $this->topicGestion->index(
-                $perPage, $levelId);
-
+            $topics         = $this->topicGestion->index($levelId, $perPage);
             $data           = [
                 'total' => $topics->total(),
                 'currentPage' => $topics->currentPage(),
