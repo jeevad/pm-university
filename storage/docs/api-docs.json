@@ -10,7 +10,7 @@
         },
         "version": "1.0.0"
     },
-    "host": "local.pmu.co",
+    "host": "pmuniversity.co",
     "basePath": "/api/v1",
     "schemes": [
         "http"
@@ -86,7 +86,7 @@
                     "200": {
                         "description": "Successful operation",
                         "schema": {
-                            "$ref": "#/definitions/ResponseLevelTopics"
+                            "$ref": "#/definitions/ResponseArticles"
                         }
                     },
                     "422": {

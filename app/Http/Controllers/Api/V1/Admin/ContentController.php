@@ -14,7 +14,7 @@ use App\Traits\ApiControllerTrait;
 /**
  * @SWG\Tag(
  *      name="Article",
- *      description="Everything about Categories"
+ *      description="Everything about Articles"
  * ),
  * @SWG\Definition(
  *     definition="ResponseArticles",
@@ -280,7 +280,7 @@ class ContentController extends AppBaseController
      *          response=200,
      *          description="Successful operation",
      *          @SWG\Schema(
-     *              ref="#/definitions/ResponseLevelTopics"
+     *              ref="#/definitions/ResponseArticles"
      *          )
      *      ),
      *      @SWG\Response(
