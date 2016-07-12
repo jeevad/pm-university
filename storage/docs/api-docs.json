@@ -86,7 +86,7 @@
                     "200": {
                         "description": "Successful operation",
                         "schema": {
-                            "$ref": "#/definitions/ResponseLevelTopics"
+                            "$ref": "#/definitions/ResponseArticles"
                         }
                     },
                     "422": {
