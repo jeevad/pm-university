@@ -10,7 +10,7 @@
         },
         "version": "1.0.0"
     },
-    "host": "pmuniversity.co",
+    "host": "local.pmu.co",
     "basePath": "/api/v1",
     "schemes": [
         "http"
@@ -26,7 +26,7 @@
                 ],
                 "summary": "Display the articles for a specified tag",
                 "description": "Get the articles for a specified tag",
-                "operationId": "indexArticlesByTag",
+                "operationId": "indexByTag",
                 "produces": [
                     "application/json"
                 ],
@@ -113,7 +113,7 @@
         "/admin/{levelId}/topics": {
             "get": {
                 "tags": [
-                    "Admin.Level"
+                    "Admin.Topic"
                 ],
                 "summary": "Display the topics for a specified level",
                 "description": "Get the topics for a specified level id",
@@ -169,7 +169,7 @@
                     "200": {
                         "description": "Successful operation",
                         "schema": {
-                            "$ref": "#/definitions/ResponseLevelTopics"
+                            "$ref": "#/definitions/ResponseTopics"
                         }
                     },
                     "422": {
@@ -372,7 +372,7 @@
             },
             "type": "object"
         },
-        "ResponseLevelTopics": {
+        "ResponseTopics": {
             "required": [
                 "id"
             ],
@@ -389,14 +389,14 @@
                         "data": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/LevelTopicData"
+                                "$ref": "#/definitions/TopicData"
                             }
                         }
                     }
                 }
             ]
         },
-        "LevelTopicData": {
+        "TopicData": {
             "required": [
                 "data"
             ],
@@ -420,7 +420,7 @@
                 }
             ]
         },
-        "LevelTopic": {
+        "Topic": {
             "required": [
                 "id",
                 "title",
@@ -459,8 +459,8 @@
             "description": "Everything about Categories"
         },
         {
-            "name": "Admin.Level",
-            "description": "Operations about Level(Bachelor's degree..)"
+            "name": "Admin.Topic",
+            "description": "Everything about Topics"
         }
     ],
     "externalDocs": {

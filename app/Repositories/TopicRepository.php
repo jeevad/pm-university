@@ -36,19 +36,15 @@ class TopicRepository extends BaseRepository
      * @param  string  $direction
      * @return Illuminate\Support\Collection
      */
-    public function index($n, $levelId = l, $orderby = 'created_at',
-                          $direction = 'desc')
+    public function index($levelId, $perPage)
     {
-        $model = 'level';
         $query = $this->model
             ->with('level')
-           // ->select('topics.id', 'topics.created_at', 'title', 'user_id',
-              //  'slug')
             ->where('level_id', $levelId)
-            ->whereNull('topics.deleted_at');
-            //->latest();
+            ->whereNull('topics.deleted_at')
+            ->latest();
 
-        return $query->paginate($n);
+        return $query->paginate($perPage);
     }
 
     /**
