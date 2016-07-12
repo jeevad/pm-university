@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 /**
  * @SWG\Swagger(
  *   basePath="/api/v1",
- *   host="local.pmu.co",
+ *   host="pmuniversity.co",
  *   schemes={"http"},
  *   produces={"application/json"},
  *   @SWG\Info(
