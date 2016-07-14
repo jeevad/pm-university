@@ -53,20 +53,21 @@ class TopicRepository extends BaseRepository
      * @param  string  $slug
      * @return array
      */
-    public function show($slug)
+    public function show($id)
     {
-        $post = $this->model->with('user', 'tags')->whereSlug($slug)->firstOrFail();
+        $topic = $this->model->findOrFail($id);
 
-        $comments = $this->comment
-            ->wherePost_id($post->id)
-            ->with('user')
-            ->whereHas('user',
-                function($q) {
-                $q->whereValid(true);
-            })
-            ->get();
+//        $comments = $this->comment
+//            ->wherePost_id($post->id)
+//            ->with('user')
+//            ->whereHas('user',
+//                function($q) {
+//                $q->whereValid(true);
+//            })
+//            ->get();
+        $comments = [];
 
-        return compact('post', 'comments');
+        return compact('topic', 'comments');
     }
 
     /**
