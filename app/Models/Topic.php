@@ -8,7 +8,7 @@ use App\Presenters\DatePresenter;
 class Topic extends Model
 {
 
-    use DatePresenter;
+    //use DatePresenter;
     /**
      * The database table used by the model.
      *

@@ -11,6 +11,7 @@ use App\Repositories\TopicRepository;
 use App\Http\Controllers\AppBaseController;
 use Auth;
 use Validator;
+use Carbon\Carbon;
 
 /**
  * @SWG\Tag(
@@ -280,7 +281,35 @@ class TopicController extends AppBaseController
      */
     public function show($id)
     {
-        //
+        $locale    = $this->request->has('locale') ? $this->request->input('locale')
+                : env('APP_LOCALE');
+        $inputs    = array_merge($this->request->all(), ['topicId' => $id]);
+        $validator = Validator::make($inputs,
+                [
+                'locale' => 'sometimes|in:en,hi',
+                'topicId' => 'required|exists:topics,id'
+        ]);
+
+        if ($validator->fails()) {
+            $errors = formatValidationMessages($validator->errors());
+            return $this->respondWithValidationError($errors);
+        }
+
+        try {
+            $result            = $this->topicGestion->show($id);
+            
+            $topic             = $result['topic'];
+            $topic->url        = $topic->url ? $topic->url : '';
+            $data              = [
+                'topic' => $topic, 'comments' => $result['comments']
+            ];
+
+            return $this->respondWithSuccess(trans('messages.success'), $data);
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound(trans('errors.resource_not_found'));
+        } catch (QueryException $e) {
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        }
     }
 
     /**
