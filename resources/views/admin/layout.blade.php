@@ -18,11 +18,11 @@
         <!-- CSS -->
         <link href="{{ asset('')}}css/app_1.min.css" rel="stylesheet">
         <link href="{{ asset('')}}css/app_2.min.css" rel="stylesheet">
-        
+
         <link href="{{ asset('')}}css/animate.css" rel="stylesheet">
         <link href="{{ asset('')}}css/toaster.css" rel="stylesheet">
         <link href="{{ asset('')}}css/loading-bar.min.css" rel="stylesheet">
-        
+
         <script>
             window.globalConfig = {
                 baseURL: "",
@@ -326,7 +326,7 @@
                             <a href="#"><i class="zmdi zmdi-settings"></i> Settings</a>
                         </li>
                         <li>
-                            <a href="{!! url('admin/auth/logout') !!}"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                            <a href="{!! url('logout') !!}"><i class="zmdi zmdi-time-restore"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -525,17 +525,17 @@
             </section>
         </section>
 
-<!--        <footer id="footer">
-            Copyright &copy; 2015 Material Admin
+        <!--        <footer id="footer">
+                    Copyright &copy; 2015 Material Admin
 
-            <ul class="f-menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Support</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </footer>-->
+                    <ul class="f-menu">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Reports</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </footer>-->
 
         <!-- Page Loader -->
         <div class="page-loader">
@@ -630,14 +630,14 @@
         <!-- Loading Bar -->
         <script src="{{ asset('')}}lib/loading-bar.min.js"></script>
         <script src="{{ asset('')}}vendors/bower_components/angular-animate/angular-animate.js"></script>
-        
-        <!-- Angular Material Dependencies -->
-    <script src="{{ asset('')}}vendors/bower_components/angular-aria/angular-aria.min.js"></script>
 
-    <!-- Angular Material Javascript using GitCDN to load directly from `bower-material/master` -->
-    <script src="{{ asset('')}}vendors/bower_components/angular-material/angular-material.min.js"></script>
-        
-        
+        <!-- Angular Material Dependencies -->
+        <script src="{{ asset('')}}vendors/bower_components/angular-aria/angular-aria.min.js"></script>
+
+        <!-- Angular Material Javascript using GitCDN to load directly from `bower-material/master` -->
+        <script src="{{ asset('')}}vendors/bower_components/angular-material/angular-material.min.js"></script>
+
+
         <script src="{{ asset('')}}js/admin/app/app.js"></script>
         <script src="{{ asset('')}}js/admin/app/data.js"></script>
         <script src="{{ asset('')}}js/admin/app/config.constant.js"></script>

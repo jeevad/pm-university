@@ -13,7 +13,7 @@
  * DB query debugging
  */
 DB::listen(function($sql) {
-   //dump($sql->sql).PHP_EOL;
+    //dump($sql->sql).PHP_EOL;
 //dump($sql->bindings).PHP_EOL;
 //    dump($sql->time);
 });
@@ -26,7 +26,6 @@ Route::auth();
 
 // Home page
 Route::get('/home', 'HomeController@index');
-//Route::get('/api/v1/test', 'Api\UserAPIController@index');
 /*
   |--------------------------------------------------------------------------
   | API routes
@@ -42,11 +41,12 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth:api', 'api.auth.isAdmin'
     });
 });
 
-Route::group(['middleware' => ['web'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['web'], 'prefix' => 'admin'],
+    function () {
     Route::get('/', function() {
-         return view('admin/layout');
+        return view('admin/layout');
     });
-    
+
     //Dashboard Route
     Route::get('page', function() {
         return view('admin/layout');
