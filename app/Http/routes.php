@@ -41,3 +41,14 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth:api', 'api.auth.isAdmin'
         require app_path('Http/api_v1_routes.php');
     });
 });
+
+Route::group(['middleware' => ['web'], 'prefix' => 'admin'], function () {
+    Route::get('/', function() {
+         return view('admin/layout');
+    });
+    
+    //Dashboard Route
+    Route::get('page', function() {
+        return view('admin/layout');
+    });
+});
