@@ -24,7 +24,7 @@ app.controller('topicCtrl', function ($scope, Data, $uibModal) {
     getResultsPage();
     function getResultsPage() {
         $scope.loading = true;
-        var url = '/api/v1/admin/1/topics?api_token=D69A9145-8B9A-5A44-9C20-EB5F09144A77&locale=en&perPage='+$scope.itemsPerPage+'&page='+$scope.currentPage;
+        var url = '/api/v1/admin/1/topics?api_token=94D63B96-7A4F-175C-383A-32F9B628EBEC&locale=en&perPage='+$scope.itemsPerPage+'&page='+$scope.currentPage;
         //var url = '/api/v1/admin/1/topics?locale=en&perPage='+$scope.itemsPerPage+'&page='+$scope.currentPage;
         //Data.post('complaint/lists/' + $scope.itemsPerPage + '/' + $scope.currentPage + '/' + $scope.orderby + '/' + $scope.state,
         Data.get(url,{filters: ''}).then(function (response) {
