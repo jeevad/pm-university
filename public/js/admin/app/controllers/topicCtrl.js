@@ -10,24 +10,24 @@
 app.controller('topicCtrl', function ($scope, Data, $uibModal) {
     $scope.topics = [];
     $scope.loading = false;
-
+    
     /* pagination settings */
     $scope.totalItems = 0;
     $scope.currentPage = 1;
     $scope.itemsPerPage = 10;
     $scope.maxSize = 5;
     $scope.filterTitle = 'All Complaints';
-
+   
     /* for sorting */
     $scope.state = 'DESC';
     $scope.orderby = 'id';
     getResultsPage();
     function getResultsPage() {
         $scope.loading = true;
-        var url = '/api/v1/admin/1/topics?api_token=032FF917-8F9F-7907-E9F9-5DCC1374E38A&locale=en&perPage=' + $scope.itemsPerPage + '&page=' + $scope.currentPage;
+        var url = '/api/v1/admin/1/topics?api_token=94D63B96-7A4F-175C-383A-32F9B628EBEC&locale=en&perPage='+$scope.itemsPerPage+'&page='+$scope.currentPage;
         //var url = '/api/v1/admin/1/topics?locale=en&perPage='+$scope.itemsPerPage+'&page='+$scope.currentPage;
         //Data.post('complaint/lists/' + $scope.itemsPerPage + '/' + $scope.currentPage + '/' + $scope.orderby + '/' + $scope.state,
-        Data.get(url, {filters: ''}).then(function (response) {
+        Data.get(url,{filters: ''}).then(function (response) {
             $scope.loading = false;
             $scope.topics = response.data.topics;
             //console.log(response.data.topics);
