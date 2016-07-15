@@ -63,23 +63,23 @@ header("Access-Control-Allow-Headers: X-Requested-With");
                     onComplete: function (swaggerApi, swaggerUi) {
 
                         log("Loaded SwaggerUI");
-                        @if (isset($requestHeaders))
-                        @foreach($requestHeaders as $requestKey => $requestValue)
-                        window.authorizations.add("{!!$requestKey!!}", new ApiKeyAuthorization("{!!$requestKey!!}", "{!!$requestValue!!}", "header"));
-                        @endforeach
-                        @endif
+                                @if (isset($requestHeaders))
+                                @foreach($requestHeaders as $requestKey = > $requestValue)
+                                window.authorizations.add("{!!$requestKey!!}", new ApiKeyAuthorization("{!!$requestKey!!}", "{!!$requestValue!!}", "header"));
+                                @endforeach
+                                @endif
 
-                        if (typeof initOAuth == "function") {
+                                if (typeof initOAuth == "function") {
                             initOAuth({
-                                clientId: "{!! $clientId !!}"||"my-client-id",
-                                clientSecret: "{!! $clientSecret !!}"||"_",
-                                realm: "{!! $realm !!}"||"_",
-                                appName: "{!! $appName !!}"||"_",
+                                clientId: "{!! $clientId !!}" || "my-client-id",
+                                clientSecret: "{!! $clientSecret !!}" || "_",
+                                realm: "{!! $realm !!}" || "_",
+                                appName: "{!! $appName !!}" || "_",
                                 scopeSeparator: ","
                             });
 
                             window.oAuthRedirectUrl = "{{ url('vendor/swaggervel/o2c.html') }}";
-                            $('#clientId').html("{!! $clientId !!}"||"my-client-id");
+                            $('#clientId').html("{!! $clientId !!}" || "my-client-id");
                             $('#redirectUrl').html(window.oAuthRedirectUrl);
                         }
 
@@ -112,16 +112,16 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
                 $('#input_apiKey').change(addApiKeyAuthorization);
 
-                $('#init-oauth').click(function(){
+                $('#init-oauth').click(function () {
                     if (typeof initOAuth == "function") {
-                            initOAuth({
-                                clientId: $('#input_clientId').val()||"my-client-id",
-                                clientSecret: $('#input_clientSecret').val()||"_",
-                                realm: $('#input_realm').val()||"_",
-                                appName: $('#input_appName').val()||"_",
-                                scopeSeparator: ","
-                            });
-                        }
+                        initOAuth({
+                            clientId: $('#input_clientId').val() || "my-client-id",
+                            clientSecret: $('#input_clientSecret').val() || "_",
+                            realm: $('#input_realm').val() || "_",
+                            appName: $('#input_appName').val() || "_",
+                            scopeSeparator: ","
+                        });
+                    }
                 });
 
                 window.swaggerUi.load();
