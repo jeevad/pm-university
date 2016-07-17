@@ -70,6 +70,50 @@ if (!function_exists('formatValidationMessages')) {
             $field    = 'topicId';
             $errors[] = getErrorMessage($field, $messages->first($field));
         }
+        if ($messages->has('sourceUrl')) {
+            $field    = 'sourceUrl';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('title')) {
+            $field    = 'title';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('description')) {
+            $field    = 'description';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('topicPicture')) {
+            $field    = 'topicPicture';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('authorName')) {
+            $field    = 'authorName';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('authorDescription')) {
+            $field    = 'authorDescription';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('authorPicture')) {
+            $field    = 'authorPicture';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('h1')) {
+            $field    = 'h1';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('metaTitle')) {
+            $field    = 'metaTitle';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('metaDescription')) {
+            $field    = 'metaDescription';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
+        if ($messages->has('metaKeywords')) {
+            $field    = 'metaKeywords';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
 
         return $errors;
     }

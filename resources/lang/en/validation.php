@@ -104,6 +104,20 @@ return [
             'required' => 'Topic ID can not be blank',
             'exists' => 'Invalid topic ID',
         ],
+        'sourceUrl' => [
+            'required' => 'Source URL can not be blank',
+            'max' => 'Invalid level ID',
+        ],
+        'title' => [
+            'required' => 'Title can not be blank',
+            'max' => 'Titla atmost 255 characters',
+        ],
+        'description' => [
+            'required' => 'Description can not be blank'
+        ],
+        'authorName' => [
+            'full_name' => 'Author name can not be blank'
+        ],
     ],
     /*
       |--------------------------------------------------------------------------

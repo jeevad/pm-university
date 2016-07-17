@@ -12,6 +12,7 @@ use App\Http\Controllers\AppBaseController;
 use Auth;
 use Validator;
 use Carbon\Carbon;
+use App\Models\Topic;
 
 /**
  * @SWG\Tag(
@@ -264,13 +265,28 @@ class TopicController extends AppBaseController
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $validator = Validator::make($this->request->all(),
+                Topic::$storeTopicRules);
+        if ($validator->fails()) {
+            $errors = formatValidationMessages($validator->errors());
+            return $this->respondWithValidationError($errors);
+        }
+        try {
+            $inputs = array_merge($this->request->all(),
+                ['title' => $this->request->has('title') ? $this->request->input('title')
+                        : getTitleViaLink($this->request->input('sourceUrl'))]);
+            $topic  = $this->topicGestion->store($inputs, Auth::user()->id);
+            return $this->respondCreated(trans('messages.topic_created_success'),
+                    $topic->toArray());
+        } catch (QueryException $ex) {
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        } catch (\ErrorException $e) {
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        }
     }
 
     /**
@@ -296,11 +312,11 @@ class TopicController extends AppBaseController
         }
 
         try {
-            $result            = $this->topicGestion->show($id);
-            
-            $topic             = $result['topic'];
-            $topic->url        = $topic->url ? $topic->url : '';
-            $data              = [
+            $result = $this->topicGestion->show($id);
+
+            $topic      = $result['topic'];
+            $topic->url = $topic->url ? $topic->url : '';
+            $data       = [
                 'topic' => $topic, 'comments' => $result['comments']
             ];
 

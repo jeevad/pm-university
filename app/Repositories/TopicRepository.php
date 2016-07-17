@@ -81,9 +81,12 @@ class TopicRepository extends BaseRepository
     private function saveTopic($topic, $inputs, $userId = null)
     {
         $topic->level_id           = (int) $inputs['levelId'];
-        $topic->url                = strtolower($inputs['url']);
-        $topic->title              = ucwords(strtolower($inputs['title']));
+        $topic->url                = strtolower($inputs['sourceUrl']);
+        $topic->title              = isset($inputs['title']) ? ucwords(strtolower($inputs['title']))
+                : getTitleViaLink(strtolower($inputs['sourceUrl']));
         $topic->description        = ucwords($inputs['description']);
+        $topic->file_id            = isset($inputs['fileId']) ? $inputs['fileId']
+                : null;
         $topic->author_name        = isset($inputs['authorName']) ? ucwords(strtolower($inputs['authorName']))
                 : null;
         $topic->author_description = isset($inputs['authorDescription']) ? ucwords(strtolower($inputs['authorDescription']))
