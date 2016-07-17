@@ -309,7 +309,7 @@
                         </div>
 
                         <div class="sp-info">
-                            Malinda Hollaway
+                            {{ Auth::user()->full_name }}
 
                             <i class="zmdi zmdi-caret-down"></i>
                         </div>

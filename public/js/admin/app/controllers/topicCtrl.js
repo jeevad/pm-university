@@ -299,4 +299,3 @@ app.controller('StatusModalInstanceCtrl', function ($scope, $rootScope, $locatio
         });
     };
 });
-

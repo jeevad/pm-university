@@ -7,7 +7,6 @@ use App\Presenters\DatePresenter;
 
 class Topic extends Model
 {
-
     //use DatePresenter;
     /**
      * The database table used by the model.
@@ -22,12 +21,12 @@ class Topic extends Model
      * @var array
      */
     public static $storeTopicRules = [
-        'url' => 'required|max:255',
-        'title' => 'required|max:255',
+        'sourceUrl' => 'required|url|max:255',
+        'title' => 'sometimes|max:255',
         'description' => 'required|max:65000',
         'topicPicture' => 'sometimes',
         'levelId' => 'required|exists:levels,id',
-        'authorName' => 'sometimes',
+        'authorName' => 'sometimes|full_name',
         'authorDescription' => 'sometimes',
         'authorPicture' => 'sometimes',
         'h1' => 'sometimes',
