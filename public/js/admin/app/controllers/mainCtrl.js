@@ -22,6 +22,10 @@ app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$window', '$docume
                 $window.location.href = '/login';
             });
         }
+        $scope.setToken = function (token) {
+            $window.localStorage.setItem('token',token);
+        };
+        $scope.setToken('032FF917-8F9F-7907-E9F9-5DCC1374E38A');
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             //start loading bar on stateChangeStart
             cfpLoadingBar.start();

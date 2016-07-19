@@ -30,7 +30,39 @@ app.config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
   }]);
-app.run(['$rootScope', '$state', '$stateParams', 'Data','$window',
+
+app.factory('BearerAuthInterceptor', function ($window, $q) {
+    return {
+        request: function (config) {
+            config.headers = config.headers || {};
+            if ($window.localStorage.getItem('token')) {
+                // may also use sessionStorage
+                config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('token');
+            }
+            return config || $q.when(config);
+        },
+        response: function (response) {
+            return response || $q.when(response);
+        },
+        responseError: function (rejection) {
+            // do something on error
+
+            if (rejection.status == 401)  {
+                //$rootScope.signOut();
+                console.log(statusText);
+            }
+
+            return $q.reject(rejection);
+        }
+    };
+});
+
+// Register the previously created AuthInterceptor.
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('BearerAuthInterceptor');
+
+});
+app.run(['$rootScope', '$state', '$stateParams', 'Data', '$window',
     function ($rootScope, $state, $stateParams, Data, $window) {
 
         // Set some reference to access them from any scope
