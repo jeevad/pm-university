@@ -31,7 +31,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
          * APPLICATION ROUTES
          * -----------------------------------
          * For any unmatched url, redirect to /dashboard
-         */ 
+         */
         $urlRouterProvider.otherwise("/dashboard");
         /* Set up the states */
         $stateProvider.state('app', {
@@ -40,12 +40,34 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             //resolve: loadSequence('modernizr', 'moment', 'angularMoment', 'uiSwitch', 'perfect-scrollbar-plugin', 'toaster', 'ngAside', 'vAccordion', 'sweet-alert', 'chartjs', 'tc.chartjs', 'oitozero.ngSweetAlert', 'chatCtrl', 'truncate', 'htmlToPlaintext', 'angular-notification-icons'),
             // resolve: loadSequence('angular-notification-icons'),
             abstract: true
-        }).state('dashboard', {
-            url: "/dashboard",
-            templateUrl: '/tpl/dashboard.html',
-            //resolve: loadSequence('chartJs','angular-chart','moment', 'daterangepicker', 'date-range-plugin','dashboardCtrl'),
-            title: 'Dashboard'
-        }).state('topics', {
+        })
+                /* Topics routes */
+                .state('topic', {
+                    url: "/topic",
+                    template: '<div  ui-view class="view" ></div>',
+                    resolve: loadSequence('topicCtrl'),
+                    abstract: true
+                }).state('topic.list', {
+            url: "/list",
+            templateUrl: '/tpl/topics.html',
+            //resolve: loadSequence('topicCtrl'),
+            title: 'topics'
+        }).state('topic.form', {
+            url: "/form",
+            templateUrl: '/tpl/topic-form.html',
+            //resolve: loadSequence('spin', 'ladda', 'angular-ladda'),
+            title: 'Topic Form'
+        }).state('topic.edit', {
+            url: "/edit/:id",
+            templateUrl: '/employee/form/edit',
+            title: 'Agency Form'
+        })
+                .state('dashboard', {
+                    url: "/dashboard",
+                    templateUrl: '/tpl/dashboard.html',
+                    //resolve: loadSequence('chartJs','angular-chart','moment', 'daterangepicker', 'date-range-plugin','dashboardCtrl'),
+                    title: 'Dashboard'
+                }).state('topics', {
             url: "/topics",
             templateUrl: '/tpl/topics.html',
             resolve: loadSequence('topicCtrl'),
@@ -73,7 +95,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
         }).state('category-dashboard', {
             url: "/category-dashboard",
             templateUrl: '/Authenticate/category_dashboard',
-            resolve: loadSequence('chartJs','angular-chart','moment', 'daterangepicker', 'sparklinJs','categoryDashboardCtrl'),
+            resolve: loadSequence('chartJs', 'angular-chart', 'moment', 'daterangepicker', 'sparklinJs', 'categoryDashboardCtrl'),
             title: 'Category Dashboard'
         }).state('profile', {
             url: "/profile",
@@ -90,7 +112,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
         }).state('addcategories', {
             url: "/addcategories",
             templateUrl: '/Page/addcategories',
-            resolve: loadSequence('angular-ladda','onBoardFlowCtrl'),
+            resolve: loadSequence('angular-ladda', 'onBoardFlowCtrl'),
             title: 'Add Categories'
         }).state('error', {
             url: '/error',
@@ -102,33 +124,34 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             url: '/500',
             templateUrl: "assets/views/utility_500.html",
         })
-        /* employee routes */
-        .state('employee', {
-            url: "/employee",
-            template: '<div ui-view class="fade-in-right-big smooth" ></div>',
-            resolve: loadSequence('empCtrl'),
-            abstract: true
-        }).state('employee.list', {
+
+                /* employee routes */
+                .state('employee', {
+                    url: "/employee",
+                    template: '<div ui-view class="fade-in-right-big smooth" ></div>',
+                    resolve: loadSequence('empCtrl'),
+                    abstract: true
+                }).state('employee.list', {
             url: "/list",
             templateUrl: '/employee/employee_list',
             title: 'Agency'
         }).state('employee.form', {
             url: "/form",
             templateUrl: '/employee/form',
-            resolve: loadSequence('spin','ladda','angular-ladda'),
+            resolve: loadSequence('spin', 'ladda', 'angular-ladda'),
             title: 'Agency List'
         }).state('employee.edit', {
             url: "/edit/:id",
             templateUrl: '/employee/form/edit',
             title: 'Agency Form'
         })
-        /* Complaint routes */
-        .state('complaint', {
-            url: "/complaint",
-            template: '<div ui-view class="fade-in-right-big smooth" ></div>',
-            resolve: loadSequence('spin','ladda','angular-ladda','moment', 'daterangepicker', 'date-range-plugin', 'complaintCtrl'),
-            abstract: true
-        }).state('complaint.list', {
+                /* Complaint routes */
+                .state('complaint', {
+                    url: "/complaint",
+                    template: '<div ui-view class="fade-in-right-big smooth" ></div>',
+                    resolve: loadSequence('spin', 'ladda', 'angular-ladda', 'moment', 'daterangepicker', 'date-range-plugin', 'complaintCtrl'),
+                    abstract: true
+                }).state('complaint.list', {
             url: "/list",
             templateUrl: '/complaint/complaint_list',
             title: 'Complaints List'
@@ -156,18 +179,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
         }).state('complaint.details', {
             url: "/details/:id",
             templateUrl: '/complaint/details',
-            resolve: loadSequence('mapLib','compDetailsCtrl'),
+            resolve: loadSequence('mapLib', 'compDetailsCtrl'),
             title: 'Complaint Details'
         })
-        //engineer route
+                //engineer route
                 // employee routes
-        .state('user', {
-            url: "/user",
-            //templateUrl: '/Authenticate/dashboard',
-            template: '<div ui-view class="fade-in-right-big smooth" ></div>',
-            resolve: loadSequence('userCtrl'),
-            abstract: true
-        }).state('user.list', {
+                .state('user', {
+                    url: "/user",
+                    //templateUrl: '/Authenticate/dashboard',
+                    template: '<div ui-view class="fade-in-right-big smooth" ></div>',
+                    resolve: loadSequence('userCtrl'),
+                    abstract: true
+                }).state('user.list', {
             url: "/list",
             templateUrl: '/user/user_list',
             //resolve: loadSequence('empCtrl'),
@@ -184,14 +207,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             title: 'engineer'
         })
 
-        /* Login routes */
+                /* Login routes */
 
-        .state('login', {
-            url: '/login',
-            templateUrl: '/Authenticate/login_tpl',
-            resolve: loadSequence('authCtrl'),
-            title: 'Login'
-        }).state('login.signin', {
+                .state('login', {
+                    url: '/login',
+                    templateUrl: '/Authenticate/login_tpl',
+                    resolve: loadSequence('authCtrl'),
+                    title: 'Login'
+                }).state('login.signin', {
             url: '/signin',
             templateUrl: "assets/views/login_login.html"
         }).state('login.forgot', {
