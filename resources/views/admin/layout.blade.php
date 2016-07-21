@@ -13,7 +13,7 @@
         <link href="{{ asset('')}}vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
         <link href="{{ asset('')}}vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
 
-        <link href="{{ asset('')}}vendors/bower_components/angular-material/angular-material.css" rel="stylesheet">
+        <!--<link href="{{ asset('')}}vendors/bower_components/angular-material/angular-material.css" rel="stylesheet">-->
 
         <!-- CSS -->
         <link href="{{ asset('')}}css/app_1.min.css" rel="stylesheet">
@@ -333,92 +333,32 @@
 
                 <ul class="main-menu">
                     <li class="active">
-                        <a href="index.html"><i class="zmdi zmdi-home"></i> Home</a>
+                        <a href="#/"><i class="zmdi zmdi-home"></i> Home</a>
                     </li>
                     <li class="sub-menu">
-                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-compact"></i> Headers</a>
-
+                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-compact"></i> Topics</a>
                         <ul>
-                            <li><a href="textual-menu.html">Textual menu</a></li>
-                            <li><a href="image-logo.html">Image logo</a></li>
-                            <li><a href="top-mainmenu.html">Mainmenu on top</a></li>
+                            <li><a ui-sref="topic.list">List</a></li>
+                            <li><a ui-sref="topic.form">Add New</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-compact"></i>Users</a>
+                        <ul>
+                            <li><a ui-sref="user.list">List</a></li>
+                            <li><a ui-sref="user.form">Add New</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-compact"></i>Administrative</a>
+                        <ul>
+                            <li><a ui-sref="user.list">Configuration</a></li>
+                            <li><a ui-sref="user.list">Canned Messages</a></li>
+                            <li><a ui-sref="user.list">Administrators</a></li>
                         </ul>
                     </li>
                     <li><a href="typography.html"><i class="zmdi zmdi-format-underlined"></i> Typography</a></li>
-                    <li class="sub-menu">
-                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-widgets"></i> Widgets</a>
 
-                        <ul>
-                            <li><a href="widget-templates.html">Templates</a></li>
-                            <li><a href="widgets.html">Widgets</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> Tables</a>
-
-                        <ul>
-                            <li><a href="tables.html">Normal Tables</a></li>
-                            <li><a href="data-tables.html">Data Tables</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-text"></i> Forms</a>
-
-                        <ul>
-                            <li><a href="form-elements.html">Basic Form Elements</a></li>
-                            <li><a href="form-components.html">Form Components</a></li>
-                            <li><a href="form-examples.html">Form Examples</a></li>
-                            <li><a href="form-validations.html">Form Validation</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-swap-alt"></i>User Interface</a>
-                        <ul>
-                            <li><a href="colors.html">Colors</a></li>
-                            <li><a href="animations.html">Animations</a></li>
-                            <li><a href="box-shadow.html">Box Shadow</a></li>
-                            <li><a href="buttons.html">Buttons</a></li>
-                            <li><a href="icons.html">Icons</a></li>
-                            <li><a href="alerts.html">Alerts</a></li>
-                            <li><a href="preloaders.html">Preloaders</a></li>
-                            <li><a href="notification-dialog.html">Notifications & Dialogs</a></li>
-                            <li><a href="media.html">Media</a></li>
-                            <li><a href="components.html">Components</a></li>
-                            <li><a href="other-components.html">Others</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-trending-up"></i>Charts</a>
-                        <ul>
-                            <li><a href="flot-charts.html">Flot Charts</a></li>
-                            <li><a href="other-charts.html">Other Charts</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="calendar.html"><i class="zmdi zmdi-calendar"></i> Calendar</a></li>
-                    <li class="sub-menu">
-                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-image"></i>Photo Gallery</a>
-                        <ul>
-                            <li><a href="photos.html">Default</a></li>
-                            <li><a href="photo-timeline.html">Timeline</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="generic-classes.html"><i class="zmdi zmdi-layers"></i> Generic Classes</a></li>
-                    <li class="sub-menu">
-                        <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-item"></i> Sample Pages</a>
-                        <ul>
-                            <li><a href="profile-about.html">Profile</a></li>
-                            <li><a href="list-view.html">List View</a></li>
-                            <li><a href="messages.html">Messages</a></li>
-                            <li><a href="pricing-table.html">Pricing Table</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="wall.html">Wall</a></li>
-                            <li><a href="invoice.html">Invoice</a></li>
-                            <li><a href="login.html">Login and Sign Up</a></li>
-                            <li><a href="lockscreen.html">Lockscreen</a></li>
-                            <li><a href="404.html">Error 404</a></li>
-                        </ul>
-                    </li>
                     <li class="sub-menu">
                         <a href="#" data-ma-action="submenu-toggle"><i class="zmdi zmdi-menu"></i> 3 Level Menu</a>
 
@@ -437,9 +377,7 @@
                             <li><a href="form-validations.html">One more 2</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="https://wrapbootstrap.com/theme/material-admin-responsive-angularjs-WB011H985"><i class="zmdi zmdi-money"></i> Buy this template</a>
-                    </li>
+                    
                 </ul>
             </aside>
 
@@ -525,7 +463,7 @@
             </section>
         </section>
 
-        <!--        <footer id="footer">
+        <footer id="footer">
                     Copyright &copy; 2015 Material Admin
 
                     <ul class="f-menu">
@@ -535,7 +473,7 @@
                         <li><a href="#">Support</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
-                </footer>-->
+        </footer>
 
         <!-- Page Loader -->
         <div class="page-loader">
@@ -632,10 +570,10 @@
         <script src="{{ asset('')}}vendors/bower_components/angular-animate/angular-animate.js"></script>
 
         <!-- Angular Material Dependencies -->
-        <script src="{{ asset('')}}vendors/bower_components/angular-aria/angular-aria.min.js"></script>
+        <!--<script src="{{ asset('')}}vendors/bower_components/angular-aria/angular-aria.min.js"></script>-->
 
         <!-- Angular Material Javascript using GitCDN to load directly from `bower-material/master` -->
-        <script src="{{ asset('')}}vendors/bower_components/angular-material/angular-material.min.js"></script>
+        <!--<script src="{{ asset('')}}vendors/bower_components/angular-material/angular-material.min.js"></script>-->
 
 
         <script src="{{ asset('')}}js/admin/app/app.js"></script>
