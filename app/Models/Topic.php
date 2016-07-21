@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Presenters\DatePresenter;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Topic extends Model
 {
+
     //use DatePresenter;
+    use SoftDeletes;
     /**
      * The database table used by the model.
      *
@@ -34,6 +37,13 @@ class Topic extends Model
         'metaDescription' => 'sometimes',
         'metaKeywords' => 'sometimes'
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * One to Many relation

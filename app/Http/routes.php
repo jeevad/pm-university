@@ -26,6 +26,7 @@ Route::auth();
 
 // Home page
 Route::get('/home', 'HomeController@index');
+Route::get('/topic-delete/{id}', 'Api\V1\Admin\TopicController@destroy');
 
 /*
   |--------------------------------------------------------------------------
