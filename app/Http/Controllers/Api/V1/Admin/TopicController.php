@@ -13,6 +13,7 @@ use Auth;
 use Validator;
 use Carbon\Carbon;
 use App\Models\Topic;
+use App\Http\Requests\StoreTopicRequest;
 
 /**
  * @SWG\Tag(
@@ -267,8 +268,11 @@ class TopicController extends AppBaseController
      * Store a newly created resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoreTopicRequest $request)
     {
+        $this->topicGestion->store($request->all(), Auth::user()->id);
+        exit;
+        $this->blog_gestion->store($request->all(), $request->user()->id);
         $validator = Validator::make($this->request->all(),
                 Topic::$storeTopicRules);
         if ($validator->fails()) {
@@ -280,7 +284,7 @@ class TopicController extends AppBaseController
                 ['title' => $this->request->has('title') ? $this->request->input('title')
                         : getTitleViaLink($this->request->input('sourceUrl'))]);
             $topic  = $this->topicGestion->store($inputs, Auth::user()->id);
-            return $this->respondCreated(trans('messages.topic_created_success'),
+            return $this->respondCreated(trans('back/topic.stored'),
                     $topic->toArray());
         } catch (QueryException $ex) {
             return $this->respondServerError(trans('errors.something_went_wrong'));
@@ -359,6 +363,8 @@ class TopicController extends AppBaseController
      */
     public function destroy($id)
     {
-        //
+        Topic::destroy($id);
+        return redirect('admin#/topics')->with('ok',
+                trans('back/topic.destroyed'));
     }
 }

@@ -13,3 +13,4 @@ Route::get('topic/{topicId}', 'TopicController@show'); // Get a topic
 Route::post('topic', 'TopicController@store'); // Store a new topic
 Route::get('topic/{topicId}/tag/{tagId}', 'ContentController@indexByTag');
 
+
