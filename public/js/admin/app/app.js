@@ -18,7 +18,7 @@ angular.module("pm-app", [
     'oc.lazyLoad',
     'cfp.loadingBar',
     'toaster',
-    'ngMaterial',
+    //'ngMaterial',
 ]);
 // Declare app level module which depends on filters, and services
 var app = angular.module('pmApp', ['pm-app']);
