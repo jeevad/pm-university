@@ -114,6 +114,10 @@ if (!function_exists('formatValidationMessages')) {
             $field    = 'metaKeywords';
             $errors[] = getErrorMessage($field, $messages->first($field));
         }
+        if ($messages->has('file')) {
+            $field    = 'file';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
 
         return $errors;
     }

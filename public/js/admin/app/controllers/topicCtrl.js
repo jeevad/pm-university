@@ -7,33 +7,52 @@
  * Author: Jeeva D <jeevananthamcse@gmail.com>
  * Related to project of PM University
  */
-app.controller('topicCtrl', function ($scope, Data, $uibModal) {
+app.controller('topicCtrl', function ($scope, Data, $uibModal, $http) {
     $scope.topics = [];
     $scope.loading = false;
-    
+
     /* pagination settings */
     $scope.totalItems = 0;
     $scope.currentPage = 1;
     $scope.itemsPerPage = 10;
     $scope.maxSize = 5;
     $scope.filterTitle = 'All Complaints';
-   
+
     /* for sorting */
     $scope.state = 'DESC';
     $scope.orderby = 'id';
     getResultsPage();
     function getResultsPage() {
         $scope.loading = true;
-        var url = '/api/v1/admin/1/topics?locale=en&perPage='+$scope.itemsPerPage+'&page='+$scope.currentPage;
+        var url = '/api/v1/admin/1/topics?locale=en&perPage=' + $scope.itemsPerPage + '&page=' + $scope.currentPage;
         //var url = '/api/v1/admin/1/topics?locale=en&perPage='+$scope.itemsPerPage+'&page='+$scope.currentPage;
         //Data.post('complaint/lists/' + $scope.itemsPerPage + '/' + $scope.currentPage + '/' + $scope.orderby + '/' + $scope.state,
-        Data.get(url,{filters: ''}).then(function (response) {
+        Data.get(url, {filters: ''}).then(function (response) {
+            console.log(response.data.topics);
             $scope.loading = false;
             $scope.topics = response.data.topics;
             //console.log(response.data.topics);
             $scope.totalItems = response.data.total;
         });
     }
+
+    /**
+     * Delete a topic
+     * 
+     * @param {type} topicId
+     * @returns {undefined}
+     */
+    $scope.deleteTopic = function (topicId) {
+        $scope.deleteLoading = true;
+        $http({
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: '/api/v1/admin/topics/' + topicId,
+            method: "DELETE",
+        }).success(function (data) {
+            $scope.deleteLoading = false;
+            window.location.href = '/admin#/topic/list';
+        });
+    };
 });
 app.controller('compListCtrl', function ($scope, Data, $uibModal, $filter) {
     $scope.complaints = [];

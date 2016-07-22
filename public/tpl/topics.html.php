@@ -47,6 +47,8 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Slug</th>
+                        <th>Source</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -54,9 +56,15 @@
                     <tr ng-repeat="topic in topics">
                         <td>[[topic.id]]</td>
                         <td>[[topic.title]]</td>
+                        <td>Christopher</td>
+                        <td>@makinton</td>
                         <td>
-                            <button ng-click="deleteTopic([[topic.id]])" type="button" class="btn btn-icon command-edit waves-effect waves-circle" data-row-id=""><span class="zmdi zmdi-edit"></span></button>
-                            <button ng-click="deleteTopic([[topic.id]])" type="button" class="btn btn-icon command-edit waves-effect waves-circle" data-row-id=""><span class="zmdi zmdi-delete"></span></button>
+                            <form action="" method="POST">
+                                  {{ csrf_field() }}
+                                  {{ method_field('DELETE')}}
+                                  <button type="button" class="btn btn-icon command-edit waves-effect waves-circle" data-row-id=""><span class="zmdi zmdi-edit"></span></button>
+                                <button type="button" class="btn btn-icon command-edit waves-effect waves-circle" data-row-id=""><span class="zmdi zmdi-delete"></span></button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>

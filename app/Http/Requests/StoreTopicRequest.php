@@ -5,9 +5,12 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use App\Models\Topic;
 use Illuminate\Contracts\Validation\Validator;
+use App\Traits\ApiControllerTrait;
 
 class StoreTopicRequest extends Request
 {
+
+    use ApiControllerTrait;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -31,13 +34,12 @@ class StoreTopicRequest extends Request
 
     protected function formatErrors(Validator $validator)
     {
-        $messages = $validator->errors();
-
-
         if ($validator->fails()) {
-            return redirect('admin#/topics')
-                    ->withErrors($validator)
-                    ->withInput();
+
+
+            $errors = formatValidationMessages((object)$validator->errors()->all());
+            return $this->respondWithValidationError('Validation failed',
+                    $errors);
         }
     }
 }
