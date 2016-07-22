@@ -8,7 +8,9 @@ use App\Traits\ApiControllerTrait;
 
 class Authenticate
 {
+
     use ApiControllerTrait;
+
     /**
      * Handle an incoming request.
      *

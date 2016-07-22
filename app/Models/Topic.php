@@ -25,13 +25,14 @@ class Topic extends Model
      */
     public static $storeTopicRules = [
         'sourceUrl' => 'required|url|max:255',
-        'title' => 'sometimes|max:255',
+        'title' => 'required|max:255',
         'description' => 'required|max:65000',
         'topicPicture' => 'sometimes',
         'levelId' => 'required|exists:levels,id',
+        'file' => 'required|image',
         'authorName' => 'sometimes|full_name',
         'authorDescription' => 'sometimes',
-        'authorPicture' => 'sometimes',
+        'authorPicture' => 'sometimes|image',
         'h1' => 'sometimes',
         'metaTitle' => 'sometimes',
         'metaDescription' => 'sometimes',

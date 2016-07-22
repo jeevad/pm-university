@@ -118,6 +118,13 @@ return [
         'authorName' => [
             'full_name' => 'Author name can not be blank'
         ],
+        'file' => [
+            'required' => 'Image can not be blank',
+            'image' => 'Invalid image'
+        ],
+        'authorPicture' => [
+            'image' => 'Invalid image'
+        ]
     ],
     /*
       |--------------------------------------------------------------------------

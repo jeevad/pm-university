@@ -21,7 +21,7 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::guard('api')->user();
+        $user = Auth::guard(env('API_GUARD'))->user();
         if ($user->accessApisAll()) {
             return $next($request);
         }

@@ -28,24 +28,33 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::get('/topic-delete/{id}', 'Api\V1\Admin\TopicController@destroy');
 
+
 /*
   |--------------------------------------------------------------------------
-  | Admin Routes
+  | Admin API Routes
   |--------------------------------------------------------------------------
   |
   | Here is where all API routes are defined.
   |
  */
-Route::group(['middleware' => ['web', 'admin']],
+Route::group(['middleware' => ['api.admin']],
     function () {
-
-    // Admin API calls
     Route::group(['prefix' => 'api/v1/admin', 'namespace' => 'Api\V1\Admin'],
         function () {
-        //dump(Auth::guard('api')->user());
         require app_path('Http/api_v1_routes.php');
     });
+});
 
+/*
+  |--------------------------------------------------------------------------
+  | Admin Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where all admin routes are defined.
+  |
+ */
+Route::group(['middleware' => ['web', 'admin']],
+    function () {
     // Admin Route
     Route::group(['prefix' => 'admin'],
         function () {

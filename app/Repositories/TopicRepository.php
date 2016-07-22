@@ -82,15 +82,14 @@ class TopicRepository extends BaseRepository
     {
         $topic->level_id           = (int) $inputs['levelId'];
         $topic->url                = strtolower($inputs['sourceUrl']);
-        $topic->title              = isset($inputs['title']) ? ucwords(strtolower($inputs['title']))
-                : getTitleViaLink(strtolower($inputs['sourceUrl']));
+        $topic->title              = ucwords(strtolower($inputs['title']));
         $topic->description        = ucwords($inputs['description']);
-        $topic->file_id            = isset($inputs['fileId']) ? $inputs['fileId']
-                : null;
+        $topic->file_id            = $inputs['topicImageId'];
         $topic->author_name        = isset($inputs['authorName']) ? ucwords(strtolower($inputs['authorName']))
                 : null;
         $topic->author_description = isset($inputs['authorDescription']) ? ucwords(strtolower($inputs['authorDescription']))
                 : null;
+        $topic->author_picture_id  = $inputs['authorImageId'];
         $topic->h1                 = isset($inputs['h1']) ? $inputs['h1'] : null;
         $topic->meta_title         = isset($inputs['metaTitle']) ? $inputs['meteTitle']
                 : null;

@@ -12,8 +12,10 @@ use App\Http\Controllers\AppBaseController;
 use Auth;
 use Validator;
 use Carbon\Carbon;
-use App\Models\Topic;
+use App\Models\Topic,
+    App\Models\File;
 use App\Http\Requests\StoreTopicRequest;
+use Image;
 
 /**
  * @SWG\Tag(
@@ -243,6 +245,7 @@ class TopicController extends AppBaseController
                     'id' => $topic->id,
                     'sourceUrl' => $topic->url ? $topic->url : '',
                     'title' => $topic->title ? $topic->title : '',
+                    'createdAt' => $topic->created_at,
                     'slug' => $topic->slug ? url($topic->level->slug.'/'.$topic->slug)
                             : '',
                 ];
@@ -268,27 +271,56 @@ class TopicController extends AppBaseController
      * Store a newly created resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTopicRequest $request)
+    public function store()
     {
-        $this->topicGestion->store($request->all(), Auth::user()->id);
-        exit;
-        $this->blog_gestion->store($request->all(), $request->user()->id);
         $validator = Validator::make($this->request->all(),
                 Topic::$storeTopicRules);
         if ($validator->fails()) {
             $errors = formatValidationMessages($validator->errors());
             return $this->respondWithValidationError($errors);
         }
+
+        $topicImageId = $authorFileId = null;
+        // Topic image
+        if ($this->request->hasFile('file')) {
+            $topicImage   = $this->request->file('file');
+            $resizedImage = $this->resize($topicImage,
+                config('image.paths.topics'), config('image.sizes.topics'));
+            //var_dump($resizedImage->basename);
+            if (!$resizedImage) {
+                return $this->respondServerError(trans('errors.image_could_not_save_or_resize'));
+            }
+            $topicFile      = new File();
+            $topicFile->uri = config('image.paths.topics').'/'.$resizedImage->basename;
+            $topicFile->save();
+            $topicImageId   = $topicFile->id;
+        }
+        // Topic author image
+        if ($this->request->hasFile('authorPicture')) {
+            $authorImage  = $this->request->file('authorPicture');
+            $resizedImage = $this->resize($authorImage,
+                config('image.paths.authors'),
+                config('image.sizes.authors.thumbnail'));
+            if (!$resizedImage) {
+                return $this->respondServerError(trans('errors.image_could_not_save_or_resize'));
+            }
+            $authorFile      = new File();
+            $authorFile->uri = config('image.paths.authors').'/'.$resizedImage->basename;
+            $authorFile->save();
+            $authorFileId    = $authorFile->id;
+        }
         try {
             $inputs = array_merge($this->request->all(),
-                ['title' => $this->request->has('title') ? $this->request->input('title')
-                        : getTitleViaLink($this->request->input('sourceUrl'))]);
-            $topic  = $this->topicGestion->store($inputs, Auth::user()->id);
+                ['topicImageId' => $topicImageId, 'authorImageId' => $authorFileId]);
+            $topic  = $this->topicGestion->store($inputs,
+                Auth::guard(env('API_GUARD'))->user()->id);
             return $this->respondCreated(trans('back/topic.stored'),
                     $topic->toArray());
-        } catch (QueryException $ex) {
+        } catch (QueryException $e) {
+            echo $e->getMessage().$e->getLine();
             return $this->respondServerError(trans('errors.something_went_wrong'));
         } catch (\ErrorException $e) {
+            echo $e->getMessage().$e->getLine();
             return $this->respondServerError(trans('errors.something_went_wrong'));
         }
     }
@@ -364,7 +396,33 @@ class TopicController extends AppBaseController
     public function destroy($id)
     {
         Topic::destroy($id);
-        return redirect('admin#/topics')->with('ok',
-                trans('back/topic.destroyed'));
+        return $this->respondWithSuccess(trans('messages.success'));
+    }
+
+    /**
+     *
+     * @param object $image
+     * @param string $path
+     * @param array $size
+     * @return mixed
+     */
+    private function resize($image, $path, array $size)
+    {
+        try {
+            $fileName      = generateFileName($image->getClientOriginalExtension());
+            $imageRealPath = $image->getRealPath();
+
+            $width  = isset($size['width']) ? intval($size['width']) : null;
+            $height = isset($size['height']) ? intval($size['height']) : null;
+
+            $img = Image::make($imageRealPath)
+                ->resize($width, $height,
+                function($constraint) {
+                $constraint->aspectRatio();
+            });
+            return $img->save(public_path($path).'/'.$fileName);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

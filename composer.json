@@ -11,7 +11,8 @@
         "laravelcollective/bus": "^5.2",
         "maatwebsite/excel": "~2.1.0",
         "filp/whoops": "^2.1",
-        "jlapp/swaggervel": "dev-master"
+        "jlapp/swaggervel": "dev-master",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

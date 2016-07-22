@@ -296,3 +296,21 @@ if (!function_exists('getTitleViaLink')) {
         return $pageTitle;
     }
 }
+
+/**
+ * Generate unique file name
+ */
+if (!function_exists('generateFileName')) {
+
+    /**
+     * Return the custom name for uploaded file
+     *
+     * @param $id
+     * @param string $moduleName
+     * @return string
+     */
+    function generateFileName($fileExtension)
+    {
+        return time()."-".uniqid().'.'.$fileExtension;
+    }
+}

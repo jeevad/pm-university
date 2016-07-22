@@ -11,6 +11,5 @@ return [
     'otp_expired' => 'OTP expired',
     'fail' => 'Failed',
     'too_many_attempts' => 'Too many attempts',
-    'mc_already_assigned_to_mohalla' => 'This mohalls is alreday associated with another co-ordinator',
-    'account_not_activated' => 'Your account not yet activated'
+    'image_could_not_save_or_resize' => 'Could not save/resize Image',
 ];
