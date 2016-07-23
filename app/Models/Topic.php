@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Topic extends Model
 {
 
-    //use DatePresenter;
+    use DatePresenter;
     use SoftDeletes;
     /**
      * The database table used by the model.

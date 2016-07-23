@@ -245,7 +245,7 @@ class TopicController extends AppBaseController
                     'id' => $topic->id,
                     'sourceUrl' => $topic->url ? $topic->url : '',
                     'title' => $topic->title ? $topic->title : '',
-                    'createdAt' => $topic->created_at,
+                    'postedOn' => $topic->created_at,
                     'slug' => $topic->slug ? url($topic->level->slug.'/'.$topic->slug)
                             : '',
                 ];
@@ -317,10 +317,8 @@ class TopicController extends AppBaseController
             return $this->respondCreated(trans('back/topic.stored'),
                     $topic->toArray());
         } catch (QueryException $e) {
-            echo $e->getMessage().$e->getLine();
             return $this->respondServerError(trans('errors.something_went_wrong'));
         } catch (\ErrorException $e) {
-            echo $e->getMessage().$e->getLine();
             return $this->respondServerError(trans('errors.something_went_wrong'));
         }
     }
