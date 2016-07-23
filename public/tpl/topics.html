@@ -47,6 +47,7 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Posted on</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -54,6 +55,7 @@
                     <tr ng-repeat="topic in topics">
                         <td>[[topic.id]]</td>
                         <td>[[topic.title]]</td>
+                        <td>[[topic.postedOn]]</td>
                         <td>
                             <button ng-click="deleteTopic([[topic.id]])" type="button" class="btn btn-icon command-edit waves-effect waves-circle" data-row-id=""><span class="zmdi zmdi-edit"></span></button>
                             <button ng-click="deleteTopic([[topic.id]])" type="button" class="btn btn-icon command-edit waves-effect waves-circle" data-row-id=""><span class="zmdi zmdi-delete"></span></button>

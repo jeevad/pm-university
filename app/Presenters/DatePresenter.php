@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use Carbon\Carbon;
+use Auth;
 
 trait DatePresenter
 {
@@ -37,7 +38,11 @@ trait DatePresenter
      */
     private function getDateFormated($date)
     {
-        return Carbon::parse($date)->format(config('app.locale') == 'fr' ? 'd/m/Y'
-                        : 'm/d/Y');
+        if (session('status') === 'admin' OR session('status') === 'super_admin') {
+            return Carbon::parse($date)->toFormattedDateString();
+        } elseif (Auth::guard(env('API_GUARD'))->user() && Auth::guard(env('API_GUARD'))->user()->accessApisAll()) {
+            return Carbon::parse($date)->toFormattedDateString();
+        }
+        return Carbon::parse($date)->format('Y-m-d H:i:s');
     }
 }
