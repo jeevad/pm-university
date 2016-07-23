@@ -12,4 +12,6 @@ return [
     'fail' => 'Failed',
     'too_many_attempts' => 'Too many attempts',
     'image_could_not_save_or_resize' => 'Could not save/resize Image',
+    'token_mismatch' => 'Session expired. Please log in again',
+    'csrf_error' => 'Sorry, we could not verify your request. Please try again',
 ];

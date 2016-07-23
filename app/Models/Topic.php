@@ -29,7 +29,7 @@ class Topic extends Model
         'description' => 'required|max:65000',
         'topicPicture' => 'sometimes',
         'levelId' => 'required|exists:levels,id',
-        'file' => 'required|image',
+        'file' => 'sometimes|image',
         'authorName' => 'sometimes|full_name',
         'authorDescription' => 'sometimes',
         'authorPicture' => 'sometimes|image',

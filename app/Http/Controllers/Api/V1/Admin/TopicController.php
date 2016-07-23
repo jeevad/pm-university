@@ -326,6 +326,71 @@ class TopicController extends AppBaseController
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        $inputs    = array_merge($this->request->all(), ['topicId' => $id]);
+        $validator = Validator::make($inputs,
+                array_merge(Topic::$storeTopicRules,
+                    ['topicId' => 'required|exists:topics,id']));
+        if ($validator->fails()) {
+            $errors = formatValidationMessages($validator->errors());
+            return $this->respondWithValidationError($errors);
+        }
+
+        $topicImageId = $authorFileId = null;
+        // Topic image
+        if ($this->request->hasFile('file')) {
+            $topicImage   = $this->request->file('file');
+            $resizedImage = $this->resize($topicImage,
+                config('image.paths.topics'), config('image.sizes.topics'));
+            //var_dump($resizedImage->basename);
+            if (!$resizedImage) {
+                return $this->respondServerError(trans('errors.image_could_not_save_or_resize'));
+            }
+            $topicFile      = new File();
+            $topicFile->uri = config('image.paths.topics').'/'.$resizedImage->basename;
+            $topicFile->save();
+            $topicImageId   = $topicFile->id;
+        }
+        // Topic author image
+        if ($this->request->hasFile('authorPicture')) {
+            $authorImage  = $this->request->file('authorPicture');
+            $resizedImage = $this->resize($authorImage,
+                config('image.paths.authors'),
+                config('image.sizes.authors.thumbnail'));
+            if (!$resizedImage) {
+                return $this->respondServerError(trans('errors.image_could_not_save_or_resize'));
+            }
+            $authorFile      = new File();
+            $authorFile->uri = config('image.paths.authors').'/'.$resizedImage->basename;
+            $authorFile->save();
+            $authorFileId    = $authorFile->id;
+        }
+        try {
+            $inputs     = array_merge($this->request->all(),
+                ['topicImageId' => $topicImageId, 'authorImageId' => $authorFileId]);
+            $topicModel = $this->topicGestion->getById($id);
+            $topic      = $this->topicGestion->saveTopic($topicModel, $inputs, 1);
+            return $this->respondWithSuccess(trans('back/topic.updated'),
+                    $topic->toArray());
+        } catch (QueryException $e) {
+            echo $e->getMessage().$e->getLine();
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        } catch (\ErrorException $e) {
+            echo $e->getMessage().$e->getLine();
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        } catch (QueryException $e) {
+            echo $e->getMessage().$e->getLine();
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        }
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -371,18 +436,6 @@ class TopicController extends AppBaseController
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
     {
         //
     }

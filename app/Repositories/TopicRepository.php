@@ -78,7 +78,7 @@ class TopicRepository extends BaseRepository
      * @param  bool   $user_id
      * @return App\Models\Topic
      */
-    private function saveTopic($topic, $inputs, $userId = null)
+    public function saveTopic($topic, $inputs, $userId = null)
     {
         $topic->level_id           = (int) $inputs['levelId'];
         $topic->url                = strtolower($inputs['sourceUrl']);
@@ -90,8 +90,8 @@ class TopicRepository extends BaseRepository
         $topic->author_description = isset($inputs['authorDescription']) ? ucwords(strtolower($inputs['authorDescription']))
                 : null;
         $topic->author_picture_id  = $inputs['authorImageId'];
-        $topic->h1                 = isset($inputs['h1']) ? $inputs['h1'] : null;
-        $topic->meta_title         = isset($inputs['metaTitle']) ? $inputs['meteTitle']
+        $topic->h1                 = isset($inputs['h1']) ? ucfirst($inputs['h1']) : null;
+        $topic->meta_title         = isset($inputs['metaTitle']) ? $inputs['metaTitle']
                 : null;
         $topic->meta_description   = isset($inputs['metaDescription']) ? $inputs['metaDescription']
                 : null;
