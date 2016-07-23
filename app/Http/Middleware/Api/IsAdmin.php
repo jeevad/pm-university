@@ -22,7 +22,7 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         $user = Auth::guard(env('API_GUARD'))->user();
-        if ($user->accessApisAll()) {
+        if ($user && $user->accessApisAll()) {
             return $next($request);
         }
         return $this->respondUnauthorized(trans('errors.unauthorized'));
