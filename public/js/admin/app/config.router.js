@@ -45,7 +45,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 .state('topic', {
                     url: "/topic",
                     template: '<div  ui-view class="view" ></div>',
-                    resolve: loadSequence('topicCtrl'),
+            resolve: loadSequence('topicCtrl','spin', 'ladda', 'angular-ladda'),
                     abstract: true
                 }).state('topic.list', {
             url: "/list",
@@ -59,8 +59,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             title: 'Topic Form'
         }).state('topic.edit', {
             url: "/edit/:id",
-            templateUrl: '/employee/form/edit',
-            title: 'Agency Form'
+            templateUrl: '/tpl/topic-form.html',
+            title: 'Topic Form'
         })
                 .state('dashboard', {
                     url: "/dashboard",
