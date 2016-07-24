@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Topic,
     App\Models\Level;
+use DB;
 
 class TopicRepository extends BaseRepository
 {
@@ -55,7 +56,17 @@ class TopicRepository extends BaseRepository
      */
     public function show($id)
     {
-        $topic = $this->model->findOrFail($id);
+        $topic = DB::table('topics as topic')
+            ->leftJoin('files as file', 'file.id', '=', 'topic.file_id')
+            ->leftJoin('files as authorImg', 'authorImg.id', '=',
+                'topic.author_picture_id')
+            ->select('topic.id', 'topic.url as sourceUrl', 'topic.title',
+                'topic.description', 'topic.id', 'file.uri as topicImgUri',
+                'topic.author_name as authorName',
+                'topic.author_description as authorDesc',
+                'authorImg.uri as authorImgUri', 'topic.created_at as postedOn')
+            ->where('topic.id', $id)
+            ->first();
 
 //        $comments = $this->comment
 //            ->wherePost_id($post->id)
@@ -90,7 +101,8 @@ class TopicRepository extends BaseRepository
         $topic->author_description = isset($inputs['authorDescription']) ? ucwords(strtolower($inputs['authorDescription']))
                 : null;
         $topic->author_picture_id  = $inputs['authorImageId'];
-        $topic->h1                 = isset($inputs['h1']) ? ucfirst($inputs['h1']) : null;
+        $topic->h1                 = isset($inputs['h1']) ? ucfirst($inputs['h1'])
+                : null;
         $topic->meta_title         = isset($inputs['metaTitle']) ? $inputs['metaTitle']
                 : null;
         $topic->meta_description   = isset($inputs['metaDescription']) ? $inputs['metaDescription']
