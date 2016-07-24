@@ -22,7 +22,7 @@ app.controller('topicCtrl', function ($scope, $location, Data, $stateParams, $ti
 
     /* If it is an edit mode, fetch employee details based on id */
     if ($stateParams.id !== undefined) {
-        Data.get('/api/v1/admin/topic/' + $stateParams.id).then(function (response) {
+        Data.get('/api/v1/admin/topics/' + $stateParams.id).then(function (response) {
             console.log(response.success);
             if (response.success) {
                 var topic = response.data.topic;
@@ -38,7 +38,7 @@ app.controller('topicCtrl', function ($scope, $location, Data, $stateParams, $ti
     $scope.loading = false;
     $scope.saveTopic = function (topic) {
         $scope.loading = true;
-        Data.post('/api/v1/admin/topic', topic).then(function (results) {
+        Data.post('/api/v1/admin/topics', topic).then(function (results) {
             $scope.loading = false;
             Data.toast(results);
             if (results.data.success) {
