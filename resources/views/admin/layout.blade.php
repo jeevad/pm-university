@@ -485,7 +485,7 @@
                 <p>Please wait...</p>
             </div>
         </div>
-
+        <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
         <!-- Older IE warning message -->
         <!--[if lt IE 9]>
             <div class="ie-warning">
