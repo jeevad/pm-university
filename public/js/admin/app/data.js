@@ -14,17 +14,33 @@ app.factory("Data", ['$http', 'toaster', '$window',
         var serviceBase = globalConfig.siteURL;
 
         var obj = {};
-        obj.toast = function (data) {
-            toaster.pop(data.status, "", data.message, 10000, 'trustedHtml');
+        obj.toast = function (response) {
+            console.log(response.data);
+            if (response.data.success) {
+                status = 'success';
+            } else {
+                status = "error";
+        }
+            toaster.pop(status, "", response.data.message, 10000, 'trustedHtml');
         }
         obj.get = function (q) {
-            return $http.get(serviceBase + q).then(function (results) {
-                return results.data;
+            return $http.get(serviceBase + q).then(function (response) {
+                //console.log(response);
+                if (response.httpCode == 401) {
+                    //  Redirect user to login page / signup Page.
+                    console.log('un_authorized');
+                }
+                return response.data;
+            }, function (results) {
+                return results;
             });
         };
         obj.post = function (q, object) {
             return $http.post(serviceBase + q, object).then(function (response) {
-                return response.data;
+                return response;
+            }, function (results) {
+                //console.log(results.data);
+                return results;
             });
         };
         obj.put = function (q, object) {

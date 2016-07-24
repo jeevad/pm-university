@@ -17,7 +17,7 @@ app.constant('JS_REQUIRES', {
         //'moment': ['../bower_components/moment/min/moment.min.js'],
         'moment': ['https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js'],
         
-        'spin': '/assets/lib/spin.min.js',
+        'spin': '/lib/spin.min.js',
 
         //*** jQuery Plugins
         'mapLib': 'http://maps.googleapis.com/maps/api/js?key= AIzaSyBJ6nF9Tg7yOPE_W_s5-8SXffyA4rkS4Lk&sensor=false&libraries=places&extension=.js',
@@ -25,7 +25,7 @@ app.constant('JS_REQUIRES', {
         'date-range-plugin': ['https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.js','https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.css'],
         //'morris-plugin': ['https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js','//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js'],
         'chartJs': ['/assets/lib/Chart.min.js'],
-        'ladda': ['/assets/lib/ladda.min.js', '/assets/css/ladda-themeless.min.css'],
+        'ladda': ['/lib/ladda.min.js', '/css/ladda-themeless.min.css'],
         
         'ckeditor-plugin': '../bower_components/ckeditor/ckeditor.js',
         'touchspin-plugin': ['../bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js', '../bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css'],
@@ -62,7 +62,7 @@ app.constant('JS_REQUIRES', {
         files: ['/assets/lib/angular-chart.min.js', '/assets/css/angular-chart.min.css']
     }, {
         name: 'angular-ladda',
-        files: ['/assets/lib/angular-ladda.min.js']
+        files: ['/lib/angular-ladda.min.js']
     }, {
         name: 'ngTable',
         files: ['../bower_components/ng-table/dist/ng-table.min.js', '../bower_components/ng-table/dist/ng-table.min.css']

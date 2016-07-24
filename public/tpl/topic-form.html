@@ -103,7 +103,7 @@
 
 </style>
 
-<div class="container">
+<div class="container" ng-controller="topicCtrl">
     <div class="block-header">
         <h2>Topic Form</h2>
 
@@ -142,29 +142,46 @@
         <div class="card-header">
             <h2>Basic Example</h2>
         </div>
-
         <div class="card-body card-padding">
-            <form role="form">
+            <form role="form" name="topicForm" ng-submit="saveTopic(topic)" autocomplete="off">
                 <uib-tabset>
                     <uib-tab index="0" heading="Content">
                         <div class="form-group fg-line">
-                            <label for="Title">Title</label>
-                            <input type="text" class="form-control input-sm" id="Title"
-                                   placeholder="Enter title">
+                            <label for="levelId">Level</label>
+                            <select class="form-control input-sm" id="levelId"
+                                   placeholder="Enter title" ng-model="topic.levelId" name="levelId">
+                                <option value="1">Bachelor</option>
+                                <option value="2">Master</option>
+                                <option value="3">Doctorate</option>
+                            </select>
                         </div>
                         <div class="form-group fg-line">
-                            <label for="exampleInputPassword1">Source URL</label>
-                            <input type="text" class="form-control input-sm" id="exampleInputPassword1"
-                                   placeholder="Enter Source URL">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control input-sm" id="title"
+                                   placeholder="Enter title" ng-model="topic.title" name="title">
                         </div>
                         <div class="form-group fg-line">
-                            <label for="exampleInputPassword1">Slug</label>
-                            <input type="text" class="form-control input-sm" id="exampleInputPassword1"
-                                   placeholder="Enter Slug">
+                            <label for="sourceUrl">Source URL</label> 
+                            <input type="text" class="form-control input-sm" id="sourceUrl" name="sourceUrl"
+                                   placeholder="Enter Source URL" ng-model="topic.sourceUrl">
+                        </div>
+                        <div class="form-group fg-line">
+                            <label for="description">Description</label>
+                            <textarea class="form-control input-sm" placeholder="Enter Meta Description" ng-model="topic.description" id="description"></textarea>
+                        </div>
+                        <div class="form-group fg-line">
+                            <label for="slug">Slug</label>
+                            <input type="text" class="form-control input-sm" id="slug" name="slug"
+                                   placeholder="Enter Slug" ng-model="topic.slug">
+                        </div>
+                        <div class="form-group fg-line">
+                            <label for="file">File</label>
+                            <input type="file" class="form-control input-sm" id="file" name="file"
+                                   placeholder="Enter file" ng-model="topic.file">
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="">
+                                <input type="checkbox" value="" ng-model="topic.enable">
                                 <i class="input-helper"></i>
                                 Enable
                             </label>
@@ -172,32 +189,44 @@
                     </uib-tab>
                     <uib-tab index="1" heading="SEO">
                         <div class="form-group fg-line">
-                            <label for="exampleInputEmail1">Page Title</label>
-                            <input type="text" class="form-control input-sm" id="exampleInputEmail1"
-                                   placeholder="Enter title">
+                            <label for="h1">Page H1</label>
+                            <input type="text" class="form-control input-sm" id="h1" name="h1"
+                                   placeholder="Enter h1" ng-model="topic.h1">
                         </div>
                         <div class="form-group fg-line">
-                            <label for="exampleInputPassword1">Meta Key</label>
-                            <textarea class="form-control input-sm" 
-                                      placeholder="Enter Meta Key"></textarea>
+                            <label for="metaTitle">Meta Title</label>
+                            <input type="text" class="form-control input-sm" id="metaTitle" name="metaTitle"
+                                   placeholder="Enter h1" ng-model="topic.metaTitle">
                         </div>
                         <div class="form-group fg-line">
-                            <label for="exampleInputPassword1">Meta Description</label>
-                            <textarea class="form-control input-sm" placeholder="Enter Meta Description"></textarea>
+                            <label for="metaKeywords">Meta Keywords</label>
+                            <input type="text" class="form-control input-sm" id="metaKeywords" name="metaKeywords"
+                                   placeholder="Enter metaKeywords" ng-model="topic.metaKeywords">
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                <i class="input-helper"></i>
-                                Enable
-                            </label>
+                        <div class="form-group fg-line">
+                            <label for="metaDescription">Meta Description</label>
+                            <textarea class="form-control input-sm" placeholder="Enter Meta Description" ng-model="topic.metaDescription" id="metaDescription" name="metaDescription"></textarea>
                         </div>
+
                     </uib-tab>
-                    <uib-tab index="2" heading="Tab Two">
-                        More Tab Content
+                    <uib-tab index="2" heading="Author">
+                        <div class="form-group fg-line">
+                            <label for="authorName">Author Name</label>
+                            <input type="text" class="form-control input-sm" id="authorName" name="authorName"
+                                   placeholder="Enter authorName" ng-model="topic.authorName">
+                        </div>
+                        <div class="form-group fg-line">
+                            <label for="authorPicture">Author Image</label>
+                            <input type="text" class="form-control input-sm" id="authorPicture" name="authorPicture"
+                                   placeholder="Enter authorPicture" ng-model="topic.authorPicture">
+                        </div>
+                        <div class="form-group fg-line">
+                            <label for="authorDescription">Author Description</label>
+                            <textarea class="form-control input-sm" placeholder="Enter author Description" ng-model="topic.authorDescription" id="authorDescription" name="authorDescription"></textarea>
+                        </div>
                     </uib-tab>
                 </uib-tabset>
-                <button type="submit" class="btn btn-primary btn-sm m-t-10">Submit</button>
+                <button type="submit" class="btn btn-primary btn-sm m-t-10" ladda="loading" data-style="slide-right">Submit</button>
             </form>
         </div>
     </div>

@@ -7,7 +7,48 @@
  * Author: Jeeva D <jeevananthamcse@gmail.com>
  * Related to project of PM University
  */
-app.controller('topicCtrl', function ($scope, Data, $uibModal, $http) {
+/**
+ * Add/Edit topic Controller
+ * For add new/edit existing user page
+ */
+app.controller('topicCtrl', function ($scope, $location, Data, $stateParams, $timeout) {
+
+    /* Default Title of the page, changes in edit mode */
+    $scope.formTitle = 'Add';
+
+    /*initially set those objects to null to avoid undefined error*/
+    $scope.topic = {levelId: '1', sourceUrl: '', title: '', description: '', authorName: '', authorDescription: '', h1: '',
+        metaTitle: '', metaDescription: '', metaKeywords: '', file: '', authorPicture: ''};
+
+    /* If it is an edit mode, fetch employee details based on id */
+    if ($stateParams.id !== undefined) {
+        Data.get('/api/v1/admin/topic/' + $stateParams.id).then(function (response) {
+            console.log(response.success);
+            if (response.success) {
+                var topic = response.data.topic;
+                $scope.topic = {id: topic.id, levelId: topic.level_id, sourceUrl: topic.url, title: topic.title, description: topic.description, authorName: topic.author_name, authorDescription: topic.author_description, h1: topic.h1,
+                    metaTitle: topic.meta_title, metaDescription: topic.meta_description, metaKeywords: topic.meta_keywords, file: topic.file_id, authorPicture: topic.author_picture_id};
+                //$scope.formTitle = 'Edit';
+            } else {
+                //Data.toast(data);
+                $location.path('topic/list');
+            }
+        });
+    }
+    $scope.loading = false;
+    $scope.saveTopic = function (topic) {
+        $scope.loading = true;
+        Data.post('/api/v1/admin/topic', topic).then(function (results) {
+            $scope.loading = false;
+            Data.toast(results);
+            if (results.data.success) {
+                $location.path('topic/list');
+            }
+        });
+    };
+});
+
+app.controller('topicListCtrl', function ($scope, Data, $uibModal, $http) {
     $scope.topics = [];
     $scope.loading = false;
 
@@ -22,6 +63,14 @@ app.controller('topicCtrl', function ($scope, Data, $uibModal, $http) {
     $scope.state = 'DESC';
     $scope.orderby = 'id';
     getResultsPage();
+    /*set page*/
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    /*on page change*/
+    $scope.pageChanged = function () {
+        getResultsPage();
+    };
     function getResultsPage() {
         $scope.loading = true;
         var url = '/api/v1/admin/1/topics?locale=en&perPage=' + $scope.itemsPerPage + '&page=' + $scope.currentPage;
