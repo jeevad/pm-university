@@ -53,7 +53,7 @@ Route::group(['middleware' => ['api.admin']],
   | Here is where all admin routes are defined.
   |
  */
-Route::group(['middleware' => ['web', 'admin']],
+Route::group(['middlewareGroups' => ['web', 'admin']],
     function () {
     // Admin Route
     Route::group(['prefix' => 'admin'],

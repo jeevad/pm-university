@@ -14,8 +14,7 @@ use Validator;
 use Carbon\Carbon;
 use App\Models\Topic,
     App\Models\File;
-use App\Http\Requests\StoreTopicRequest;
-use Image;
+use App\Libraries\CustomImageLib;
 
 /**
  * @SWG\Tag(
@@ -208,7 +207,7 @@ class TopicController extends AppBaseController
      */
     public function indexByLevel($levelId)
     {
-        // Set the locale
+// Set the locale
         $locale    = $this->request->has('locale') ? $this->request->input('locale')
                 : env('APP_LOCALE');
         $inputs    = array_merge($this->request->all(), ['levelId' => $levelId]);
@@ -222,7 +221,7 @@ class TopicController extends AppBaseController
             $errors = formatValidationMessages($validator->errors());
             return $this->respondWithValidationError($errors);
         }
-        // Set pagination
+// Set pagination
         $perPage = (int) $this->request->input('perPage', 200);
         $page    = (int) $this->request->input('page', 1);
         try {
@@ -252,19 +251,8 @@ class TopicController extends AppBaseController
             }
             return $this->respondWithSuccess(trans('messages.success'), $data);
         } catch (QueryException $e) {
-            dump($e->getMessage());
             return $this->respondServerError(trans('errors.something_went_wrong'));
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -281,12 +269,14 @@ class TopicController extends AppBaseController
         }
 
         $topicImageId = $authorFileId = null;
-        // Topic image
+        if ($this->request->hasFile('file') OR $this->request->hasFile('authorPicture')) {
+            $imageLib = new CustomImageLib();
+        }
+// Topic image
         if ($this->request->hasFile('file')) {
             $topicImage   = $this->request->file('file');
-            $resizedImage = $this->resize($topicImage,
+            $resizedImage = $imageLib->resize($topicImage,
                 config('image.paths.topics'), config('image.sizes.topics'));
-            //var_dump($resizedImage->basename);
             if (!$resizedImage) {
                 return $this->respondServerError(trans('errors.image_could_not_save_or_resize'));
             }
@@ -295,10 +285,10 @@ class TopicController extends AppBaseController
             $topicFile->save();
             $topicImageId   = $topicFile->id;
         }
-        // Topic author image
+// Topic author image
         if ($this->request->hasFile('authorPicture')) {
             $authorImage  = $this->request->file('authorPicture');
-            $resizedImage = $this->resize($authorImage,
+            $resizedImage = $imageLib->resize($authorImage,
                 config('image.paths.authors'),
                 config('image.sizes.authors.thumbnail'));
             if (!$resizedImage) {
@@ -334,19 +324,21 @@ class TopicController extends AppBaseController
         $inputs    = array_merge($this->request->all(), ['topicId' => $id]);
         $validator = Validator::make($inputs,
                 array_merge(Topic::$storeTopicRules,
-                    ['topicId' => 'required|exists:topics,id']));
+                    ['topicId' => 'exists:topics,id']));
         if ($validator->fails()) {
             $errors = formatValidationMessages($validator->errors());
             return $this->respondWithValidationError($errors);
         }
 
         $topicImageId = $authorFileId = null;
+        if ($this->request->hasFile('file') OR $this->request->hasFile('authorPicture')) {
+            $imageLib = new CustomImageLib();
+        }
         // Topic image
         if ($this->request->hasFile('file')) {
             $topicImage   = $this->request->file('file');
-            $resizedImage = $this->resize($topicImage,
+            $resizedImage = $imageLib->resize($topicImage,
                 config('image.paths.topics'), config('image.sizes.topics'));
-            //var_dump($resizedImage->basename);
             if (!$resizedImage) {
                 return $this->respondServerError(trans('errors.image_could_not_save_or_resize'));
             }
@@ -358,7 +350,7 @@ class TopicController extends AppBaseController
         // Topic author image
         if ($this->request->hasFile('authorPicture')) {
             $authorImage  = $this->request->file('authorPicture');
-            $resizedImage = $this->resize($authorImage,
+            $resizedImage = $imageLib->resize($authorImage,
                 config('image.paths.authors'),
                 config('image.sizes.authors.thumbnail'));
             if (!$resizedImage) {
@@ -377,14 +369,11 @@ class TopicController extends AppBaseController
             return $this->respondWithSuccess(trans('back/topic.updated'),
                     $topic->toArray());
         } catch (QueryException $e) {
-            echo $e->getMessage().$e->getLine();
             return $this->respondServerError(trans('errors.something_went_wrong'));
         } catch (\ErrorException $e) {
-            echo $e->getMessage().$e->getLine();
             return $this->respondServerError(trans('errors.something_went_wrong'));
-        } catch (QueryException $e) {
-            echo $e->getMessage().$e->getLine();
-            return $this->respondServerError(trans('errors.something_went_wrong'));
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound(trans('errors.resource_not_found'));
         }
     }
 
@@ -409,13 +398,19 @@ class TopicController extends AppBaseController
             $errors = formatValidationMessages($validator->errors());
             return $this->respondWithValidationError($errors);
         }
-
         try {
             $result = $this->topicGestion->show($id);
 
-            $topic      = $result['topic'];
-            $topic->url = $topic->url ? $topic->url : '';
-            $data       = [
+            $topic               = $result['topic'];
+            $topic->sourceUrl    = $topic->sourceUrl ? $topic->sourceUrl : '';
+            $topic->description  = $topic->description ? $topic->description : '';
+            $topic->authorName   = $topic->authorName ? $topic->authorName : '';
+            $topic->authorDesc   = $topic->authorDesc ? $topic->authorDesc : '';
+            $topic->topicImgUri  = $topic->topicImgUri ? url($topic->topicImgUri)
+                    : '';
+            $topic->authorImgUri = $topic->authorImgUri ? url($topic->authorImgUri)
+                    : '';
+            $data                = [
                 'topic' => $topic, 'comments' => $result['comments']
             ];
 
@@ -428,17 +423,6 @@ class TopicController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -446,34 +430,13 @@ class TopicController extends AppBaseController
      */
     public function destroy($id)
     {
-        Topic::destroy($id);
-        return $this->respondWithSuccess(trans('messages.success'));
-    }
-
-    /**
-     *
-     * @param object $image
-     * @param string $path
-     * @param array $size
-     * @return mixed
-     */
-    private function resize($image, $path, array $size)
-    {
         try {
-            $fileName      = generateFileName($image->getClientOriginalExtension());
-            $imageRealPath = $image->getRealPath();
-
-            $width  = isset($size['width']) ? intval($size['width']) : null;
-            $height = isset($size['height']) ? intval($size['height']) : null;
-
-            $img = Image::make($imageRealPath)
-                ->resize($width, $height,
-                function($constraint) {
-                $constraint->aspectRatio();
-            });
-            return $img->save(public_path($path).'/'.$fileName);
-        } catch (\Exception $e) {
-            return false;
+            Topic::destroy($id);
+            return $this->respondWithSuccess(trans('messages.success'));
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound(trans('errors.resource_not_found'));
+        } catch (QueryException $e) {
+            return $this->respondServerError(trans('errors.something_went_wrong'));
         }
     }
 }
