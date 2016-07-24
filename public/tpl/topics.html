@@ -1,4 +1,4 @@
-<div class="container" ng-controller="topicCtrl">
+<div class="container" ng-controller="topicListCtrl">
     <div class="block-header">
         <h2>Topics</h2>
 
@@ -57,13 +57,18 @@
                         <td>[[topic.title]]</td>
                         <td>[[topic.postedOn]]</td>
                         <td>
-                            <button ng-click="deleteTopic([[topic.id]])" type="button" class="btn btn-icon command-edit waves-effect waves-circle" data-row-id=""><span class="zmdi zmdi-edit"></span></button>
-                            <button ng-click="deleteTopic([[topic.id]])" type="button" class="btn btn-icon command-edit waves-effect waves-circle" data-row-id=""><span class="zmdi zmdi-delete"></span></button>
+                            <a class="btn btn-icon command-edit waves-effect waves-circle" ng-href="#/topic/edit/[[topic.id]]" role="button"><span class="zmdi zmdi-edit"></span></a> 
+                            <button type="button" class="btn btn-icon command-edit waves-effect waves-circle"  ng-click="deleteTopic([[topic.id]])"><span class="zmdi zmdi-delete"></span></button> 
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <!-- Pagination -->
+        <nav class="nav-pagination text-center" ng-show="totalItems > 10" >
+            <uib-pagination total-items="totalItems" ng-change="pageChanged()" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></uib-pagination>
+            <!--<uib-pagination boundary-links="true" max-size="maxSize" items-per-page="itemsPerPage" ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>-->
+        </nav>
     </div>
 
 
