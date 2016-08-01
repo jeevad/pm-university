@@ -13,7 +13,7 @@ class CreateContentTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('content_tag',
+        Schema::create('article_tag',
             function (Blueprint $table) {
             $table->increments('id');
             $table->biginteger('content_id')->unsigned();
@@ -28,6 +28,6 @@ class CreateContentTagTable extends Migration
      */
     public function down()
     {
-        Schema::drop('content_tag');
+        Schema::drop('article_tag');
     }
 }

@@ -13,17 +13,17 @@ class CreateContentTable extends Migration
      */
     public function up()
     {
-        Schema::create('content',
+        Schema::create('articles',
             function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('topic_id')->unsigned()->index();
             $table->bigInteger('user_id')->unsigned();
-            $table->string('url');
+            $table->string('source_url');
             $table->string('title');
             $table->longText('description');
             $table->bigInteger('file_id')->unsigned()->nullable();
-            $table->string('author_name', 200);
-            $table->mediumText('author_description');
+            $table->string('author_name', 200)->nulable();
+            $table->mediumText('author_description')->nullable();;
             $table->bigInteger('author_picture_id')->unusigned()->nullable();
             $table->integer('sequence')->unsigned();
             $table->string('slug');
@@ -44,6 +44,6 @@ class CreateContentTable extends Migration
      */
     public function down()
     {
-        Schema::drop('content');
+        Schema::drop('articles');
     }
 }

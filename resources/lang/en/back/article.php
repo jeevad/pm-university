@@ -1,0 +1,27 @@
+<?php
+return [
+    'dashboard' => 'topics gestion',
+    'creation' => 'Creation',
+    'published' => 'Published',
+    'title' => 'Title',
+    'permalink' => 'Permalink :',
+    'summary' => 'Summary',
+    'content' => 'Content',
+    'tags' => 'Tags',
+    'edition' => 'Edition',
+    'add' => 'Add a post',
+    'articles' => 'Articles',
+    'date' => 'Date',
+    'author' => 'Author',
+    'seen' => 'Seen',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'see' => 'See',
+    'edit' => 'Edit',
+    'destroy' => 'Destroy',
+    'destroy-warning' => 'Really destroy this article ?',
+    'fail' => 'Update fail.',
+    'stored' => 'Article stored.',
+    'updated' => 'Article updated.',
+    'destroyed' => 'Article destroyed'
+];
