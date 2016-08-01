@@ -1,24 +1,25 @@
-<?php namespace App\Models;
+<?php
+
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model  {
+class Tag extends Model
+{
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'tags';
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'tags';
-
-	/**
-	 * Many to Many relation
-	 *
-	 * @return Illuminate\Database\Eloquent\Relations\belongToMany
-	 */
-	public function content()
-	{
-		return $this->belongsToMany(env('APP_MODEL_NAMESPACE').'Content');
-	}
-
+    /**
+     * Many to Many relation
+     *
+     * @return Illuminate\Database\Eloquent\Relations\belongToMany
+     */
+    public function articles()
+    {
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Article');
+    }
 }

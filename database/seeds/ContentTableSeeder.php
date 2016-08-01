@@ -32,7 +32,7 @@ class ContentTableSeeder extends Seeder
                     Content::create([
                         'topic_id' => $row->topic_id,
                         'user_id' => $row->user_id,
-                        'url' => $row->url,
+                        'source_url' => $row->url,
                         'title' => $pageTitle,
                         'slug' => $this->generateSlug($content, $pageTitle)
                     ]);

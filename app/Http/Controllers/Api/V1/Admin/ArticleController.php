@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\ContentRepository,
+use App\Repositories\ArticleRepository,
     App\Repositories\UserRepository;
 use Validator;
 use App\Http\Controllers\AppBaseController;
 use App\Traits\ApiControllerTrait;
+use Illuminate\Database\Eloquent\ModelNotFoundException,
+    Illuminate\Database\QueryException;
+use App\Models\Article;
 
 /**
  * @SWG\Tag(
@@ -82,7 +85,7 @@ use App\Traits\ApiControllerTrait;
  *     )
  * ),
  */
-class ContentController extends AppBaseController
+class ArticleController extends AppBaseController
 {
 
     use ApiControllerTrait;
@@ -94,11 +97,11 @@ class ContentController extends AppBaseController
     protected $request;
 
     /**
-     * The TopicRepository instance.
+     * The ArticleRepository instance.
      *
-     * @var App\Repositories\ContentRepository
+     * @var App\Repositories\ArticleRepository
      */
-    protected $contentGestion;
+    protected $articleGestion;
 
     /**
      * The pagination number.
@@ -115,10 +118,10 @@ class ContentController extends AppBaseController
      * @return void
      */
     public function __construct(
-    Request $request, ContentRepository $contentRepo)
+    Request $request, ArticleRepository $artilceRepo)
     {
         $this->request        = $request;
-        $this->contentGestion = $contentRepo;
+        $this->articleGestion = $artilceRepo;
         $this->nbrPages       = 10;
     }
 
@@ -141,24 +144,49 @@ class ContentController extends AppBaseController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $validator = Validator::make($this->request->all(),
+                Article::$storeArticleRules);
+        if ($validator->fails()) {
+            $errors = formatValidationMessages($validator->errors());
+            return $this->respondWithValidationError($errors);
+        }
+
+        $authorFileId = null;
+
+        // Article author image
+        if ($this->request->hasFile('authorPicture')) {
+            $authorImage  = $this->request->file('authorPicture');
+            $resizedImage = $imageLib->resize($authorImage,
+                config('image.paths.authors'),
+                config('image.sizes.authors.thumbnail'));
+            if (!$resizedImage) {
+                return $this->respondServerError(trans('errors.image_could_not_save_or_resize'));
+            }
+            $authorFile      = new File();
+            $authorFile->uri = config('image.paths.authors').'/'.$resizedImage->basename;
+            $authorFile->save();
+            $authorFileId    = $authorFile->id;
+        }
+        try {
+            $inputs  = array_merge($this->request->all(),
+                ['authorImageId' => $authorFileId]);
+            $article = $this->articleGestion->store($inputs, 1);
+            return $this->respondCreated(trans('back/article.stored'),
+                    $article->toArray());
+        } catch (QueryException $e) {
+            echo $e->getMessage();
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        } catch (\ErrorException $e) {
+            echo $e->getMessage();
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        }
     }
 
     /**

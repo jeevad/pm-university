@@ -2,11 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Models\Content,
+use App\Models\Article,
     App\Models\Tag,
-    App\Models\Comment;
+    App\Models\Comment,
+    App\Models\ArticleTag;
 
-class ContentRepository extends BaseRepository
+class ArticleRepository extends BaseRepository
 {
     /**
      * The Tag instance.
@@ -23,23 +24,23 @@ class ContentRepository extends BaseRepository
     protected $comment;
 
     /**
-     * Create a new ContentRepository instance.
+     * Create a new ArticleRepository instance.
      *
-     * @param  App\Models\Content $content
+     * @param  App\Models\Atricle $article
      * @param  App\Models\Tag $tag
      * @param  App\Models\Comment $comment
      * @return void
      */
     public function __construct(
-    Content $content, Tag $tag, Comment $comment)
+    Article $article, Tag $tag, Comment $comment)
     {
-        $this->model   = $content;
+        $this->model   = $article;
         $this->tag     = $tag;
         $this->comment = $comment;
     }
 
     /**
-     * Create a query for Content.
+     * Create a query for Article.
      *
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -99,8 +100,53 @@ class ContentRepository extends BaseRepository
      */
     public function show($slug)
     {
-        return $content = $this->model->with('tags')->whereSlug($slug)->firstOrFail();
+        return $article = $this->model->with('tags')->whereSlug($slug)->firstOrFail();
 
-        return compact('content');
+        return compact('article');
+    }
+
+    /**
+     * Create or update an article.
+     *
+     * @param  App\Models\Article $article
+     * @param  array  $inputs
+     * @param  bool   $user_id
+     * @return App\Models\Article
+     */
+    public function saveArticle($article, $inputs, $userId = null)
+    {
+        $article->topic_id           = (int) $inputs['topicId'];
+        $article->source_url         = strtolower($inputs['sourceUrl']);
+        $article->title              = ucwords(strtolower($inputs['title']));
+        $article->description        = ucwords($inputs['description']);
+        $article->author_name        = isset($inputs['authorName']) ? ucwords(strtolower($inputs['authorName']))
+                : '';
+        $article->author_description = isset($inputs['authorDescription']) ? ucwords(strtolower($inputs['authorDescription']))
+                : '';
+        $article->author_picture_id  = $inputs['authorImageId'];
+
+        $article->slug = $this->generateSlug($article, $inputs['title']);
+        if ($userId) {
+            $article->user_id = $userId;
+        }
+        $article->save();
+
+        return $article;
+    }
+
+    /**
+     * Create an article.
+     *
+     * @param  array  $inputs
+     * @param  int    $user_id
+     * @return void
+     */
+    public function store($inputs, $userId)
+    {
+        $article = $this->saveArticle(new $this->model, $inputs, $userId);
+
+        // Store into article tags
+        $article->tags()->attach($inputs['tagId']);
+        return $article;
     }
 }
