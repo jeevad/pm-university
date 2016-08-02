@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -13,18 +12,17 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments',
-            function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('description');
             $table->boolean('seen')->default(false);
             $table->integer('user_id')->unsigned();
             $table->integer('content_id')->unsigned();
-
+            
             // Timestamps
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
-
+            
             // Soft delete
             $table->softDeletes()->index();
         });

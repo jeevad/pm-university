@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -8,6 +7,7 @@ use App\Services\CustomValidation;
 
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap any application services.
      *
@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::resolver(function($translator, $data, $rules, $messages) {
+        Validator::resolver(function ($translator, $data, $rules, $messages) {
             return new CustomValidation($translator, $data, $rules, $messages);
         });
     }

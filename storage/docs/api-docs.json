@@ -1,470 +1,470 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Prouct Management University APIs",
-        "description": "PMU api calls in the swagger-2.0 specification",
-        "termsOfService": "http://pmuniversity.co/terms/",
-        "contact": {
-            "name": "PMU API Team",
-            "url": "http://pmuniversity.co/"
-        },
-        "version": "1.0.0"
-    },
-    "host": "pmuniversity.co",
-    "basePath": "/api/v1",
-    "schemes": [
-        "http"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/admin/topic/{topicId}/tag/{tagId}": {
-            "get": {
-                "tags": [
-                    "Article"
-                ],
-                "summary": "Display the articles for a specified tag",
-                "description": "Get the articles for a specified tag",
-                "operationId": "indexByTag",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "api_token",
-                        "in": "query",
-                        "description": "Authorization token",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "topicId",
-                        "in": "path",
-                        "description": "Topic id",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "tagId",
-                        "in": "path",
-                        "description": "Tag id",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "locale",
-                        "in": "query",
-                        "description": "User preferred language(en|hi), default en",
-                        "type": "string",
-                        "default": "en",
-                        "enum": [
-                            "en",
-                            "hi"
-                        ]
-                    },
-                    {
-                        "name": "perPage",
-                        "in": "query",
-                        "description": "Number of items you would like displayed per page",
-                        "type": "integer",
-                        "format": "int64",
-                        "default": "15"
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description": "Current page number to display",
-                        "type": "integer",
-                        "format": "int64",
-                        "default": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/ResponseArticles"
-                        }
-                    },
-                    "422": {
-                        "description": "Unsuccessful operation - Validation failed",
-                        "schema": {
-                            "$ref": "#/definitions/validationErrorModel"
-                        }
-                    },
-                    "404": {
-                        "description": "Unsuccessful operation, category not found",
-                        "schema": {
-                            "$ref": "#/definitions/responseModel"
-                        }
-                    },
-                    "500": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/responseModel"
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/{levelId}/topics": {
-            "get": {
-                "tags": [
-                    "Admin.Topic"
-                ],
-                "summary": "Display the topics for a specified level",
-                "description": "Get the topics for a specified level id",
-                "operationId": "indexTopics",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "api_token",
-                        "in": "query",
-                        "description": "Authorization token",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "levelId",
-                        "in": "path",
-                        "description": "Level id",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "locale",
-                        "in": "query",
-                        "description": "User preferred language(en|hi), default en",
-                        "type": "string",
-                        "default": "en",
-                        "enum": [
-                            "en",
-                            "hi"
-                        ]
-                    },
-                    {
-                        "name": "perPage",
-                        "in": "query",
-                        "description": "Number of items you would like displayed per page",
-                        "type": "integer",
-                        "format": "int64",
-                        "default": "15"
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description": "Current page number to display",
-                        "type": "integer",
-                        "format": "int64",
-                        "default": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/ResponseTopics"
-                        }
-                    },
-                    "422": {
-                        "description": "Unsuccessful operation - Validation failed",
-                        "schema": {
-                            "$ref": "#/definitions/validationErrorModel"
-                        }
-                    },
-                    "404": {
-                        "description": "Unsuccessful operation, category not found",
-                        "schema": {
-                            "$ref": "#/definitions/responseModel"
-                        }
-                    },
-                    "500": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/responseModel"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "ValidationError": {
-            "required": [
-                "field",
-                "message"
-            ],
-            "properties": {
-                "field": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "responseModel": {
-            "required": [
-                "httpCode",
-                "success",
-                "message"
-            ],
-            "properties": {
-                "httpCode": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "success": {
-                    "type": "boolean"
-                },
-                "message": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "validationErrorModel": {
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#definitions/responseModel"
-                },
-                {
-                    "required": [
-                        "data"
-                    ],
-                    "properties": {
-                        "data": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ValidationError"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        "Pagination": {
-            "required": [
-                "total",
-                "hasMore"
-            ],
-            "properties": {
-                "total": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "currentPage": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "perPage": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "lastPage": {
-                    "description": "Last page number",
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "hasMore": {
-                    "description": "Indicates still more pages are there?",
-                    "type": "boolean"
-                },
-                "nextPageUrl": {
-                    "description": "Next page URL",
-                    "type": "string"
-                },
-                "previousPageUrl": {
-                    "description": "Previous page URL",
-                    "type": "string"
-                },
-                "url": {
-                    "description": "Current page URL",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "rateLimit": {
-            "type": "object"
-        },
-        "ResponseArticles": {
-            "required": [
-                "id"
-            ],
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#definitions/responseModel"
-                },
-                {
-                    "required": [
-                        "data"
-                    ],
-                    "properties": {
-                        "data": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ArticleData"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        "ArticleData": {
-            "required": [
-                "data"
-            ],
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#definitions/Pagination"
-                },
-                {
-                    "required": [
-                        "topics"
-                    ],
-                    "properties": {
-                        "topics": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Article"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        "Article": {
-            "required": [
-                "id",
-                "title",
-                "sourceUrl",
-                "slug"
-            ],
-            "properties": {
-                "id": {
-                    "description": "Article id",
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "title": {
-                    "description": "Article title",
-                    "type": "string"
-                },
-                "sourceUrl": {
-                    "description": "Article's source URL",
-                    "type": "string"
-                },
-                "slug": {
-                    "description": "Article's slug",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "ResponseTopics": {
-            "required": [
-                "id"
-            ],
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#definitions/responseModel"
-                },
-                {
-                    "required": [
-                        "data"
-                    ],
-                    "properties": {
-                        "data": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/TopicData"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        "TopicData": {
-            "required": [
-                "data"
-            ],
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#definitions/Pagination"
-                },
-                {
-                    "required": [
-                        "topics"
-                    ],
-                    "properties": {
-                        "topics": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/LevelTopic"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        "Topic": {
-            "required": [
-                "id",
-                "title",
-                "sourceUrl",
-                "slug"
-            ],
-            "properties": {
-                "id": {
-                    "description": "Topic id",
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "title": {
-                    "description": "Topic title",
-                    "type": "string"
-                },
-                "sourceUrl": {
-                    "description": "Topic's source URL",
-                    "type": "string"
-                },
-                "slug": {
-                    "description": "Topic slug",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        }
-    },
-    "tags": [
-        {
-            "name": "Auth",
-            "description": "Operations about Authentication"
-        },
-        {
-            "name": "Article",
-            "description": "Everything about Categories"
-        },
-        {
-            "name": "Admin.Topic",
-            "description": "Everything about Topics"
-        }
-    ],
-    "externalDocs": {
-        "description": "Find out more about Swagger",
-        "url": "http://swagger.io"
-    }
+	"swagger": "2.0",
+	"info": {
+		"title": "Prouct Management University APIs",
+		"description": "PMU api calls in the swagger-2.0 specification",
+		"termsOfService": "http://pmuniversity.co/terms/",
+		"contact": {
+			"name": "PMU API Team",
+			"url": "http://pmuniversity.co/"
+		},
+		"version": "1.0.0"
+	},
+	"host": "pmuniversity.co",
+	"basePath": "/api/v1",
+	"schemes": [
+		"http"
+	],
+	"produces": [
+		"application/json"
+	],
+	"paths": {
+		"/admin/topic/{topicId}/tag/{tagId}": {
+			"get": {
+				"tags": [
+					"Article"
+				],
+				"summary": "Display the articles for a specified tag",
+				"description": "Get the articles for a specified tag",
+				"operationId": "indexByTag",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "api_token",
+						"in": "query",
+						"description": "Authorization token",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "topicId",
+						"in": "path",
+						"description": "Topic id",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "tagId",
+						"in": "path",
+						"description": "Tag id",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "locale",
+						"in": "query",
+						"description": "User preferred language(en|hi), default en",
+						"type": "string",
+						"default": "en",
+						"enum": [
+							"en",
+							"hi"
+						]
+					},
+					{
+						"name": "perPage",
+						"in": "query",
+						"description": "Number of items you would like displayed per page",
+						"type": "integer",
+						"format": "int64",
+						"default": "15"
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"description": "Current page number to display",
+						"type": "integer",
+						"format": "int64",
+						"default": "1"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"schema": {
+							"$ref": "#/definitions/ResponseArticles"
+						}
+					},
+					"422": {
+						"description": "Unsuccessful operation - Validation failed",
+						"schema": {
+							"$ref": "#/definitions/validationErrorModel"
+						}
+					},
+					"404": {
+						"description": "Unsuccessful operation, category not found",
+						"schema": {
+							"$ref": "#/definitions/responseModel"
+						}
+					},
+					"500": {
+						"description": "Unexpected error",
+						"schema": {
+							"$ref": "#/definitions/responseModel"
+						}
+					}
+				}
+			}
+		},
+		"/admin/{levelId}/topics": {
+			"get": {
+				"tags": [
+					"Admin.Topic"
+				],
+				"summary": "Display the topics for a specified level",
+				"description": "Get the topics for a specified level id",
+				"operationId": "indexTopics",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "api_token",
+						"in": "query",
+						"description": "Authorization token",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "levelId",
+						"in": "path",
+						"description": "Level id",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "locale",
+						"in": "query",
+						"description": "User preferred language(en|hi), default en",
+						"type": "string",
+						"default": "en",
+						"enum": [
+							"en",
+							"hi"
+						]
+					},
+					{
+						"name": "perPage",
+						"in": "query",
+						"description": "Number of items you would like displayed per page",
+						"type": "integer",
+						"format": "int64",
+						"default": "15"
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"description": "Current page number to display",
+						"type": "integer",
+						"format": "int64",
+						"default": "1"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"schema": {
+							"$ref": "#/definitions/ResponseTopics"
+						}
+					},
+					"422": {
+						"description": "Unsuccessful operation - Validation failed",
+						"schema": {
+							"$ref": "#/definitions/validationErrorModel"
+						}
+					},
+					"404": {
+						"description": "Unsuccessful operation, category not found",
+						"schema": {
+							"$ref": "#/definitions/responseModel"
+						}
+					},
+					"500": {
+						"description": "Unexpected error",
+						"schema": {
+							"$ref": "#/definitions/responseModel"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"ValidationError": {
+			"required": [
+				"field",
+				"message"
+			],
+			"properties": {
+				"field": {
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"responseModel": {
+			"required": [
+				"httpCode",
+				"success",
+				"message"
+			],
+			"properties": {
+				"httpCode": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"success": {
+					"type": "boolean"
+				},
+				"message": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"validationErrorModel": {
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#definitions/responseModel"
+				},
+				{
+					"required": [
+						"data"
+					],
+					"properties": {
+						"data": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ValidationError"
+							}
+						}
+					}
+				}
+			]
+		},
+		"Pagination": {
+			"required": [
+				"total",
+				"hasMore"
+			],
+			"properties": {
+				"total": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"currentPage": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"perPage": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"lastPage": {
+					"description": "Last page number",
+					"type": "integer",
+					"format": "int64"
+				},
+				"hasMore": {
+					"description": "Indicates still more pages are there?",
+					"type": "boolean"
+				},
+				"nextPageUrl": {
+					"description": "Next page URL",
+					"type": "string"
+				},
+				"previousPageUrl": {
+					"description": "Previous page URL",
+					"type": "string"
+				},
+				"url": {
+					"description": "Current page URL",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"rateLimit": {
+			"type": "object"
+		},
+		"ResponseArticles": {
+			"required": [
+				"id"
+			],
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#definitions/responseModel"
+				},
+				{
+					"required": [
+						"data"
+					],
+					"properties": {
+						"data": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ArticleData"
+							}
+						}
+					}
+				}
+			]
+		},
+		"ArticleData": {
+			"required": [
+				"data"
+			],
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#definitions/Pagination"
+				},
+				{
+					"required": [
+						"topics"
+					],
+					"properties": {
+						"topics": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Article"
+							}
+						}
+					}
+				}
+			]
+		},
+		"Article": {
+			"required": [
+				"id",
+				"title",
+				"sourceUrl",
+				"slug"
+			],
+			"properties": {
+				"id": {
+					"description": "Article id",
+					"type": "integer",
+					"format": "int64"
+				},
+				"title": {
+					"description": "Article title",
+					"type": "string"
+				},
+				"sourceUrl": {
+					"description": "Article's source URL",
+					"type": "string"
+				},
+				"slug": {
+					"description": "Article's slug",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"ResponseTopics": {
+			"required": [
+				"id"
+			],
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#definitions/responseModel"
+				},
+				{
+					"required": [
+						"data"
+					],
+					"properties": {
+						"data": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/TopicData"
+							}
+						}
+					}
+				}
+			]
+		},
+		"TopicData": {
+			"required": [
+				"data"
+			],
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#definitions/Pagination"
+				},
+				{
+					"required": [
+						"topics"
+					],
+					"properties": {
+						"topics": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/LevelTopic"
+							}
+						}
+					}
+				}
+			]
+		},
+		"Topic": {
+			"required": [
+				"id",
+				"title",
+				"sourceUrl",
+				"slug"
+			],
+			"properties": {
+				"id": {
+					"description": "Topic id",
+					"type": "integer",
+					"format": "int64"
+				},
+				"title": {
+					"description": "Topic title",
+					"type": "string"
+				},
+				"sourceUrl": {
+					"description": "Topic's source URL",
+					"type": "string"
+				},
+				"slug": {
+					"description": "Topic slug",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		}
+	},
+	"tags": [
+		{
+			"name": "Auth",
+			"description": "Operations about Authentication"
+		},
+		{
+			"name": "Article",
+			"description": "Everything about Categories"
+		},
+		{
+			"name": "Admin.Topic",
+			"description": "Everything about Topics"
+		}
+	],
+	"externalDocs": {
+		"description": "Find out more about Swagger",
+		"url": "http://swagger.io"
+	}
 }

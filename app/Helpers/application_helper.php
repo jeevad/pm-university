@@ -1,25 +1,25 @@
 <?php
-if (!function_exists('config_path')) {
+if (! function_exists('config_path')) {
 
     /**
      * Get the configuration path.
      *
-     * @param  string $path
+     * @param string $path            
      * @return string
      */
     function config_path($path = '')
     {
-        return app()->basePath().'/config'.($path ? '/'.$path : $path);
+        return app()->basePath() . '/config' . ($path ? '/' . $path : $path);
     }
 }
 
-if (!function_exists('bcrypt')) {
+if (! function_exists('bcrypt')) {
 
     /**
      * Hash the given value.
      *
-     * @param  string  $value
-     * @param  array   $options
+     * @param string $value            
+     * @param array $options            
      * @return string
      */
     function bcrypt($value, $options = [])
@@ -29,12 +29,12 @@ if (!function_exists('bcrypt')) {
 }
 
 /*
-  |--------------------------------------------------------------------------
-  | IP address of the current user
-  |--------------------------------------------------------------------------
-  |
+ * |--------------------------------------------------------------------------
+ * | IP address of the current user
+ * |--------------------------------------------------------------------------
+ * |
  */
-if (!function_exists('getUserIp')) {
+if (! function_exists('getUserIp')) {
 
     function getUserIp($integer_format = true)
     {
@@ -44,27 +44,26 @@ if (!function_exists('getUserIp')) {
 }
 
 /*
-  |--------------------------------------------------------------------------
-  | User agent (web browser) being used by the current user
-  |--------------------------------------------------------------------------
-  |
+ * |--------------------------------------------------------------------------
+ * | User agent (web browser) being used by the current user
+ * |--------------------------------------------------------------------------
+ * |
  */
-if (!function_exists('getUserAgent')) {
+if (! function_exists('getUserAgent')) {
 
     function getUserAgent()
     {
-
-        return (!isset($_SERVER['HTTP_USER_AGENT'])) ? FALSE : $_SERVER['HTTP_USER_AGENT'];
+        return (! isset($_SERVER['HTTP_USER_AGENT'])) ? FALSE : $_SERVER['HTTP_USER_AGENT'];
     }
 }
 
 /**
  * Generate a globally unique identifier
  */
-if (!function_exists('generateGUID')) {
+if (! function_exists('generateGUID')) {
 
     function generateGUID($opt = false)
-    {       //  Set to true/false as your default way to do this.
+    { // Set to true/false as your default way to do this.
         if (function_exists('com_create_guid')) {
             if ($opt) {
                 return com_create_guid();
@@ -72,30 +71,26 @@ if (!function_exists('generateGUID')) {
                 return trim(com_create_guid(), '{}');
             }
         } else {
-            mt_srand((double) microtime() * 10000);    // optional for php 4.2.0 and up.
-            $charid      = strtoupper(md5(uniqid(rand(), true)));
-            $hyphen      = chr(45);    // "-"
-            $left_curly  = $opt ? chr(123) : "";     //  "{"
-            $right_curly = $opt ? chr(125) : "";    //  "}"
-            $uuid        = $left_curly
-                .substr($charid, 0, 8).$hyphen
-                .substr($charid, 8, 4).$hyphen
-                .substr($charid, 12, 4).$hyphen
-                .substr($charid, 16, 4).$hyphen
-                .substr($charid, 20, 12)
-                .$right_curly;
+            mt_srand((double) microtime() * 10000); // optional for php 4.2.0 and up.
+            $charid = strtoupper(md5(uniqid(rand(), true)));
+            $hyphen = chr(45); // "-"
+            $left_curly = $opt ? chr(123) : ""; // "{"
+            $right_curly = $opt ? chr(125) : ""; // "}"
+            $uuid = $left_curly . substr($charid, 0, 8) . $hyphen . substr($charid, 8, 4) . $hyphen . substr($charid, 12, 4) . $hyphen . substr($charid, 16, 4) . $hyphen . substr($charid, 20, 12) . $right_curly;
             return $uuid;
         }
     }
 }
 
 /**
- * Dump helper. Functions to dump variables to the screen, in a nicley
+ * Dump helper.
+ * Functions to dump variables to the screen, in a nicley
  * formatted manner.
+ * 
  * @author Joost van Veen
  * @version 1.0
  */
-if (!function_exists('dump')) {
+if (! function_exists('dump')) {
 
     function dump($var, $label = 'Dump', $echo = TRUE)
     {
@@ -103,11 +98,11 @@ if (!function_exists('dump')) {
         ob_start();
         var_dump($var);
         $output = ob_get_clean();
-
+        
         // Add formatting
         $output = preg_replace("/\]\=\>\n(\s+)/m", "] => ", $output);
-        $output = '<pre style="background: #FFFEEF; color: #000; border: 1px dotted #000; padding: 10px; margin: 10px 0; text-align: left;">'.$label.' => '.$output.'</pre>';
-
+        $output = '<pre style="background: #FFFEEF; color: #000; border: 1px dotted #000; padding: 10px; margin: 10px 0; text-align: left;">' . $label . ' => ' . $output . '</pre>';
+        
         // Output
         if ($echo == TRUE) {
             echo $output;
@@ -117,29 +112,29 @@ if (!function_exists('dump')) {
     }
 }
 
-if (!function_exists('dump_exit')) {
+if (! function_exists('dump_exit')) {
 
     function dump_exit($var, $label = 'Dump', $echo = TRUE)
     {
         dump($var, $label, $echo);
-        exit;
+        exit();
     }
 }
 
 /**
  * Get source id from device type android|ios
  *
- * @param string $deviceOs
+ * @param string $deviceOs            
  * @return mixed
  */
-if (!function_exists('getChannelId')) {
+if (! function_exists('getChannelId')) {
 
     function getChannelId($deviceOs)
     {
-        $channel['web']     = 1;
+        $channel['web'] = 1;
         $channel['android'] = 2;
-        $channel['ios']     = 3;
-
+        $channel['ios'] = 3;
+        
         return $channel[strtolower($deviceOs)];
     }
 }
@@ -149,7 +144,7 @@ if (!function_exists('getChannelId')) {
  *
  * @return integer
  */
-if (!function_exists('generateOtp')) {
+if (! function_exists('generateOtp')) {
 
     function generateOtp()
     {
@@ -159,27 +154,26 @@ if (!function_exists('generateOtp')) {
 /**
  * sendSms
  */
-if (!function_exists('sendSms')) {
+if (! function_exists('sendSms')) {
 
     function sendSms($mobileNumber, $textMsg = '')
     {
         $senderID = env('SMS_SENDER_ID');
-        $user     = env('SMS_USER_NAME').':'.env('SMS_PASSWORD');
-
-        //open connection
+        $user = env('SMS_USER_NAME') . ':' . env('SMS_PASSWORD');
+        
+        // open connection
         $ch = curl_init();
-
-        //set the url, POST data
+        
+        // set the url, POST data
         curl_setopt($ch, CURLOPT_URL, env('SMS_BASE_URL'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "user=$user&senderID=$senderID&receipientno=$mobileNumber&msgtxt=$textMsg");
-
-        //execute post
-        $buffer   = curl_exec($ch);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "user=$user&senderID=$senderID&receipientno=$mobileNumber&msgtxt=$textMsg");
+        
+        // execute post
+        $buffer = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+        
         // Close connection
         curl_close($ch);
     }
@@ -188,10 +182,10 @@ if (!function_exists('sendSms')) {
 /**
  * Calculate OTP expiration time in minutes
  *
- * @param timestamp $otpSentAt
+ * @param timestamp $otpSentAt            
  * @return int
  */
-if (!function_exists('calculateOtpSessTime')) {
+if (! function_exists('calculateOtpSessTime')) {
 
     function calculateOtpSessTime($otpSentAt)
     {
@@ -203,78 +197,76 @@ if (!function_exists('calculateOtpSessTime')) {
 /**
  * Generate random MAC address
  */
-if (!function_exists('generateMacAddress')) {
+if (! function_exists('generateMacAddress')) {
 
     function generateMacAddress($doHash = false)
     {
         if ($doHash) {
-            return implode(':',
-                str_split(str_pad(base_convert(mt_rand(0, 0xffffff), 10, 16).base_convert(mt_rand(0,
-                                0xffffff), 10, 16), 12), 2));
+            return implode(':', str_split(str_pad(base_convert(mt_rand(0, 0xffffff), 10, 16) . base_convert(mt_rand(0, 0xffffff), 10, 16), 12), 2));
         }
         return implode(':', str_split(substr(md5(mt_rand()), 0, 12), 2));
     }
 }
 /*
-  |--------------------------------------------------------------------------
-  | Modify .env file helper function
-  |--------------------------------------------------------------------------
-  |
-  | Source: http://laravelsnippets.com/snippets/env-file-modify-helper
-
-  | You can easily modify .env file by putting key and value into modifyEnv helper function
-  | // you can update any value you want. Just type $key which exists and wanted value to replace.
-  |    $data = [
-  |           'APP_ENV' => 'your_environment',
-  |           'APP_KEY' => 'your_key',
-  |           'APP_DEBUG' => 'trueOrFalse',
-  |           'DB_DATABASE' => 'test',
-  |           'DB_USERNAME' => 'test',
-  'DB_PASSWORD' => 'test',
-  'DB_HOST' => 'localhost',
-  'CACHE_DRIVER' => 'file',
-  'SESSION_DRIVER' => 'file',
-
-  // Custom
-
-  'CUSTOM' => 'value',
-  ];
-
-  // or
-  $data = [
-  'DB_HOST' => '127.0.0.1',
-  ];
-
-  |   modifyEnv($data);
-  |
+ * |--------------------------------------------------------------------------
+ * | Modify .env file helper function
+ * |--------------------------------------------------------------------------
+ * |
+ * | Source: http://laravelsnippets.com/snippets/env-file-modify-helper
+ *
+ * | You can easily modify .env file by putting key and value into modifyEnv helper function
+ * | // you can update any value you want. Just type $key which exists and wanted value to replace.
+ * | $data = [
+ * | 'APP_ENV' => 'your_environment',
+ * | 'APP_KEY' => 'your_key',
+ * | 'APP_DEBUG' => 'trueOrFalse',
+ * | 'DB_DATABASE' => 'test',
+ * | 'DB_USERNAME' => 'test',
+ * 'DB_PASSWORD' => 'test',
+ * 'DB_HOST' => 'localhost',
+ * 'CACHE_DRIVER' => 'file',
+ * 'SESSION_DRIVER' => 'file',
+ *
+ * // Custom
+ *
+ * 'CUSTOM' => 'value',
+ * ];
+ *
+ * // or
+ * $data = [
+ * 'DB_HOST' => '127.0.0.1',
+ * ];
+ *
+ * | modifyEnv($data);
+ * |
  */
 
-if (!function_exists('modifyEnv')) {
+if (! function_exists('modifyEnv')) {
 
     function modifyEnv(array $data)
     {
-        $envPath = base_path().DIRECTORY_SEPARATOR.'.env';
-
+        $envPath = base_path() . DIRECTORY_SEPARATOR . '.env';
+        
         $contentArray = collect(file($envPath, FILE_IGNORE_NEW_LINES));
-
+        
         $contentArray->transform(function ($item) use ($data) {
             foreach ($data as $key => $value) {
                 if (str_contains($item, $key)) {
-                    return $key.'='.$value;
+                    return $key . '=' . $value;
                 }
             }
-
+            
             return $item;
         });
-
+        
         $content = implode($contentArray->toArray(), "\n");
-        //file_put_contents($envPath, $content);
-
+        // file_put_contents($envPath, $content);
+        
         \File::put($envPath, $content);
     }
 }
 
-if (!function_exists('changeLocale')) {
+if (! function_exists('changeLocale')) {
 
     function changeLocale($locale)
     {
@@ -282,14 +274,14 @@ if (!function_exists('changeLocale')) {
     }
 }
 
-if (!function_exists('getTitleViaLink')) {
+if (! function_exists('getTitleViaLink')) {
 
     function getTitleViaLink($url)
     {
         $pageTitle = '';
-        $str       = file_get_contents($url);
+        $str = file_get_contents($url);
         if (strlen($str) > 0) {
-            $str       = trim(preg_replace('/\s+/', ' ', $str)); // supports line breaks inside <title>
+            $str = trim(preg_replace('/\s+/', ' ', $str)); // supports line breaks inside <title>
             preg_match("/\<title\>(.*)\<\/title\>/i", $str, $title); // ignore case
             $pageTitle = $title[1];
         }
@@ -300,17 +292,18 @@ if (!function_exists('getTitleViaLink')) {
 /**
  * Generate unique file name
  */
-if (!function_exists('generateFileName')) {
+if (! function_exists('generateFileName')) {
 
     /**
      * Return the custom name for uploaded file
      *
-     * @param $id
-     * @param string $moduleName
+     * @param
+     *            $id
+     * @param string $moduleName            
      * @return string
      */
     function generateFileName($fileExtension)
     {
-        return time()."-".uniqid().'.'.$fileExtension;
+        return time() . "-" . uniqid() . '.' . $fileExtension;
     }
 }

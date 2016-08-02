@@ -1,17 +1,17 @@
 <?php
 return [
-
+    
     /*
-      |--------------------------------------------------------------------------
-      | Application Environment
-      |--------------------------------------------------------------------------
-      |
-      | This value determines the "environment" your application is currently
-      | running in. This may determine how you prefer to configure various
-      | services your application utilizes. Set this in your ".env" file.
-      |
+     * |--------------------------------------------------------------------------
+     * | Application Environment
+     * |--------------------------------------------------------------------------
+     * |
+     * | This value determines the "environment" your application is currently
+     * | running in. This may determine how you prefer to configure various
+     * | services your application utilizes. Set this in your ".env" file.
+     * |
      */
-
+    
     'env' => env('APP_ENV', 'production'),
     /*
       |--------------------------------------------------------------------------
@@ -104,7 +104,7 @@ return [
       |
      */
     'providers' => [
-
+        
         /*
          * Laravel Framework Service Providers...
          */
@@ -143,7 +143,7 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         Jlapp\Swaggervel\SwaggervelServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
     ],
     /*
       |--------------------------------------------------------------------------
@@ -156,7 +156,7 @@ return [
       |
      */
     'aliases' => [
-
+        
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -193,6 +193,6 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Image' => Intervention\Image\Facades\Image::class,
-    ],
+        'Image' => Intervention\Image\Facades\Image::class
+    ]
 ];

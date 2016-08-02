@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -13,9 +12,11 @@ class AddApiTokenToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users',
-            function (Blueprint $table) {
-            $table->string('api_token', 60)->unique()->after('id')->index();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('api_token', 60)
+                ->unique()
+                ->after('id')
+                ->index();
         });
     }
 
@@ -26,8 +27,7 @@ class AddApiTokenToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users',
-            function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

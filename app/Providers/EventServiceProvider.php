@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
@@ -7,26 +6,31 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
+
     /**
      * The event handler mappings for the application.
      *
      * @var array
      */
     protected $listen = [
-        'Illuminate\Auth\Events\Login' => ['App\Listeners\LoginSuccess'],
-        'Illuminate\Auth\Events\Logout' => ['App\Listeners\LogoutSuccess']
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LoginSuccess'
+        ],
+        'Illuminate\Auth\Events\Logout' => [
+            'App\Listeners\LogoutSuccess'
+        ]
     ];
 
     /**
      * Register any other events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param \Illuminate\Contracts\Events\Dispatcher $events            
      * @return void
      */
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
-
+        
         //
     }
 }

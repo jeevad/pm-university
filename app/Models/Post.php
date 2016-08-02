@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,8 +6,9 @@ use App\Presenters\DatePresenter;
 
 class Content extends Model
 {
-
+    
     use DatePresenter;
+
     /**
      * The database table used by the model.
      *
@@ -23,7 +23,7 @@ class Content extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(env('APP_MODEL_NAMESPACE').'Tag');
+        return $this->belongsToMany(env('APP_MODEL_NAMESPACE') . 'Tag');
     }
 
     /**
@@ -33,6 +33,6 @@ class Content extends Model
      */
     public function comments()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Comment');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Comment');
     }
 }

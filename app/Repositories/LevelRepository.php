@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Repositories;
 
-use App\Models\Topic,
-    App\Models\Level;
+use App\Models\Topic, App\Models\Level;
 
 class LevelRepository extends BaseRepository
 {
+
     /**
      * The Topic instance.
      *
@@ -17,12 +16,11 @@ class LevelRepository extends BaseRepository
     /**
      * Create a new LevelRepository instance.
      *
-     * @param  App\Models\Level $level
-     * * @param  App\Models\Topic $topic
+     * @param App\Models\Level $level
+     *            * @param App\Models\Topic $topic
      * @return void
      */
-    public function __construct(
-    Level $level, Topic $topic)
+    public function __construct(Level $level, Topic $topic)
     {
         $this->model = $level;
         $this->topic = $topic;

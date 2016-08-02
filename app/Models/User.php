@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
     /**
      * The database table used by the model.
      *
@@ -18,7 +18,10 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
     /**
      * Validation rules to store an user
@@ -38,7 +41,7 @@ class User extends Authenticatable
      */
     public function channel()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Channel');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'Channel');
     }
 
     /**
@@ -48,7 +51,7 @@ class User extends Authenticatable
      */
     public function role()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Role');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'Role');
     }
 
     /**
@@ -58,7 +61,7 @@ class User extends Authenticatable
      */
     public function topics()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Topic');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Topic');
     }
 
     /**
@@ -68,7 +71,7 @@ class User extends Authenticatable
      */
     public function content()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Content');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Content');
     }
 
     /**
@@ -78,8 +81,7 @@ class User extends Authenticatable
      */
     public function accessMediasAll()
     {
-
-        return $this->role->slug === 'super_admin' OR $this->role->slug === 'admin';
+        return $this->role->slug === 'super_admin' or $this->role->slug === 'admin';
     }
 
     /**
@@ -89,7 +91,7 @@ class User extends Authenticatable
      */
     public function accessApisAll()
     {
-        return $this->role->slug === 'super_admin' OR $this->role->slug === 'admin';
+        return $this->role->slug === 'super_admin' or $this->role->slug === 'admin';
     }
 
     /**

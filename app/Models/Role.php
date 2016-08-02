@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+
     /**
      * The database table used by the model.
      *
@@ -20,6 +20,6 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE').'User');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'User');
     }
 }

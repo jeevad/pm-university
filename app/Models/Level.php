@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Level extends Model
 {
+
     /**
      * The database table used by the model.
      *
@@ -20,8 +20,9 @@ class Level extends Model
      */
     public function users()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Topic');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Topic');
     }
+
     /**
      * One to Many relation
      *
@@ -29,6 +30,6 @@ class Level extends Model
      */
     public function topics()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Topic');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Topic');
     }
 }

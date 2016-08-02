@@ -5,7 +5,6 @@
  * Date: 04/07/14
  * Time: 3:54 PM
  */
-
 return array(
     /*
       |--------------------------------------------------------------------------
@@ -42,10 +41,10 @@ return array(
     */
     "excludes" => array(
         storage_path(),
-        base_path()."/tests",
-        base_path()."/resources/views",
-        base_path()."/config",
-        base_path()."/vendor"
+        base_path() . "/tests",
+        base_path() . "/resources/views",
+        base_path() . "/config",
+        base_path() . "/vendor"
     ),
 
     /*
@@ -54,7 +53,7 @@ return array(
       |--------------------------------------------------------------------------
     */
     "generateAlways" => false,
-
+    
     "api-key" => "auth_token",
 
     /*
