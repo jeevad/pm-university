@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class ArticleTag extends Model
 {
+
     /**
      * The database table used by the model.
      *
@@ -25,6 +25,8 @@ class ArticleTag extends Model
      *
      * @var array
      */
-    protected $fillable = ['article_id', 'tag_id'];
-
+    protected $fillable = [
+        'article_id',
+        'tag_id'
+    ];
 }

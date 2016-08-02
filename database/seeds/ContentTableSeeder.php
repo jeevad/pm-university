@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use App\Models\Content;
 use Illuminate\Database\QueryException;
@@ -7,7 +6,7 @@ use App\Traits\Sluggable;
 
 class ContentTableSeeder extends Seeder
 {
-
+    
     use Sluggable;
 
     /**
@@ -17,17 +16,16 @@ class ContentTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::selectSheets('Content')->load(database_path('seeds/seed_files/product-management.xlsx'),
-            function ($reader) {
+        Excel::selectSheets('Content')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
-
+            
             // Truncate channels
             DB::table('content')->truncate();
             $i = 0;
             foreach ($results as $row) {
                 try {
-                    $content   = new Content();
+                    $content = new Content();
                     $pageTitle = getTitleViaLink($row->url);
                     Content::create([
                         'topic_id' => $row->topic_id,
@@ -37,13 +35,13 @@ class ContentTableSeeder extends Seeder
                         'slug' => $this->generateSlug($content, $pageTitle)
                     ]);
                 } catch (QueryException $e) {
-                    die('Some exception occured. <br/>'.$e->getMessage());
+                    die('Some exception occured. <br/>' . $e->getMessage());
                 } catch (\ErrorException $e) {
-                    die('Some exception occured. <br/>'.$e->getMessage());
+                    die('Some exception occured. <br/>' . $e->getMessage());
                 }
-                $i++;
+                $i ++;
             }
-            echo $i.' Content successfully inserted'.PHP_EOL;
+            echo $i . ' Content successfully inserted' . PHP_EOL;
         });
     }
 }

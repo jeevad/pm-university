@@ -1,21 +1,20 @@
 <?php
-
 return [
-
+    
     /*
-    |--------------------------------------------------------------------------
-    | Mail Driver
-    |--------------------------------------------------------------------------
-    |
-    | Laravel supports both SMTP and PHP's "mail" function as drivers for the
-    | sending of e-mail. You may specify which one you're using throughout
-    | your application here. By default, Laravel is setup for SMTP mail.
-    |
-    | Supported: "smtp", "mail", "sendmail", "mailgun", "mandrill",
-    |            "ses", "sparkpost", "log"
-    |
-    */
-
+     * |--------------------------------------------------------------------------
+     * | Mail Driver
+     * |--------------------------------------------------------------------------
+     * |
+     * | Laravel supports both SMTP and PHP's "mail" function as drivers for the
+     * | sending of e-mail. You may specify which one you're using throughout
+     * | your application here. By default, Laravel is setup for SMTP mail.
+     * |
+     * | Supported: "smtp", "mail", "sendmail", "mailgun", "mandrill",
+     * | "ses", "sparkpost", "log"
+     * |
+     */
+    
     'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
@@ -54,7 +53,10 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-    'from' => ['address' => env('MAIL_FROM'), 'name' => env('MAIL_FROM_NAME')],
+    'from' => [
+        'address' => env('MAIL_FROM'),
+        'name' => env('MAIL_FROM_NAME')
+    ],
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
@@ -105,6 +107,6 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
-
-];
+    'sendmail' => '/usr/sbin/sendmail -bs'
+]
+;

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
@@ -9,7 +8,7 @@ use App\Traits\ApiControllerTrait;
 
 class StoreTopicRequest extends Request
 {
-
+    
     use ApiControllerTrait;
 
     /**
@@ -35,11 +34,9 @@ class StoreTopicRequest extends Request
     protected function formatErrors(Validator $validator)
     {
         if ($validator->fails()) {
-
-
-            $errors = formatValidationMessages((object)$validator->errors()->all());
-            return $this->respondWithValidationError('Validation failed',
-                    $errors);
+            
+            $errors = formatValidationMessages((object) $validator->errors()->all());
+            return $this->respondWithValidationError('Validation failed', $errors);
         }
     }
 }

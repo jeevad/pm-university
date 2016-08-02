@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use App\Models\Level;
 use Illuminate\Database\QueryException;
@@ -14,11 +13,10 @@ class LevelsTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::selectSheets('Levels')->load(database_path('seeds/seed_files/product-management.xlsx'),
-            function ($reader) {
+        Excel::selectSheets('Levels')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
-
+            
             // Truncate role
             Level::truncate();
             $i = 0;
@@ -29,11 +27,11 @@ class LevelsTableSeeder extends Seeder
                         'slug' => str_slug($row->title, '-')
                     ]);
                 } catch (QueryException $e) {
-                    die('Some exception occured. <br/>'.$e->getMessage());
+                    die('Some exception occured. <br/>' . $e->getMessage());
                 }
-                $i++;
+                $i ++;
             }
-            echo $i.' Levels successfully inserted'.PHP_EOL;
+            echo $i . ' Levels successfully inserted' . PHP_EOL;
         });
     }
 }

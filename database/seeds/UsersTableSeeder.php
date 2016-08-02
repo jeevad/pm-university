@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -14,11 +13,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::selectSheets('Users')->load(database_path('seeds/seed_files/product-management.xlsx'),
-            function ($reader) {
+        Excel::selectSheets('Users')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
-
+            
             // Truncate users
             User::truncate();
             $i = 0;
@@ -31,15 +29,14 @@ class UsersTableSeeder extends Seeder
                         'role_id' => (int) $row->role_id,
                         'full_name' => ucwords(strtolower($row->full_name)),
                         'activated' => true,
-                        'slug' => str_slug(ucwords(strtolower($row->full_name)),
-                            '-')
+                        'slug' => str_slug(ucwords(strtolower($row->full_name)), '-')
                     ]);
                 } catch (QueryException $e) {
-                    die('Some exception occured. <br/>'.$e->getMessage());
+                    die('Some exception occured. <br/>' . $e->getMessage());
                 }
-                $i++;
+                $i ++;
             }
-            echo $i.' Users successfully inserted'.PHP_EOL;
+            echo $i . ' Users successfully inserted' . PHP_EOL;
         });
     }
 }

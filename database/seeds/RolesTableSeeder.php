@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use Illuminate\Database\QueryException;
@@ -14,11 +13,10 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::selectSheets('Roles')->load(database_path('seeds/seed_files/product-management.xlsx'),
-            function ($reader) {
+        Excel::selectSheets('Roles')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
-
+            
             // Truncate role
             Role::truncate();
             $i = 0;
@@ -29,11 +27,11 @@ class RolesTableSeeder extends Seeder
                         'slug' => str_slug($row->title, '-')
                     ]);
                 } catch (QueryException $e) {
-                    die('Some exception occured. <br/>'.$e->getMessage());
+                    die('Some exception occured. <br/>' . $e->getMessage());
                 }
-                $i++;
+                $i ++;
             }
-            echo $i.' Roles successfully inserted'.PHP_EOL;
+            echo $i . ' Roles successfully inserted' . PHP_EOL;
         });
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use App\Models\Tag;
 use Illuminate\Database\QueryException;
@@ -14,11 +13,10 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::selectSheets('Tags')->load(database_path('seeds/seed_files/product-management.xlsx'),
-            function ($reader) {
+        Excel::selectSheets('Tags')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
-
+            
             // Truncate tags
             Tag::truncate();
             $i = 0;
@@ -28,11 +26,11 @@ class TagsTableSeeder extends Seeder
                         'title' => ucwords(strtolower($row->title))
                     ]);
                 } catch (QueryException $e) {
-                    die('Some exception occured. <br/>'.$e->getMessage());
+                    die('Some exception occured. <br/>' . $e->getMessage());
                 }
-                $i++;
+                $i ++;
             }
-            echo $i.' Tags successfully inserted'.PHP_EOL;
+            echo $i . ' Tags successfully inserted' . PHP_EOL;
         });
     }
 }

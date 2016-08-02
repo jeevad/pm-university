@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -13,8 +12,7 @@ class CreatePasswordSocialAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('social_accounts',
-            function (Blueprint $table) {
+        Schema::create('social_accounts', function (Blueprint $table) {
             $table->bigInteger('user_id');
             $table->string('provider_user_id');
             $table->string('provider')->comment('facebook, twitter, github, google etc');

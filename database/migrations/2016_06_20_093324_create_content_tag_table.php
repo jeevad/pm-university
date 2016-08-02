@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -13,8 +12,7 @@ class CreateContentTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_tag',
-            function (Blueprint $table) {
+        Schema::create('article_tag', function (Blueprint $table) {
             $table->increments('id');
             $table->biginteger('content_id')->unsigned();
             $table->integer('tag_id')->unsigned();

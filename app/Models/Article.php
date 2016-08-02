@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,9 +7,10 @@ use App\Traits\NullableFields;
 
 class Article extends Model
 {
-
+    
     use DatePresenter,
         NullableFields;
+
     /**
      * The database table used by the model.
      *
@@ -41,7 +41,7 @@ class Article extends Model
      */
     protected $casts = [
         'author_name' => 'string',
-        'author_description' => 'string',
+        'author_description' => 'string'
     ];
 
     /**
@@ -51,7 +51,7 @@ class Article extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(env('APP_MODEL_NAMESPACE').'Tag');
+        return $this->belongsToMany(env('APP_MODEL_NAMESPACE') . 'Tag');
     }
 
     /**
@@ -61,7 +61,7 @@ class Article extends Model
      */
     public function user()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'User');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'User');
     }
 
     /**
@@ -71,13 +71,13 @@ class Article extends Model
      */
     public function comments()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Comment');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Comment');
     }
 
     /**
      * Set the author's name.
      *
-     * @param  string  $value
+     * @param string $value            
      * @return string
      */
     public function setAuthorNameAttribute($authorName)
@@ -88,7 +88,7 @@ class Article extends Model
     /**
      * Set the author's name.
      *
-     * @param  string  $value
+     * @param string $value            
      * @return string
      */
     public function setAuthorDescriptionAttribute($authorDescription)

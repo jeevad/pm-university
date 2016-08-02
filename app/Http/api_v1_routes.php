@@ -1,11 +1,11 @@
 <?php
 /*
-  |--------------------------------------------------------------------------
-  | API Routes
-  |--------------------------------------------------------------------------
-  |
-  | Here is where all API routes are defined.
-  |
+ * |--------------------------------------------------------------------------
+ * | API Routes
+ * |--------------------------------------------------------------------------
+ * |
+ * | Here is where all API routes are defined.
+ * |
  */
 Route::get('{levelId}/topics', 'TopicController@indexByLevel');
 Route::resource('topics', 'TopicController');

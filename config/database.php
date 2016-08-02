@@ -1,17 +1,17 @@
 <?php
 return [
-
+    
     /*
-      |--------------------------------------------------------------------------
-      | PDO Fetch Style
-      |--------------------------------------------------------------------------
-      |
-      | By default, database results will be returned as instances of the PHP
-      | stdClass object; however, you may desire to retrieve records in an
-      | array format for simplicity. Here you can tweak the fetch style.
-      |
+     * |--------------------------------------------------------------------------
+     * | PDO Fetch Style
+     * |--------------------------------------------------------------------------
+     * |
+     * | By default, database results will be returned as instances of the PHP
+     * | stdClass object; however, you may desire to retrieve records in an
+     * | array format for simplicity. Here you can tweak the fetch style.
+     * |
      */
-
+    
     'fetch' => PDO::FETCH_CLASS,
     /*
       |--------------------------------------------------------------------------
@@ -40,11 +40,11 @@ return [
       |
      */
     'connections' => [
-
+        
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
+            'prefix' => ''
         ],
         'mysql' => [
             'driver' => 'mysql',
@@ -57,7 +57,7 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix' => env('DB_PREFIX', ''),
             'strict' => false,
-            'engine' => null,
+            'engine' => null
         ],
         'pgsql' => [
             'driver' => 'pgsql',
@@ -68,8 +68,8 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
-            'schema' => 'public',
-        ],
+            'schema' => 'public'
+        ]
     ],
     /*
       |--------------------------------------------------------------------------
@@ -93,13 +93,13 @@ return [
       |
      */
     'redis' => [
-
+        
         'cluster' => false,
         'default' => [
             'host' => env('REDIS_HOST', 'localhost'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
-            'database' => 0,
-        ],
-    ],
+            'database' => 0
+        ]
+    ]
 ];

@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+
     /**
      * The database table used by the model.
      *
@@ -20,6 +20,6 @@ class Tag extends Model
      */
     public function articles()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Article');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'Article');
     }
 }

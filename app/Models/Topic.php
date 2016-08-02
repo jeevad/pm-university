@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,9 +7,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Topic extends Model
 {
-
+    
     use DatePresenter;
     use SoftDeletes;
+
     /**
      * The database table used by the model.
      *
@@ -44,7 +44,9 @@ class Topic extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * One to Many relation
@@ -53,7 +55,7 @@ class Topic extends Model
      */
     public function user()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'User');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'User');
     }
 
     /**
@@ -63,7 +65,7 @@ class Topic extends Model
      */
     public function level()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Level');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'Level');
     }
 
     /**
@@ -73,6 +75,6 @@ class Topic extends Model
      */
     public function comments()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Comment');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Comment');
     }
 }

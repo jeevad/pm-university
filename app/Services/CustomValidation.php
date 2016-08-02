@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services;
 
 use Illuminate\Validation\Validator;
@@ -20,10 +19,10 @@ class CustomValidation extends Validator
 
     /**
      * Validator for alphabetic chracters and spaces.
-     * 
-     * @param type $attribute
-     * @param type $value
-     * @param type $parameters
+     *
+     * @param type $attribute            
+     * @param type $value            
+     * @param type $parameters            
      * @return type
      */
     public function validateAlphaSpaces($attribute, $value, $parameters)
@@ -32,11 +31,11 @@ class CustomValidation extends Validator
     }
 
     /**
-     *  Validator for alphabetic chracters, dash, spaces and numbers.
-     * 
-     * @param type $attribute
-     * @param type $value
-     * @param type $parameters
+     * Validator for alphabetic chracters, dash, spaces and numbers.
+     *
+     * @param type $attribute            
+     * @param type $value            
+     * @param type $parameters            
      * @return type
      */
     public function validateAlphaSpacesNum($attribute, $value, $parameters)
@@ -61,7 +60,11 @@ class CustomValidation extends Validator
 
     public function validateDeviceOs($attribute, $value, $parameters)
     {
-        return in_array(strtolower($value), array('android', 'ios', 'web'));
+        return in_array(strtolower($value), array(
+            'android',
+            'ios',
+            'web'
+        ));
     }
 
     public function validateMacAddress($attribute, $value, $parameters)
@@ -77,9 +80,12 @@ class CustomValidation extends Validator
     /**
      * Validates user id
      *
-     * @param $attribute
-     * @param $value
-     * @param $parameters
+     * @param
+     *            $attribute
+     * @param
+     *            $value
+     * @param
+     *            $parameters
      * @return mixed
      */
     public function validateUserId($attribute, $value, $parameters)
@@ -91,9 +97,12 @@ class CustomValidation extends Validator
     /**
      * Validates complaint id
      *
-     * @param $attribute
-     * @param $value
-     * @param $parameters
+     * @param
+     *            $attribute
+     * @param
+     *            $value
+     * @param
+     *            $parameters
      * @return mixed
      */
     public function validateComplaintId($attribute, $value, $parameters)
@@ -105,31 +114,38 @@ class CustomValidation extends Validator
     /**
      * Validates complaint current status and latest status
      *
-     * @param $attribute
-     * @param $value
-     * @param $parameters
+     * @param
+     *            $attribute
+     * @param
+     *            $value
+     * @param
+     *            $parameters
      * @return bool
      */
     public function validateCurrentStatusId($attribute, $value, $parameters)
     {
         $complaint = new Complaint();
-        $status    = $complaint->getComplaintStatus((int) $parameters[0]);
+        $status = $complaint->getComplaintStatus((int) $parameters[0]);
         return (int) $status->status_id !== (int) $value;
     }
 
     /**
-     * Validates complaint status is switchable to another ie. Complaint can be re-opened when it is in re-solved status
+     * Validates complaint status is switchable to another ie.
+     * Complaint can be re-opened when it is in re-solved status
      *
-     * @param $attribute
-     * @param $value
-     * @param $parameters
+     * @param
+     *            $attribute
+     * @param
+     *            $value
+     * @param
+     *            $parameters
      * @return bool
      */
     public function validateIsStatusSwitchable($attribute, $value, $parameters)
     {
         $complaint = new Complaint();
-        $status    = $complaint->getComplaintStatus((int) $parameters[0]);
-
+        $status = $complaint->getComplaintStatus((int) $parameters[0]);
+        
         $inputStatusId = (int) $value;
         if ($inputStatusId === 5) {
             return (int) $status->status_id === 4;
@@ -140,9 +156,12 @@ class CustomValidation extends Validator
     /**
      * Validates comment
      *
-     * @param $attribute
-     * @param $value
-     * @param $parameters
+     * @param
+     *            $attribute
+     * @param
+     *            $value
+     * @param
+     *            $parameters
      * @return bool
      */
     public function validateCommentDescription($attribute, $value, $parameters)
@@ -153,9 +172,12 @@ class CustomValidation extends Validator
     /**
      * Validates complaint feedback option id
      *
-     * @param $attribute
-     * @param $value
-     * @param $parameters
+     * @param
+     *            $attribute
+     * @param
+     *            $value
+     * @param
+     *            $parameters
      * @return mixed
      */
     public function validateFeedbackOptionId($attribute, $value, $parameters)
@@ -167,23 +189,23 @@ class CustomValidation extends Validator
     /**
      * Validates Image file dimensions
      *
-     * @param type $attribute
-     * @param type $value
-     * @param type $parameters
+     * @param type $attribute            
+     * @param type $value            
+     * @param type $parameters            
      * @return type
      */
     public function validateFileDimension($attribute, $value, $parameters)
     {
         $moduleType = isset($parameters[0]) ? $parameters[0] : 'users';
-        return array_key_exists($value, config('image.sizes.'.$moduleType));
+        return array_key_exists($value, config('image.sizes.' . $moduleType));
     }
 
     /**
      * Validates Image file dimensions
      *
-     * @param type $attribute
-     * @param type $value
-     * @param type $parameters
+     * @param type $attribute            
+     * @param type $value            
+     * @param type $parameters            
      * @return type
      */
     public function validateCommentOptionId($attribute, $value, $parameters)
@@ -195,9 +217,9 @@ class CustomValidation extends Validator
     /**
      * Validates Image file dimensions
      *
-     * @param type $attribute
-     * @param type $value
-     * @param type $parameters
+     * @param type $attribute            
+     * @param type $value            
+     * @param type $parameters            
      * @return type
      */
     public function validateTempFileId($attribute, $value, $parameters)

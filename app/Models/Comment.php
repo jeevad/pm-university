@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,8 +6,9 @@ use App\Presenters\DatePresenter;
 
 class Comment extends Model
 {
-
+    
     use DatePresenter;
+
     /**
      * The database table used by the model.
      *
@@ -23,7 +23,7 @@ class Comment extends Model
      */
     public function user()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'User');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'User');
     }
 
     /**
@@ -33,6 +33,6 @@ class Comment extends Model
      */
     public function post()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Topic');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'Topic');
     }
 }

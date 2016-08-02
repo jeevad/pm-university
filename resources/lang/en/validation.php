@@ -1,17 +1,17 @@
 <?php
 return [
-
+    
     /*
-      |--------------------------------------------------------------------------
-      | Validation Language Lines
-      |--------------------------------------------------------------------------
-      |
-      | The following language lines contain the default error messages used by
-      | the validator class. Some of these rules have multiple versions such
-      | as the size rules. Feel free to tweak each of these messages here.
-      |
+     * |--------------------------------------------------------------------------
+     * | Validation Language Lines
+     * |--------------------------------------------------------------------------
+     * |
+     * | The following language lines contain the default error messages used by
+     * | the validator class. Some of these rules have multiple versions such
+     * | as the size rules. Feel free to tweak each of these messages here.
+     * |
      */
-
+    
     'accepted' => 'The :attribute must be accepted.',
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
@@ -24,7 +24,7 @@ return [
         'numeric' => 'The :attribute must be between :min and :max.',
         'file' => 'The :attribute must be between :min and :max kilobytes.',
         'string' => 'The :attribute must be between :min and :max characters.',
-        'array' => 'The :attribute must have between :min and :max items.',
+        'array' => 'The :attribute must have between :min and :max items.'
     ],
     'boolean' => 'The :attribute field must be true or false.',
     'confirmed' => 'The :attribute confirmation does not match.',
@@ -47,14 +47,14 @@ return [
         'numeric' => 'The :attribute may not be greater than :max.',
         'file' => 'The :attribute may not be greater than :max kilobytes.',
         'string' => 'The :attribute may not be greater than :max characters.',
-        'array' => 'The :attribute may not have more than :max items.',
+        'array' => 'The :attribute may not have more than :max items.'
     ],
     'mimes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
         'string' => 'The :attribute must be at least :min characters.',
-        'array' => 'The :attribute must have at least :min items.',
+        'array' => 'The :attribute must have at least :min items.'
     ],
     'not_in' => 'The selected :attribute is invalid.',
     'numeric' => 'The :attribute must be a number.',
@@ -72,7 +72,7 @@ return [
         'numeric' => 'The :attribute must be :size.',
         'file' => 'The :attribute must be :size kilobytes.',
         'string' => 'The :attribute must be :size characters.',
-        'array' => 'The :attribute must contain :size items.',
+        'array' => 'The :attribute must contain :size items.'
     ],
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid zone.',
@@ -90,27 +90,27 @@ return [
      */
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'custom-message',
+            'rule-name' => 'custom-message'
         ],
         'levelId' => [
             'required' => 'Level ID can not be blank',
-            'exists' => 'Invalid level ID',
+            'exists' => 'Invalid level ID'
         ],
         'tagId' => [
             'required' => 'Tag ID can not be blank',
-            'exists' => 'Invalid tag ID',
+            'exists' => 'Invalid tag ID'
         ],
         'topicId' => [
             'required' => 'Topic ID can not be blank',
-            'exists' => 'Invalid topic ID',
+            'exists' => 'Invalid topic ID'
         ],
         'sourceUrl' => [
             'required' => 'Source URL can not be blank',
-            'max' => 'Invalid level ID',
+            'max' => 'Invalid level ID'
         ],
         'title' => [
             'required' => 'Title can not be blank',
-            'max' => 'Titla atmost 255 characters',
+            'max' => 'Titla atmost 255 characters'
         ],
         'description' => [
             'required' => 'Description can not be blank'
@@ -136,5 +136,5 @@ return [
       | of "email". This simply helps us make messages a little cleaner.
       |
      */
-    'attributes' => [],
+    'attributes' => []
 ];
