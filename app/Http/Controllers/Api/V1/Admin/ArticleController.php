@@ -129,11 +129,27 @@ class ArticleController extends AppBaseController
      */
     public function index()
     {
+        // Set the locale
+        $locale = $this->request->has('locale') ? $this->request->input('locale') : env('APP_LOCALE');
+        
+        $validator = Validator::make($this->request->all(), [
+            'locale' => 'sometimes|in:en,hi',
+            'topicId' => 'required|exists:topics,id',
+            'typeId' => 'sometimes|exists:article_types,id'
+        ]);
+        
+        if ($validator->fails()) {
+            $errors = formatValidationMessages($validator->errors());
+            return $this->respondWithValidationError($errors);
+        }
+        // Set pagination
+        $perPage = (int) $this->request->input('perPage', 10);
+        $page = (int) $this->request->input('page', 1);
         try {
-            $topics = $this->topicGestion->index(10, $this->request->has('levelId') ? $this->request->input('levelId') : 1);
-            dd(compact('topics'));
+            $articles = $this->articleGestion->index($perPage, (int) $this->request->input('topicId'), $this->request->has('typeId') ? (int) $this->request->input('typeId') : 1);
+            return $this->respondWithSuccess(trans('messages.success'), $articles->toArray());
         } catch (QueryException $e) {
-            echo 'some thing went wrong' . $e->getMessage();
+            return $this->respondServerError(trans('errors.something_went_wrong'));
         }
     }
 
@@ -176,198 +192,6 @@ class ArticleController extends AppBaseController
             return $this->respondServerError(trans('errors.something_went_wrong'));
         } catch (\ErrorException $e) {
             echo $e->getMessage();
-            return $this->respondServerError(trans('errors.something_went_wrong'));
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id            
-     * @return \Illuminate\Http\Response
-     */
-    public function show($slug)
-    {
-        try {
-            $content = $this->contentGestion->show($slug);
-            
-            // foreach($contents as $content) {
-            dump($content->tags->title);
-            // }
-            exit();
-            // dump($content->tags->count());
-            dd(compact('content'));
-        } catch (QueryException $e) {
-            echo 'some thing went wrong' . $e->getMessage();
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id            
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request            
-     * @param int $id            
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id            
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
-     *
-     * @param int $topicId            
-     * @param int $tagId            
-     * @return IlluminateResponse @SWG\Get(
-     *         path="/admin/topic/{topicId}/tag/{tagId}",
-     *         summary="Display the articles for a specified tag",
-     *         tags={"Article"},
-     *         description="Get the articles for a specified tag",
-     *         operationId="indexByTag",
-     *         produces={"application/json"},
-     *         @SWG\Parameter(
-     *         name="api_token",
-     *         description="Authorization token",
-     *         type="string",
-     *         required=true,
-     *         in="query"
-     *         ),
-     *         @SWG\Parameter(
-     *         name="topicId",
-     *         description="Topic id",
-     *         type="integer",
-     *         format="int32",
-     *         required=true,
-     *         in="path"
-     *         ),
-     *         @SWG\Parameter(
-     *         name="tagId",
-     *         description="Tag id",
-     *         type="integer",
-     *         format="int32",
-     *         required=true,
-     *         in="path"
-     *         ),
-     *         @SWG\Parameter(
-     *         name="locale",
-     *         in="query",
-     *         description="User preferred language(en|hi), default en",
-     *         default="en",
-     *         enum={"en", "hi"},
-     *         type="string"
-     *         ),
-     *         @SWG\Parameter(
-     *         name="perPage",
-     *         in="query",
-     *         description="Number of items you would like displayed per page",
-     *         default="15",
-     *         type="integer",
-     *         format="int64"
-     *         ),
-     *         @SWG\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="Current page number to display",
-     *         default="1",
-     *         type="integer",
-     *         format="int64"
-     *         ),
-     *         @SWG\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *         @SWG\Schema(
-     *         ref="#/definitions/ResponseArticles"
-     *         )
-     *         ),
-     *         @SWG\Response(
-     *         response=422,
-     *         description="Unsuccessful operation - Validation failed",
-     *         @SWG\Schema(
-     *         ref="#/definitions/validationErrorModel"
-     *         )
-     *         ),
-     *         @SWG\Response(
-     *         response=404,
-     *         description="Unsuccessful operation, category not found",
-     *         @SWG\Schema(
-     *         ref="#/definitions/responseModel"
-     *         ),
-     *         ),
-     *         @SWG\Response(
-     *         response=500,
-     *         description="Unexpected error",
-     *         @SWG\Schema(
-     *         ref="#/definitions/responseModel"
-     *         )
-     *         )
-     *         )
-     */
-    public function indexByTag($topicId, $tagId)
-    {
-        // Set the locale
-        $locale = $this->request->has('locale') ? $this->request->input('locale') : env('APP_LOCALE');
-        $inputs = array_merge($this->request->all(), [
-            'topicId' => $topicId,
-            'tagId' => $tagId
-        ]);
-        $validator = Validator::make($inputs, [
-            'locale' => 'sometimes|in:en,hi',
-            'tagId' => 'required|exists:tags,id',
-            'topicId' => 'required|exists:topics,id'
-        ]);
-        
-        if ($validator->fails()) {
-            $errors = formatValidationMessages($validator->errors());
-            return $this->respondWithValidationError($errors);
-        }
-        // Set pagination
-        $perPage = (int) $this->request->input('perPage', 200);
-        $page = (int) $this->request->input('page', 1);
-        try {
-            $articles = $this->contentGestion->indexTag($perPage, $topicId, $tagId);
-            $data = [
-                'total' => $articles->total(),
-                'currentPage' => $articles->currentPage(),
-                'perPage' => $articles->perPage(),
-                'hasMore' => $articles->hasMorePages(),
-                'lastPage' => $articles->lastPage(),
-                'nextPageUrl' => $articles->nextPageUrl() ? $articles->nextPageUrl() : '',
-                'previousPageUrl' => $articles->previousPageUrl() ? $articles->previousPageUrl() : '',
-                'url' => $articles->url($page)
-            ];
-            $data['articles'] = [];
-            foreach ($articles as $article) {
-                $data['articles'][] = [
-                    'id' => $article->id,
-                    'sourceUrl' => $article->url ? $article->url : '',
-                    'title' => $article->title ? $article->title : '',
-                    'slug' => $article->slug ? url($article->slug) : ''
-                ];
-            }
-            return $this->respondWithSuccess(trans('messages.success'), $data);
-        } catch (QueryException $e) {
             return $this->respondServerError(trans('errors.something_went_wrong'));
         }
     }
