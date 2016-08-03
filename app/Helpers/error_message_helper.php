@@ -7,7 +7,7 @@
  */
 if (! function_exists('formatValidationMessages')) {
 
-    function formatValidationMessages(array $messages = array())
+    function formatValidationMessages($messages = array())
     {
         $errors = array();
         if ($messages->has('appToken')) {
