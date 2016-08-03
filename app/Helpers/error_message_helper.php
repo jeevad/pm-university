@@ -119,6 +119,10 @@ if (! function_exists('formatValidationMessages')) {
             $field = 'file';
             $errors[] = getErrorMessage($field, $messages->first($field));
         }
+        if ($messages->has('articleId')) {
+            $field = 'articleId';
+            $errors[] = getErrorMessage($field, $messages->first($field));
+        }
         
         return $errors;
     }

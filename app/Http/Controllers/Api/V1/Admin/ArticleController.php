@@ -188,11 +188,57 @@ class ArticleController extends AppBaseController
             $article = $this->articleGestion->store($inputs, 1);
             return $this->respondCreated(trans('back/article.stored'), $article->toArray());
         } catch (QueryException $e) {
-            echo $e->getMessage();
             return $this->respondServerError(trans('errors.something_went_wrong'));
         } catch (\ErrorException $e) {
-            echo $e->getMessage();
             return $this->respondServerError(trans('errors.something_went_wrong'));
+        }
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        $inputs = array_merge($this->request->all(), [
+            'articleId' => $id
+        ]);
+        $validator = Validator::make($inputs, array_merge(Article::$storeArticleRules, [
+            'articleId' => 'exists:articles,id'
+        ]));
+        if ($validator->fails()) {
+            $errors = formatValidationMessages($validator->errors());
+            return $this->respondWithValidationError($errors);
+        }
+    
+        $authorFileId = null;
+        
+        // Article author image
+        if ($this->request->hasFile('authorPicture')) {
+            $authorImage = $this->request->file('authorPicture');
+            $resizedImage = $imageLib->resize($authorImage, config('image.paths.authors'), config('image.sizes.authors.thumbnail'));
+            if (! $resizedImage) {
+                return $this->respondServerError(trans('errors.image_could_not_save_or_resize'));
+            }
+            $authorFile = new File();
+            $authorFile->uri = config('image.paths.authors') . '/' . $resizedImage->basename;
+            $authorFile->save();
+            $authorFileId = $authorFile->id;
+        }
+        try {
+            $inputs = array_merge($this->request->all(), [
+                'authorImageId' => $authorFileId
+            ]);
+            $articleModel = $this->articleGestion->getById($id);
+            $article = $this->articleGestion->saveArticle($articleModel, $inputs, 1);
+            return $this->respondWithSuccess(trans('back/article.updated'), $article->toArray());
+        } catch (QueryException $e) {
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        } catch (\ErrorException $e) {
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound(trans('errors.resource_not_found'));
         }
     }
 }
