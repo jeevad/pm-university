@@ -6,10 +6,14 @@
  */
 /*  Only used with Theme processes */
 html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
-  color: '{{foreground-1}}';
-  background-color: '{{background-color}}'; }
+	color: '{{foreground-1}}';
+	background-color: '{{background-color}}';
+}
 
 md-tooltip.md-THEME_NAME-theme {
-  color: '{{background-A100}}'; }
-  md-tooltip.md-THEME_NAME-theme ._md-content {
-    background-color: '{{foreground-2}}'; }
+	color: '{{background-A100}}';
+}
+
+md-tooltip.md-THEME_NAME-theme ._md-content {
+	background-color: '{{foreground-2}}';
+}

@@ -25,7 +25,7 @@ class Article extends Model
      */
     public static $storeArticleRules = [
         'topicId' => 'required|exists:topics,id',
-        'tagId' => 'required|exists:tags,id',
+        'typeId' => 'required|exists:article_types,id',
         'sourceUrl' => 'required|url|max:255',
         'title' => 'required|max:255',
         'description' => 'required|max:65000',
@@ -49,9 +49,9 @@ class Article extends Model
      *
      * @return Illuminate\Database\Eloquent\Relations\belongToMany
      */
-    public function tags()
+    public function types()
     {
-        return $this->belongsToMany(env('APP_MODEL_NAMESPACE') . 'Tag');
+        return $this->belongsToMany(env('APP_MODEL_NAMESPACE') . 'ArticleType');
     }
 
     /**

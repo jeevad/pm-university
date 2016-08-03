@@ -114,7 +114,7 @@ class TopicController extends AppBaseController
      * Set preferences
      *
      * UsersController constructor.
-     * 
+     *
      * @param Request $request            
      * @param App\Repositories\TopicRepository $topicGestion            
      */
@@ -252,7 +252,7 @@ class TopicController extends AppBaseController
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function store()

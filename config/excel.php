@@ -518,10 +518,10 @@ return array(
                 
                 'firstname' => 'A2'
             )
-            
         )
         
-    ),
+    )
+    ,
     
     'views' => array(
 
@@ -687,6 +687,5 @@ return array(
             )
         )
     )
-    
 )
 ;

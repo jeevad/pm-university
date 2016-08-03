@@ -13,7 +13,7 @@ class TopicsTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::selectSheets('Topics')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
+        Excel::selectSheets('topics')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
             

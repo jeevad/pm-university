@@ -1,17 +1,21 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Article, App\Models\Tag, App\Models\Comment, App\Models\ArticleTag;
+use App\Models\ {
+                Article, 
+                Comment, 
+                ArticleType
+};
 
 class ArticleRepository extends BaseRepository
 {
 
     /**
-     * The Tag instance.
+     * The ArticleType instance.
      *
-     * @var App\Models\Tag
+     * @var App\Models\ArticleType
      */
-    protected $tag;
+    protected $articleType;
 
     /**
      * The Comment instance.
@@ -24,14 +28,14 @@ class ArticleRepository extends BaseRepository
      * Create a new ArticleRepository instance.
      *
      * @param App\Models\Atricle $article            
-     * @param App\Models\Tag $tag            
+     * @param App\Models\ArticleType $articleType            
      * @param App\Models\Comment $comment            
      * @return void
      */
-    public function __construct(Article $article, Tag $tag, Comment $comment)
+    public function __construct(Article $article, ArticleType $articleType, Comment $comment)
     {
         $this->model = $article;
-        $this->tag = $tag;
+        $this->articleType = $articleType;
         $this->comment = $comment;
     }
 
@@ -112,11 +116,12 @@ class ArticleRepository extends BaseRepository
         $article->source_url = strtolower($inputs['sourceUrl']);
         $article->title = ucwords(strtolower($inputs['title']));
         $article->description = ucwords($inputs['description']);
-        $article->author_name = isset($inputs['authorName']) ? ucwords(strtolower($inputs['authorName'])) : '';
-        $article->author_description = isset($inputs['authorDescription']) ? ucwords(strtolower($inputs['authorDescription'])) : '';
+        $article->author_name = $inputs['authorName'] ?? '';
+        $article->author_description = $inputs['authorDescription'] ?? '';
         $article->author_picture_id = $inputs['authorImageId'];
         
         $article->slug = $this->generateSlug($article, $inputs['title']);
+        $article->article_type_id = (int) $inputs['typeId'];
         if ($userId) {
             $article->user_id = $userId;
         }
@@ -136,8 +141,6 @@ class ArticleRepository extends BaseRepository
     {
         $article = $this->saveArticle(new $this->model(), $inputs, $userId);
         
-        // Store into article tags
-        $article->tags()->attach($inputs['tagId']);
         return $article;
     }
 }

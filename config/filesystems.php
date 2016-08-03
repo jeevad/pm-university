@@ -61,6 +61,5 @@ return [
             'bucket' => 'your-bucket'
         ]
     ]
-    
 ]
 ;

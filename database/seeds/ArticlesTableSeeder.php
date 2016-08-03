@@ -1,10 +1,10 @@
 <?php
 use Illuminate\Database\Seeder;
-use App\Models\Content;
+use App\Models\Article;
 use Illuminate\Database\QueryException;
 use App\Traits\Sluggable;
 
-class ContentTableSeeder extends Seeder
+class ArticlesTableSeeder extends Seeder
 {
     
     use Sluggable;
@@ -16,18 +16,18 @@ class ContentTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::selectSheets('Content')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
+        Excel::selectSheets('articles')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
             
-            // Truncate channels
-            DB::table('content')->truncate();
+            // Truncate articles if any
+            DB::table('articles')->truncate();
             $i = 0;
             foreach ($results as $row) {
                 try {
-                    $content = new Content();
+                    $content = new Article();
                     $pageTitle = getTitleViaLink($row->url);
-                    Content::create([
+                    Article::create([
                         'topic_id' => $row->topic_id,
                         'user_id' => $row->user_id,
                         'source_url' => $row->url,
@@ -41,7 +41,7 @@ class ContentTableSeeder extends Seeder
                 }
                 $i ++;
             }
-            echo $i . ' Content successfully inserted' . PHP_EOL;
+            echo $i . ' Articles successfully inserted' . PHP_EOL;
         });
     }
 }

@@ -7,7 +7,7 @@
  */
 if (! function_exists('formatValidationMessages')) {
 
-    function formatValidationMessages($messages = array())
+    function formatValidationMessages(array $messages = array())
     {
         $errors = array();
         if ($messages->has('appToken')) {
@@ -62,8 +62,8 @@ if (! function_exists('formatValidationMessages')) {
             $field = 'levelId';
             $errors[] = getErrorMessage($field, $messages->first($field));
         }
-        if ($messages->has('tagId')) {
-            $field = 'tagId';
+        if ($messages->has('typeId')) {
+            $field = 'typeId';
             $errors[] = getErrorMessage($field, $messages->first($field));
         }
         if ($messages->has('topicId')) {

@@ -33,9 +33,10 @@ return [
             'secret' => env('PUSHER_SECRET'),
             'app_id' => env('PUSHER_APP_ID'),
             'options' => []
-            //
-            
-        ],
+        ]
+        //
+        
+        ,
         
         'redis' => [
             'driver' => 'redis',
@@ -46,6 +47,5 @@ return [
             'driver' => 'log'
         ]
     ]
-    
 ]
 ;
