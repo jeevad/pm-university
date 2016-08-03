@@ -100,6 +100,10 @@ return [
             'required' => 'Article type ID can not be blank',
             'exists' => 'Invalid article type ID'
         ],
+        'articleId' => [
+            'required' => 'Article ID can not be blank',
+            'exists' => 'Invalid article ID'
+        ],
         'topicId' => [
             'required' => 'Topic ID can not be blank',
             'exists' => 'Invalid topic ID'

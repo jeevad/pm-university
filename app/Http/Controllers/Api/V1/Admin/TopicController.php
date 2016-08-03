@@ -2,15 +2,16 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Traits\ApiControllerTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException, Illuminate\Database\QueryException;
 use App\Repositories\TopicRepository;
 use App\Http\Controllers\AppBaseController;
 use Auth;
 use Validator;
-use Carbon\Carbon;
-use App\Models\Topic, App\Models\File;
+use App\Models\ {
+                Topic, 
+                File
+};
 use App\Libraries\CustomImageLib;
 
 /**
