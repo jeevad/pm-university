@@ -36,18 +36,12 @@ Route::get('/topic-delete/{id}', 'Api\V1\Admin\TopicController@destroy');
  * | Here is where all API routes are defined.
  * |
  */
-Route::group([
-    'middleware' => [
-        'api.admin'
-    ]
-], function () {
     Route::group([
         'prefix' => 'api/v1/admin',
         'namespace' => 'Api\V1\Admin'
     ], function () {
         require app_path('Http/api_v1_routes.php');
     });
-});
 
 /*
  * |--------------------------------------------------------------------------
