@@ -4,12 +4,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Presenters\DatePresenter;
 use App\Traits\NullableFields;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
     
     use DatePresenter,
-        NullableFields;
+        NullableFields, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -42,6 +43,15 @@ class Article extends Model
     protected $casts = [
         'author_name' => 'string',
         'author_description' => 'string'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
     ];
 
     /**
