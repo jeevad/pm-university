@@ -18,7 +18,7 @@ class CreateTopicsTable extends Migration
                 ->unsigned()
                 ->nullable();
             $table->integer('level_id')->unsigned();
-            $table->string('url')->nullable();
+            $table->string('source_url')->nullable();
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->bigInteger('file_id')

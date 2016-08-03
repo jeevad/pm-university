@@ -3,7 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class ArticleType extends Model
 {
 
     /**
@@ -11,7 +11,7 @@ class Tag extends Model
      *
      * @var string
      */
-    protected $table = 'tags';
+    protected $table = 'article_types';
 
     /**
      * Many to Many relation

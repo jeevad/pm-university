@@ -2,7 +2,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentTable extends Migration
+class CreateArticlesTable extends Migration
 {
 
     /**
@@ -17,6 +17,9 @@ class CreateContentTable extends Migration
             $table->integer('topic_id')
                 ->unsigned()
                 ->index();
+            $table->integer('article_type_id')
+                ->unsigned()
+                ->index();
             $table->bigInteger('user_id')->unsigned();
             $table->string('source_url');
             $table->string('title');
@@ -24,7 +27,7 @@ class CreateContentTable extends Migration
             $table->bigInteger('file_id')
                 ->unsigned()
                 ->nullable();
-            $table->string('author_name', 200)->nulable();
+            $table->string('author_name', 200)->nullable();
             $table->mediumText('author_description')->nullable();
             ;
             $table->bigInteger('author_picture_id')

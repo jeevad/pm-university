@@ -1,9 +1,9 @@
 <?php
 use Illuminate\Database\Seeder;
-use App\Models\Tag;
+use App\Models\ArticleType;
 use Illuminate\Database\QueryException;
 
-class TagsTableSeeder extends Seeder
+class ArticleTypesTableSeeder extends Seeder
 {
 
     /**
@@ -13,16 +13,16 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        Excel::selectSheets('Tags')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
+        Excel::selectSheets('article_types')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
             
-            // Truncate tags
-            Tag::truncate();
+            // Truncate types
+            ArticleType::truncate();
             $i = 0;
             foreach ($results as $row) {
                 try {
-                    Tag::create([
+                    ArticleType::create([
                         'title' => ucwords(strtolower($row->title))
                     ]);
                 } catch (QueryException $e) {
@@ -30,7 +30,7 @@ class TagsTableSeeder extends Seeder
                 }
                 $i ++;
             }
-            echo $i . ' Tags successfully inserted' . PHP_EOL;
+            echo $i . ' Article types successfully inserted' . PHP_EOL;
         });
     }
 }

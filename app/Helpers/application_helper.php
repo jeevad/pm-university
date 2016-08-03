@@ -86,7 +86,7 @@ if (! function_exists('generateGUID')) {
  * Dump helper.
  * Functions to dump variables to the screen, in a nicley
  * formatted manner.
- * 
+ *
  * @author Joost van Veen
  * @version 1.0
  */

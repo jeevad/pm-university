@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->text('description');
             $table->boolean('seen')->default(false);
             $table->integer('user_id')->unsigned();
-            $table->integer('content_id')->unsigned();
+            $table->integer('topic_id')->unsigned();
             
             // Timestamps
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

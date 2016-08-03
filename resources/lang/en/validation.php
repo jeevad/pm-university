@@ -96,9 +96,9 @@ return [
             'required' => 'Level ID can not be blank',
             'exists' => 'Invalid level ID'
         ],
-        'tagId' => [
-            'required' => 'Tag ID can not be blank',
-            'exists' => 'Invalid tag ID'
+        'typeId' => [
+            'required' => 'Article type ID can not be blank',
+            'exists' => 'Invalid article type ID'
         ],
         'topicId' => [
             'required' => 'Topic ID can not be blank',

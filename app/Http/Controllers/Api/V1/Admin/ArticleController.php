@@ -2,13 +2,13 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Repositories\ArticleRepository, App\Repositories\UserRepository;
+use App\Repositories\ {
+                ArticleRepository
+};
 use Validator;
 use App\Http\Controllers\AppBaseController;
 use App\Traits\ApiControllerTrait;
-use Illuminate\Database\Eloquent\ModelNotFoundException, Illuminate\Database\QueryException;
+use Illuminate\Database\QueryException;
 use App\Models\Article;
 
 /**

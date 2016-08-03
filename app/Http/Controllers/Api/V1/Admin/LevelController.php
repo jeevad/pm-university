@@ -40,7 +40,7 @@ class LevelController extends AppBaseController
      * Set preferences
      *
      * LevelController constructor.
-     * 
+     *
      * @param Request $request            
      * @param App\Repositories\LevelRepository $levelRepo            
      */
