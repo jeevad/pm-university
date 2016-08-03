@@ -241,4 +241,21 @@ class ArticleController extends AppBaseController
             return $this->respondNotFound(trans('errors.resource_not_found'));
         }
     }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            Article::destroy($id);
+            return $this->respondWithSuccess(trans('messages.success'));
+        } catch (ModelNotFoundException $e) {
+            return $this->respondNotFound(trans('errors.resource_not_found'));
+        } catch (QueryException $e) {
+            return $this->respondServerError(trans('errors.something_went_wrong'));
+        }
+    }
 }
