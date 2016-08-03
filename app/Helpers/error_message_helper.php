@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Format form validation error messages
  *
@@ -7,9 +8,9 @@
  */
 if (! function_exists('formatValidationMessages')) {
 
-    function formatValidationMessages($messages = array())
+    function formatValidationMessages(Illuminate\Support\MessageBag $messages)
     {
-        $errors = array();
+        $errors = [];
         if ($messages->has('appToken')) {
             $field = 'appToken';
             $errors[] = getErrorMessage($field, $messages->first($field));

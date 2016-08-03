@@ -44,13 +44,15 @@ class ArticleRepository extends BaseRepository
      *
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function queryActiveWithUserOrderByDate($topicId = 1)
+    private function queryActiveOrderByDate($topicId, $typeId, $orderBy = 'created_at', $sort = 'desc')
     {
-        return $this->model->select('id', 'created_at', 'updated_at', 'title', 'slug', 'user_id', 'description', 'sequence')
+        $query = $this->model->select('id', 'created_at', 'updated_at', 'title', 'slug', 'user_id', 'description', 'sequence')
             ->where('topic_id', $topicId)
-            ->whereNull('content.deleted_at')
-            ->with('user')
-            ->latest();
+            ->whereNull('articles.deleted_at');
+        if ($typeId !== 1 or $typeId !== 2) {
+            $query->where('article_type_id', $typeId);
+        }
+        return $query->orderBy($orderBy, $sort);
     }
 
     /**
@@ -73,18 +75,16 @@ class ArticleRepository extends BaseRepository
      * @param int $id            
      * @return Illuminate\Support\Collection
      */
-    public function indexTag($n, $topicId, $tagId)
+    public function index($n, $topicId, $typeId)
     {
-        if ($tagId == 1) {
-            $query = $this->queryActiveWithUser($topicId)->latest();
-        } elseif ($tagId == 2) {
-            $query = $this->queryActiveWithUser($topicId)->orderBy('sequence');
+        if ($typeId === 1) {
+            $query = $this->queryActiveOrderByDate($topicId, $typeId, 'sequence', 'asc');
+        } elseif ($typeId === 2) {
+            $query = $this->queryActiveOrderByDate($topicId, $typeId);
+        } else {
+            $query = $this->queryActiveOrderByDate($topicId, $typeId);
         }
-        
-        return $query->whereHas('tags', function ($q) use ($tagId) {
-            $q->where('tags.id', $tagId);
-        })
-            ->paginate($n);
+        return $query->paginate($n);
     }
 
     /**
