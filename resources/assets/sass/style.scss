@@ -1,0 +1,166 @@
+@import "fonts.scss";
+@import "mixin.scss";
+
+html, body {
+	width: 100%;
+	background-color: map-get($colors, white);
+	font-size: 5px;
+	margin: 0;
+	font-family: "Lato Light";
+}
+
+.pmu-title {
+	font-family: "Lato Black";
+}
+
+.pmu-wrapper {
+	& > * {
+		width: auto;
+		max-width: 450px;
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
+		margin: 0 auto;
+	}
+}
+
+.container-full {
+	margin: 0 auto;
+	width: 100%;
+}
+
+@media (min-width:768px) {
+
+	html, body {
+		font-size: 6px;
+	}
+
+	.pmu-wrapper {
+		& > * {
+			width: 80%;
+			max-width: 80.8rem;
+			padding-left: 0;
+			padding-right: 0;
+			margin: 0 auto;
+		}
+	}
+
+}
+
+.banner-wrapper {
+	height: 70rem;
+	background: transparent map-get($images, banner_background) no-repeat center;
+	background-size: cover;
+	.banner-container {
+		padding-top: 10rem;
+		padding-bottom: 10rem;
+		text-align: center;
+		color: map-get($colors, white);
+		line-height: 1.2;
+		.banner-logo {
+			padding: 1.5rem 0 12rem 0;
+			img {
+				width: 10.8rem;
+			}
+		}
+		.banner-title {
+			font-size: 5.8rem;
+			background-image: map-get($images, black_background_transparent);
+			display: inline-block;
+			padding: 1.1rem 3.1rem; 
+		}
+		.banner-desc {
+				margin: 1px 0 0;
+			P {
+				font-size: 2.2rem;
+				background-image: map-get($images, black_background_transparent);
+				padding: 0 .5rem;
+				display: inline;
+				line-height: inherit;
+			}
+		}
+		.banner-link {
+			margin-top: 13rem;
+			i {
+				background-image: map-get($images, arrow_down);
+				width: 3.8rem;
+				height: 3.8rem;
+				display: inline-block;
+				background-size: contain;
+			}
+		}
+	}
+	margin-bottom: 15rem;
+}
+
+.bachelours-degree {
+	margin-bottom: 15rem;
+	text-align: center;
+	.bachelours-degree-wrapper {
+		.title {
+			color: map-get($colors, gray);
+			font-size: 4rem;
+			line-height: 1;
+			margin-bottom: 2rem;
+		}
+		.desc {
+			font-size: 2.2rem;
+			padding: 0 5rem;
+			margin-bottom: 7rem;
+		}
+		.degree-list {
+			list-style: none;
+			border-top: 1px solid map-get($colors, borderGray);
+			padding: 0;
+			.degree-list-item {
+				border-bottom: 1px solid map-get($colors, borderGray);
+				padding: 1.8rem 2rem;
+				font-size: 2.2rem;
+				font-family: "Lato Black";
+				display: table;
+				width: 100%;
+				position: relative;
+				text-align: left;
+				i {
+					display: table-cell;
+					font-style: normal;
+					width: 2.1rem;
+					height: 2.2rem;
+					line-height: 1;
+				}
+				p {
+					display: table-cell;
+					padding-left: 2.5rem;
+					width: 65rem;
+				}
+				button {
+					display: table-cell;
+					background: none;
+					border: 1px solid map-get($colors, borderGray);
+					width: 12rem;
+					height: 4rem;
+					color: map-get($colors, buttonRed);
+					text-transform: uppercase;
+					font-size: 1.4rem;
+					padding: 1rem 2rem;
+					border-radius: 2rem;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width:992px) {
+
+	html, body {
+		font-size: 8px;
+	}
+
+}
+
+@media (min-width:1200px) {
+
+	html, body {
+		font-size: 10px;
+	}
+
+}
