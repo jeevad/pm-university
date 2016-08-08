@@ -12,21 +12,24 @@
 /**
  * DB query debugging
  */
-DB::listen(function ($sql) {
-    // dump($sql->sql).PHP_EOL;
-    // dump($sql->bindings).PHP_EOL;
-    // dump($sql->time);
-});
-Route::get('/', function () {
-    return view('welcome');
-});
+DB::listen ( function ($sql) {
+	// dump($sql->sql).PHP_EOL;
+	// dump($sql->bindings).PHP_EOL;
+	// dump($sql->time);
+} );
+Route::get ( '/', function () {
+	return view ( 'front' );
+} );
+Route::get ( '/admin', function () {
+	return view ( 'welcome' );
+} );
 
 // Authentication routes...
-Route::auth();
+Route::auth ();
 
 // Home page
-Route::get('/home', 'HomeController@index');
-Route::get('/topic-delete/{id}', 'Api\V1\Admin\TopicController@destroy');
+Route::get ( '/home', 'HomeController@index' );
+Route::get ( '/topic-delete/{id}', 'Api\V1\Admin\TopicController@destroy' );
 
 /*
  * |--------------------------------------------------------------------------
@@ -36,12 +39,12 @@ Route::get('/topic-delete/{id}', 'Api\V1\Admin\TopicController@destroy');
  * | Here is where all API routes are defined.
  * |
  */
-    Route::group([
-        'prefix' => 'api/v1/admin',
-        'namespace' => 'Api\V1\Admin'
-    ], function () {
-        require app_path('Http/api_v1_routes.php');
-    });
+Route::group ( [ 
+		'prefix' => 'api/v1/admin',
+		'namespace' => 'Api\V1\Admin' 
+], function () {
+	require app_path ( 'Http/api_v1_routes.php' );
+} );
 
 /*
  * |--------------------------------------------------------------------------
@@ -51,23 +54,23 @@ Route::get('/topic-delete/{id}', 'Api\V1\Admin\TopicController@destroy');
  * | Here is where all admin routes are defined.
  * |
  */
-Route::group([
-    'middleware' => [
-        'web',
-        'admin'
-    ]
+Route::group ( [ 
+		'middleware' => [ 
+				'web',
+				'admin' 
+		] 
 ], function () {
-    // Admin Route
-    Route::group([
-        'prefix' => 'admin'
-    ], function () {
-        Route::get('/', function () {
-            return view('admin/layout');
-        });
-        
-        // Dashboard Route
-        Route::get('page', function () {
-            return view('admin/layout');
-        });
-    });
-});
+	// Admin Route
+	Route::group ( [ 
+			'prefix' => 'admin' 
+	], function () {
+		Route::get ( '/', function () {
+			return view ( 'admin/layout' );
+		} );
+		
+		// Dashboard Route
+		Route::get ( 'page', function () {
+			return view ( 'admin/layout' );
+		} );
+	} );
+} );
