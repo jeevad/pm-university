@@ -13,13 +13,27 @@
  * DB query debugging
  */
 DB::listen ( function ($sql) {
-	// dump($sql->sql).PHP_EOL;
+	//dump($sql->sql).PHP_EOL;
 	// dump($sql->bindings).PHP_EOL;
 	// dump($sql->time);
 } );
-Route::get ( '/', function () {
-	return view ( 'front' );
-} );
+	/*
+	 * |--------------------------------------------------------------------------
+	 * | Front end routes
+	 * |--------------------------------------------------------------------------
+	 * |
+	 * |
+	 */
+Route::get('/', 'HomeController@index');
+Route::resource('topics', 'TopicController');
+
+/*
+ * |--------------------------------------------------------------------------
+ * | Admin routes
+ * |--------------------------------------------------------------------------
+ * |
+ * |
+ */
 Route::get ( '/admin', function () {
 	return view ( 'welcome' );
 } );
