@@ -75,5 +75,5 @@ return [
     |
     */
 
-    'prefix' => 'laravel'
+    'prefix' => 'pmu'
 ];

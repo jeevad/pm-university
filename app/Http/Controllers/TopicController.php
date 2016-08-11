@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Repositories\ {
 	TopicRepository
 };
-use App\Models\ {
-	Topic
-};
 
-class HomeController extends Controller {
+class TopicController extends Controller {
 	/**
 	 * Illuminate\Http\Request
 	 *
@@ -33,20 +30,30 @@ class HomeController extends Controller {
 	 *
 	 * @param Request $request        	
 	 * @param App\Repositories\TopicRepository $topicGestion        	
-	 * @return void
 	 */
 	public function __construct(Request $request, TopicRepository $topicRepo) {
-		// $this->middleware('auth');
 		$this->request = $request;
 		$this->topicGestion = $topicRepo;
 	}
-	
 	/**
-	 * Show the application dashboard.
+	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index() {		
-		return view ( 'front' );
+	public function index() {
+		
+		$bacheoloreTopics = $this->topicGestion->index(1,200);
+		$masterTopics = $this->topicGestion->index(2,200);
+		return view('');
+	}
+	
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param int $id        	
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show() {
+		return true;
 	}
 }

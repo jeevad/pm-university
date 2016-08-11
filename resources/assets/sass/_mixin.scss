@@ -1,3 +1,17 @@
-$colors: (white: #FFFFFF, black: #000000, gray: #A2A2A2, borderGray: #ECEFF1, buttonRed: #FF3366);
+$colors: (white: #FFFFFF, black: #000000, gray: #A2A2A2, borderGray: #ECEFF1, buttonRed: #FF3366, darkgray: #454545, mediumgray: #757575, lightgray: #f2f2f2);
 
-$images: (banner_background: url("../images/banner-background.png"), black_background_transparent: url("../images/header-background.png"), arrow_down: url('../images/arrow-down.png'), );
+$images: (banner_background: url("../images/banner-background.png"), black_background_transparent: url("../images/header-background.png"), arrow_down: url('../images/arrow-down.png'), green_check: url('../images/green-check.png'), red_background: url("../images/red-background.png"));
+
+@mixin _transform($value) {
+	-webkit-transform: $value;
+	-moz-transform:    $value;
+	-ms-transform:     $value;
+	-o-transform:      $value;
+	transform:         $value;
+}
+
+@mixin _boxshadow($x, $y, $Strength, $range, $color) {
+	-moz-box-shadow: $x $y $Strength $range $color;
+	-webkit-box-shadow: $x $y $Strength $range $color;
+	box-shadow: $x $y $Strength $range $color;
+}

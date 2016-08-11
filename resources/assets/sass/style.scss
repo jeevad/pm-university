@@ -9,8 +9,21 @@ html, body {
 	font-family: "Lato Light";
 }
 
-.pmu-title {
-	font-family: "Lato Black";
+ul, li {
+	list-style: none;
+	padding: 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+a {
+	text-decoration: none;
+	&:hover, &:focus, &:active {
+		text-decoration: none;
+		outline: none;
+	}
 }
 
 .pmu-wrapper {
@@ -23,16 +36,7 @@ html, body {
 	}
 }
 
-.container-full {
-	margin: 0 auto;
-	width: 100%;
-}
-
 @media (min-width:768px) {
-
-	html, body {
-		font-size: 6px;
-	}
 
 	.pmu-wrapper {
 		& > * {
@@ -46,8 +50,29 @@ html, body {
 
 }
 
+.title {
+	font-size: 4rem;
+	line-height: 1;
+	font-family: "Lato Black";
+	color: map-get($colors, darkgray);
+	text-transform: uppercase;
+	margin-bottom: 2rem;
+}
+.desc {
+	font-size: 2.2rem;
+	color: map-get($colors, mediumgray);
+	padding: 0 5rem;
+	max-width: 80rem;
+	margin: 0 auto;
+}
+
+.container-full {
+	margin: 0 auto;
+	width: 100%;
+}
+
 .banner-wrapper {
-	height: 70rem;
+	min-height: 70rem;
 	background: transparent map-get($images, banner_background) no-repeat center;
 	background-size: cover;
 	.banner-container {
@@ -63,13 +88,15 @@ html, body {
 			}
 		}
 		.banner-title {
+			font-family: "Lato Black";
 			font-size: 5.8rem;
 			background-image: map-get($images, black_background_transparent);
 			display: inline-block;
-			padding: 1.1rem 3.1rem; 
+			padding: 1.1rem 3.1rem;
+			color: inherit;
 		}
 		.banner-desc {
-				margin: 1px 0 0;
+			margin: 1px 0 0;
 			P {
 				font-size: 2.2rem;
 				background-image: map-get($images, black_background_transparent);
@@ -97,20 +124,12 @@ html, body {
 	text-align: center;
 	.bachelours-degree-wrapper {
 		.title {
-			color: map-get($colors, gray);
-			font-size: 4rem;
-			line-height: 1;
-			margin-bottom: 2rem;
 		}
 		.desc {
-			font-size: 2.2rem;
-			padding: 0 5rem;
 			margin-bottom: 7rem;
 		}
 		.degree-list {
-			list-style: none;
 			border-top: 1px solid map-get($colors, borderGray);
-			padding: 0;
 			.degree-list-item {
 				border-bottom: 1px solid map-get($colors, borderGray);
 				padding: 1.8rem 2rem;
@@ -120,7 +139,10 @@ html, body {
 				width: 100%;
 				position: relative;
 				text-align: left;
+				color: map-get($colors, darkgray);
+				cursor: pointer;
 				i {
+					position: relative;
 					display: table-cell;
 					font-style: normal;
 					width: 2.1rem;
@@ -143,10 +165,255 @@ html, body {
 					font-size: 1.4rem;
 					padding: 1rem 2rem;
 					border-radius: 2rem;
+					&:focus, &:active {
+						outline: none;
+					}
+				}
+				&.active, &:hover {
+					background: map-get($colors, buttonRed);
+					color: map-get($colors, white);
+					button {
+						color: map-get($colors, white);
+					}
+				}
+				&.checked {
+					i {
+						text-indent: -99999999px;
+						background: transparent url("../images/green-check.png") no-repeat center left;
+						background-size: contain;
+					}
 				}
 			}
 		}
 	}
+	&.masters-degree {
+		.bachelours-degree-wrapper {
+			.degree-list-item {
+				&.checked {
+					i {
+						background-image: url("../images/white-check.png");
+						&:before {
+							height: 0;
+							width: 0;
+							content: "";
+							border-width: .9rem;
+							border-style: solid;
+							border-color: transparent map-get($colors, white) transparent transparent;
+							position: absolute;
+							right: -2rem;
+							top: 50%;
+							z-index: 2;
+							@include _transform(translateY(-50%));
+						}
+						&:after {
+							content: "Mark as Read";
+							position: absolute;
+							padding: 1rem;
+							left: 3.8rem;
+							font-family: "Lato Bold";
+							font-size: 1.2rem;
+							background: white;
+							color: initial;
+							display: table-cell;
+							vertical-align: middle;
+							text-indent: 0;
+							white-space: nowrap;
+							border-radius: 3px;
+							@include _boxshadow(2px, 2px, 15px, -6px, map-get($colors, black));
+							top: 50%;
+							@include _transform(translateY(-50%));
+							z-index: 1;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.specialization {
+	margin-bottom: 15rem;
+	text-align: center;
+	color: map-get($colors, darkgray);
+	.title {
+		margin-bottom: 2rem;
+	}
+	.desc {
+		padding: 0 5rem;
+	}
+	.specialization-list {
+		display: inline-block;
+		width: 100%;
+		.specialization-list-item {
+			width: 50%;
+			float: left;
+			font-family: "Lato Black";
+			font-size: 2.2rem;
+			margin-top: 6rem;
+			cursor: pointer;
+			&:nth-child(4n+1) {
+				clear: left;
+			}
+			i {
+				border-radius: 50%;
+				background-color: map-get($colors, darkgray);
+				display: block;
+				width: 7rem;
+				height: 7rem;
+				margin: 0 auto 2rem;
+			}
+			span {
+				display: block;
+				text-transform: uppercase;
+			}
+			&.active, &:hover {
+				color: map-get($colors, buttonRed);
+				i {
+					background-color: map-get($colors, buttonRed);
+				}
+			}
+		}
+	}
+}
+
+.knowledge {
+	background: map-get($colors, lightgray);
+	padding: 15rem 0;
+	text-align: center;
+	& > * {
+		max-width: 94.4rem;
+	}
+	.knowledge-list {
+		display: inline-block;
+		margin-left: -2.1rem;
+		.knowledge-list-item {
+			margin-top: 6rem;
+			padding-left: 2.1rem;
+			width: 100%;
+			float: left;
+			position: relative;
+			cursor: pointer;
+			.list-image {
+				position: relative;
+				&:before {
+					content: "";
+					background: transparent map-get($images, black_background_transparent);
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+				}
+			}
+			.list-desc {
+				position: absolute;
+				bottom: 0;
+				background-color: map-get($colors, white);
+				line-height: 1;
+				padding: 4rem;
+				width: calc(100% - 2.1rem);
+				P {
+					text-align: left;
+					font-size: 3rem;
+					font-family: "Lato Black";
+					text-transform: uppercase;
+					margin: 0;
+				}
+			}
+			&.active, &:hover {
+				.list-image {
+					&:before {
+						background: transparent map-get($images, red_background);
+					}
+				}
+				.list-desc {
+					background: transparent;
+					border: 1px solid map-get($colors, white);
+					padding: 0;
+					top: 0;
+					margin: 2rem;
+					color: map-get($colors, white);
+					width: calc(100% - 6.1rem);
+					p {
+						position: absolute;
+						bottom: 0;
+						padding: 2rem;
+					}
+				}
+			}
+		}
+	}
+}
+
+.placements {
+	padding: 15rem 0;
+	.placements-wrapper {
+		text-align: center;
+		.placements-list {
+			.placements-list-item {
+				display: table;
+				text-align: left;
+				margin-top: 6rem;
+				& > * {
+					display: table-cell;
+					vertical-align: middle;
+				}
+				.list-image {
+					width: 15.1rem;
+				}
+				.list-content {
+					padding-left: 4rem;
+					.list-header {
+						font-size: 2.2rem;
+					}
+					.list-desc {
+						font-size: 1.6rem;
+						padding: 0;
+						font-family: "Lato Regular";
+					}
+					.list-link {
+						color: map-get($colors, buttonRed);
+						a {
+							font-family: "Lato Black";
+							font-size: 1.4rem;
+							color: inherit;
+							text-transform: uppercase;
+							&:after {
+								font-size: 2rem;
+								color: inherit;
+								content: "\00bb";
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width:768px) {
+
+	html, body {
+		font-size: 6px;
+	}
+
+	.specialization {
+		.specialization-list {
+			.specialization-list-item {
+				width: 25%;
+			}
+		}
+	}
+
+	.knowledge {
+		.knowledge-list {
+			display: inline-block;
+			.knowledge-list-item {
+				width: 33.33%;
+			}
+		}
+	}
+
 }
 
 @media (min-width:992px) {
