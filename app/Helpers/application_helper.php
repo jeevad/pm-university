@@ -290,3 +290,37 @@ if (!function_exists('classActiveTopic')) {
 		return $topicId == 1 ? 'active ' : '';
 	}
 }
+/**
+ * Render HTML helper block
+ */
+if (! function_exists ( 'classHelperBlock' )) {
+	function classHelperBlock($errors, $name) {
+		if ($errors->has ( $name )) {
+			return '<span class="help-block">' . $errors->first ( $name ) . '</span>';
+		}
+	}
+}
+/**
+ * Render HTML 'has-error' class
+ */
+if (! function_exists ( 'classHasError' )) {
+	function classHasError($errors, $name, $class = 'has-error') {
+		if ($errors->has ( $name )) {
+			return $class;
+		}
+		return '';
+	}
+}
+/**
+ * Render HTML 'has-error' class
+ */
+if (! function_exists ( 'classControlLabel' )) {
+	function classControlLabel($errors, $name, $class = 'has-error') {
+		if ($errors->has ( $name )) {
+			return [
+					'class' => "control-label"
+			];
+		}
+		return [ ];
+	}
+}

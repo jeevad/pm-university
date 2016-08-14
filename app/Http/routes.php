@@ -13,19 +13,19 @@
  * DB query debugging
  */
 DB::listen ( function ($sql) {
-	//dump($sql->sql).PHP_EOL;
+	// dump($sql->sql).PHP_EOL;
 	// dump($sql->bindings).PHP_EOL;
 	// dump($sql->time);
 } );
-	/*
-	 * |--------------------------------------------------------------------------
-	 * | Front end routes
-	 * |--------------------------------------------------------------------------
-	 * |
-	 * |
-	 */
-Route::get('/', 'HomeController@index');
-Route::resource('topics', 'TopicController');
+/*
+ * |--------------------------------------------------------------------------
+ * | Front end routes
+ * |--------------------------------------------------------------------------
+ * |
+ * |
+ */
+Route::get ( '/', 'HomeController@index' );
+Route::resource ( 'topics', 'TopicController' );
 
 /*
  * |--------------------------------------------------------------------------
@@ -79,12 +79,16 @@ Route::group ( [
 			'prefix' => 'admin' 
 	], function () {
 		Route::get ( '/', function () {
-			return view ( 'admin/layout' );
+			return view ( 'back/dashboard' );
 		} );
 		
 		// Dashboard Route
-		Route::get ( 'page', function () {
-			return view ( 'admin/layout' );
+		Route::get ( 'dashboard', function () {
+			return view ( 'back/dashboard' );
 		} );
+		// Topics Route
+		Route::resource ( 'topics', 'TopicController' );
+		// List topics based on Product types
+		Route::get ( 'product-types/{type}', 'TopicController@indexByLevel' );
 	} );
 } );
