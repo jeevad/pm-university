@@ -8,15 +8,15 @@
 <meta charset="utf-8" />
 <title>{{config('globals.site_title_abbr') }} | {{
 	config('globals.site_title') }}</title>
-<link rel="stylesheet" href="{{ elixir('assets/css/vendor.css') }}">
-<link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
-<script src="{{ elixir('assets/js/vendor.js') }}"></script>
+<link rel="stylesheet" href="{{ elixir('assets/front/css/vendor.css') }}">
+<link rel="stylesheet" href="{{ elixir('assets/front/css/app.css') }}">
+<script src="{{ elixir('assets/front/js/vendor.js') }}"></script>
 </head>
 <body>
 	<header class="pmu-wrapper banner-wrapper">
 		<div class="banner-container">
 			<div class="banner-logo">
-				<img src="{{ elixir('assets/images/logo.png') }}" title="Logo">
+				<img src="{{ asset('assets/front/images/logo.png') }}" title="Logo">
 			</div>
 			<div class="banner-title">Product Manager University</div>
 			<div class="banner-desc">
@@ -86,7 +86,7 @@
 				<div class="knowledge-list">
 					<div class="knowledge-list-item active">
 						<div class="list-image">
-							<img src="./assets/images/knowledge-class.png" />
+							<img src="{{ asset('assets/front/images/knowledge-class.png') }}" />
 						</div>
 						<div class="list-desc">
 							<p>Product Manager Courses</p>
@@ -94,7 +94,7 @@
 					</div>
 					<div class="knowledge-list-item">
 						<div class="list-image">
-							<img src="./assets/images/knowledge-pen.png" />
+							<img src="{{ asset('assets/front/images/knowledge-pen.png')}}" />
 						</div>
 						<div class="list-desc">
 							<p>Product Manager Blogs</p>
@@ -102,7 +102,7 @@
 					</div>
 					<div class="knowledge-list-item">
 						<div class="list-image">
-							<img src="./assets/images/knowledge-earpod.png" />
+							<img src="{{ asset('assets/front/images/knowledge-earpod.png') }}" />
 						</div>
 						<div class="list-desc">
 							<p>Product Manager Podcasts</p>
@@ -119,7 +119,7 @@
 				<div class="placements-list">
 					<div class="placements-list-item">
 						<div class="list-image">
-							<img src="./assets/images/pm-interviews.png" />
+							<img src="{{ asset('assets/front/images/pm-interviews.png') }}" />
 						</div>
 						<div class="list-content">
 							<div class="list-header title">Product Managment jobs</div>
@@ -135,7 +135,7 @@
 					</div>
 					<div class="placements-list-item">
 						<div class="list-image">
-							<img src="./assets/images/pm-jobs.png" />
+							<img src="{{ asset('assets/front/images/pm-jobs.png') }}" />
 						</div>
 						<div class="list-content">
 							<div class="list-header title">Product Managment jobs</div>
