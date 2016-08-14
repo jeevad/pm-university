@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "assets/css/app.css": "assets/css/app-c9c01df573.css",
   "assets/css/vendor.css": "assets/css/vendor-4c903fb288.css",
   "assets/images/arrow-down.png": "assets/images/arrow-down-0047254d0f.png",
@@ -21,4 +22,11 @@
   "assets/images/whit-check.png": "assets/images/whit-check-529e646cd2.png",
   "assets/images/white-check.png": "assets/images/white-check-529e646cd2.png",
   "assets/js/vendor.js": "assets/js/vendor-31030de2ab.js"
+=======
+  "assets/front/css/app.css": "assets/front/css/app-1beae8a38b.css",
+  "assets/front/css/vendor.css": "assets/front/css/vendor-54c4266531.css",
+  "assets/front/js/vendor.js": "assets/front/js/vendor-f42f6ea649.js",
+  "assets/js/app.js": "assets/js/app-042fa435dd.js",
+  "assets/js/vendor.js": "assets/js/vendor-58105131ab.js"
+>>>>>>> 1642cf1cf02a892533a08711d4b4e402cc714f37
 }
