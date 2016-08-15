@@ -92,6 +92,8 @@ Route::group ( [
 		} );
 		// Topics Route
 		Route::resource ( 'topics', 'TopicController' );
+		// Article Route
+		Route::resource('articles', 'ArticleController');
 		// List topics based on Product types
 		Route::get ( 'product-types/{type}', 'TopicController@indexByLevel' );
 	} );
