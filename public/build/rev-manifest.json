@@ -1,32 +1,7 @@
 {
-<<<<<<< HEAD
-  "assets/css/app.css": "assets/css/app-c9c01df573.css",
-  "assets/css/vendor.css": "assets/css/vendor-4c903fb288.css",
-  "assets/images/arrow-down.png": "assets/images/arrow-down-0047254d0f.png",
-  "assets/images/banner-background.png": "assets/images/banner-background-64eacf3aa7.png",
-  "assets/images/facebook.png": "assets/images/facebook-09de8fcf99.png",
-  "assets/images/gmail.png": "assets/images/gmail-286aafd443.png",
-  "assets/images/green-check.png": "assets/images/green-check-d81ba458e0.png",
-  "assets/images/header-background.png": "assets/images/header-background-7b503c9607.png",
-  "assets/images/knowledge-class.png": "assets/images/knowledge-class-42a7a5b450.png",
-  "assets/images/knowledge-earpod.png": "assets/images/knowledge-earpod-361854652b.png",
-  "assets/images/knowledge-pen.png": "assets/images/knowledge-pen-6bd38ba337.png",
-  "assets/images/linkedin.png": "assets/images/linkedin-8b9245a447.png",
-  "assets/images/logo.png": "assets/images/logo-3e4957a94b.png",
-  "assets/images/pm-full-image.png": "assets/images/pm-full-image-0d8e90d8a1.png",
-  "assets/images/pm-half-image.png": "assets/images/pm-half-image-0d8e90d8a1.png",
-  "assets/images/pm-interviews.png": "assets/images/pm-interviews-8a5f945010.png",
-  "assets/images/pm-jobs.png": "assets/images/pm-jobs-3754f499b8.png",
-  "assets/images/red-background.png": "assets/images/red-background-21f5ac43cf.png",
-  "assets/images/twitter.png": "assets/images/twitter-287a8bd087.png",
-  "assets/images/whit-check.png": "assets/images/whit-check-529e646cd2.png",
-  "assets/images/white-check.png": "assets/images/white-check-529e646cd2.png",
-  "assets/js/vendor.js": "assets/js/vendor-31030de2ab.js"
-=======
-  "assets/front/css/app.css": "assets/front/css/app-1beae8a38b.css",
-  "assets/front/css/vendor.css": "assets/front/css/vendor-54c4266531.css",
-  "assets/front/js/vendor.js": "assets/front/js/vendor-f42f6ea649.js",
-  "assets/js/app.js": "assets/js/app-042fa435dd.js",
-  "assets/js/vendor.js": "assets/js/vendor-58105131ab.js"
->>>>>>> 1642cf1cf02a892533a08711d4b4e402cc714f37
+  "assets/front/css/app.css": "assets/front/css/app-c9c01df573.css",
+  "assets/front/css/vendor.css": "assets/front/css/vendor-4c903fb288.css",
+  "assets/front/js/vendor.js": "assets/front/js/vendor-31030de2ab.js",
+  "assets/js/app.js": "assets/js/app-85fe963e4c.js",
+  "assets/js/vendor.js": "assets/js/vendor-cc5462610f.js"
 }
