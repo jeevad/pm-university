@@ -72,7 +72,7 @@ class TopicController extends Controller {
 		
 		try {
 			
-			$topic = $this->topicGestion->store ( $this->request->all (), Auth::user ()->id );
+			$topic = $this->topicGestion->store ( $request->all (), Auth::user ()->id );
 			
 			flash ( trans ( 'messages.topic_created_success' ), 'success' )->important ();
 			return redirect ( 'admin/topics' );
@@ -146,11 +146,11 @@ class TopicController extends Controller {
 			flash ( trans ( 'messages.topic_updated_success' ), 'success' )->important ();
 			return redirect ( 'admin/topics' );
 		} catch ( QueryException $e ) {
-			$message = trans ( 'errors.something_went_wrong' );
+			$message = trans ( 'errors.something_went_wrong' ).$e->getMessage();
 		} catch ( \ErrorException $e ) {
-			$message = trans ( 'errors.something_went_wrong' );
+			$message = trans ( 'errors.something_went_wrong' ).$e->getMessage();
 		} catch ( ModelNotFoundException $e ) {
-			$message = trans ( 'errors.something_went_wrong' );
+			$message = trans ( 'errors.something_went_wrong' ).$e->getMessage();
 		}
 		flash ( $message, $level )->important ();
 		return redirect ( $redirectUrl )->withInput ();
