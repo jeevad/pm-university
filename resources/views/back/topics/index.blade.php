@@ -49,7 +49,7 @@
 						<td>{{ $topic->title }}</td>
 						<td>{{ $topic->level->title }}</td>
 						<td>{{ $topic->created_at }}</td>
-						<td><a href="topics/{{$topic->id}}/edit"
+						<td><a href="/admin/topics/{{$topic->id}}/edit"
 							class="btn btn-icon command-delete waves-effect waves-circle"><span
 								class="zmdi zmdi-edit"></span></a>
 							<form action="topics/{{ $topic->id }}" method="POST"
