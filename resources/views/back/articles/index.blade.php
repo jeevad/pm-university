@@ -1,7 +1,7 @@
 @extends('back.template') @section('content')
 <div class="container">
 	<div class="block-header">
-		<h2>Topics</h2>
+		<h2>Articles</h2>
 		<ul class="actions">
 			<li><a href="#"> <i class="zmdi zmdi-trending-up"></i>
 			</a></li>
@@ -22,13 +22,7 @@
 
 	<div class="card">
 		<div class="card-header">
-			<h2>
-				@if (Request::path() == 'admin/product-types/bachelore') Bachelor's degree
-
-				@elseif (Request::path() == 'admin/product-types/master') Master's degree
-				@elseif (Request::path() == 'admin/product-types/specialization')
-				Specialization @else Topics Listing @endif
-			</h2>
+			<h2>Topics Listing</h2>
 		</div>
 
 		<div class="card-body table-responsive">
@@ -37,23 +31,21 @@
 					<tr>
 						<th>#</th>
 						<th>Title</th>
-						<th>Type</th>
+
 						<th>Posted on</th>
 						<th>Action</th>
-						<th>Article</th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($topics as $topic)
+					@foreach ($articles as $article)
 					<tr>
-						<td>{{ $topic->id }}</td>
-						<td>{{ $topic->title }}</td>
-						<td>{{ $topic->level->title }}</td>
-						<td>{{ $topic->created_at }}</td>
-						<td><a href="topics/{{$topic->id}}/edit"
+						<td>{{ $article->id }}</td>
+						<td>{{ $article->title }}</td>
+						<td>{{ $article->created_at }}</td>
+						<td><a href="/admin/articles/{{$article->id}}/edit"
 							class="btn btn-icon command-delete waves-effect waves-circle"><span
 								class="zmdi zmdi-edit"></span></a>
-							<form action="topics/{{ $topic->id }}" method="POST"
+							<form action="topics/{{ $article->id }}" method="POST"
 								style="display: inline">
 								{{ method_field('DELETE') }} {{ csrf_field() }}
 								<button type="submit"
@@ -61,12 +53,6 @@
 									<span class="zmdi zmdi-delete"></span>
 								</button>
 							</form></td>
-							<td><a href="/admin/articles/create?topicId={{$topic->id}}"
-							class="btn btn-icon" title="Add an article"><span
-								class="zmdi zmdi-plus-circle"></span></a> <a
-							href="/admin/articles?topicId={{$topic->id}}"
-							class="btn btn-icon" title="List all articles"><span
-								class="zmdi zmdi-view-list-alt"></span></a></td>
 					</tr>
 					@endforeach
 				</tbody>
@@ -76,13 +62,13 @@
 				class="bootgrid-footer container-fluid">
 				<div class="row">
 					<div class="col-sm-6">@include('pagination.custom', ['paginator' =>
-						$topics])</div>
+						$articles])</div>
 				</div>
 			</div>
 		</div>
 		<!-- Add Topic button -->
 		@include('back.partials._add_button', ['url' =>
-		'/admin/topics/create'])
+		'/admin/articles/create?topicId='.$topicId])
 	</div>
 </div>
 @endsection

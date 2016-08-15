@@ -7,5 +7,10 @@ return [
 		'update_topic' => 'Update topic',
 		'topic_created_success' => 'Topic has been created successfully',
 		'topic_deleted_success' => 'Topic has been deleted successfully',
-		'topic_updated_success' => 'Topic has been updated successfully',		
+		'topic_updated_success' => 'Topic has been updated successfully',
+		'create_article' => 'Create an article',
+		'update_article' => 'Update an article',
+		'article_created_success' => 'Artilce has been created successfully',
+		'article_deleted_success' => 'Article has been deleted successfully',
+		'article_updated_success' => 'Article has been updated successfully',
 ];
