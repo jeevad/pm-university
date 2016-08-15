@@ -161,6 +161,22 @@ class ArticleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id) {
-		//
+		$message = trans ( 'messages.article_deleted_success' );
+		$level = 'danger';
+		$article = Article::find($id);
+		try {
+			
+			Article::destroy ( $id );
+			$level = 'success';
+		} catch ( ModelNotFoundException $e ) {
+			$message = trans ( 'errors.resource_not_found' );
+		} catch ( QueryException $e ) {
+			$message = trans ( 'errors.something_went_wrong' );
+		}
+		// flash()->overlay('Notice', 'You are now a Laracasts member!');
+		
+		flash ( $message, $level )->important ();
+		// flash ()->overlay ('Success', $message );
+		return redirect ( 'admin/articles?topicId='.$article->topic_id );
 	}
 }

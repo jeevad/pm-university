@@ -45,7 +45,7 @@
 						<td><a href="/admin/articles/{{$article->id}}/edit"
 							class="btn btn-icon command-delete waves-effect waves-circle"><span
 								class="zmdi zmdi-edit"></span></a>
-							<form action="topics/{{ $article->id }}" method="POST"
+							<form action="articles/{{ $article->id }}" method="POST"
 								style="display: inline">
 								{{ method_field('DELETE') }} {{ csrf_field() }}
 								<button type="submit"
