@@ -1,11 +1,11 @@
 <?php
-use Illuminate\Database\Seeder;
+
 use App\Models\Channel;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\Seeder;
 
 class ChannelsTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -16,7 +16,7 @@ class ChannelsTableSeeder extends Seeder
         Excel::selectSheets('Channels')->load(database_path('seeds/seed_files/product-management.xlsx'), function ($reader) {
             // Getting all results
             $results = $reader->get();
-            
+
             // Truncate channels
             DB::table('channels')->truncate();
             $i = 0;
@@ -24,14 +24,14 @@ class ChannelsTableSeeder extends Seeder
                 try {
                     Channel::create([
                         'title' => $row->title,
-                        'slug' => str_slug($row->title, '-')
+                        'slug'  => str_slug($row->title, '-'),
                     ]);
                 } catch (QueryException $e) {
-                    die('Some exception occured. <br/>' . $e->getMessage());
+                    die('Some exception occured. <br/>'.$e->getMessage());
                 }
-                $i ++;
+                $i++;
             }
-            echo $i . ' Channels successfully inserted' . PHP_EOL;
+            echo $i.' Channels successfully inserted'.PHP_EOL;
         });
     }
 }

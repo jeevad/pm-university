@@ -10,11 +10,11 @@
  * | to using a Closure or controller method. Build something great!
  * |
  */
-Route::get ( '/', 'WelcomeController@index');
+Route::get('/', 'WelcomeController@index');
 
-Auth::routes ();
+Auth::routes();
 
-Route::get ( '/home', 'HomeController@index' );
+Route::get('/home', 'HomeController@index');
 /*
  * |--------------------------------------------------------------------------
  * | Admin Routes
@@ -23,30 +23,29 @@ Route::get ( '/home', 'HomeController@index' );
  * | Here is where all admin routes are defined.
  * |
  */
-Route::group ( [ 
-		'middleware' => [ 
-				
-				'admin' 
-		] 
-], function () {
-	// Admin Route
-	Route::group ( [ 
-			'prefix' => 'admin' 
-	], function () {
-		Route::get ( '/', function () {
-			return view ( 'back/dashboard' );
-		} );
-		
-		// Dashboard Route
-		Route::get ( 'dashboard', function () {
-			return view ( 'back/dashboard' );
-		} );
-		// Topics Route
-		Route::resource ( 'topics', 'TopicController' );
-		// Article Route
-		Route::resource ( 'articles', 'ArticleController' );
-		// List topics based on Product types
-		Route::get ( 'product-types/{type}', 'TopicController@indexByLevel' );
-	} );
-} );
+Route::group([
+        'middleware' => [
 
+                'admin',
+        ],
+], function () {
+    // Admin Route
+    Route::group([
+            'prefix' => 'admin',
+    ], function () {
+        Route::get('/', function () {
+            return view('back/dashboard');
+        });
+
+        // Dashboard Route
+        Route::get('dashboard', function () {
+            return view('back/dashboard');
+        });
+        // Topics Route
+        Route::resource('topics', 'TopicController');
+        // Article Route
+        Route::resource('articles', 'ArticleController');
+        // List topics based on Product types
+        Route::get('product-types/{type}', 'TopicController@indexByLevel');
+    });
+});

@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Providers;
 
+use App\Services\CustomValidation;
 use Illuminate\Support\ServiceProvider;
 use Validator;
-use App\Services\CustomValidation;
 
 class AppServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *

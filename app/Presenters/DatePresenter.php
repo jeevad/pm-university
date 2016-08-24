@@ -1,16 +1,17 @@
 <?php
+
 namespace App\Presenters;
 
-use Carbon\Carbon;
 use Auth;
+use Carbon\Carbon;
 
 trait DatePresenter
 {
-
     /**
-     * Format created_at attribute
+     * Format created_at attribute.
      *
-     * @param Carbon $date            
+     * @param Carbon $date
+     *
      * @return string
      */
     public function getCreatedAtAttribute($date)
@@ -19,9 +20,10 @@ trait DatePresenter
     }
 
     /**
-     * Format updated_at attribute
+     * Format updated_at attribute.
      *
-     * @param Carbon $date            
+     * @param Carbon $date
+     *
      * @return string
      */
     public function getUpdatedAtAttribute($date)
@@ -30,9 +32,10 @@ trait DatePresenter
     }
 
     /**
-     * Format date
+     * Format date.
      *
-     * @param Carbon $date            
+     * @param Carbon $date
+     *
      * @return string
      */
     private function getDateFormated($date)
@@ -42,6 +45,7 @@ trait DatePresenter
         } elseif (Auth::guard(env('API_GUARD'))->user() && Auth::guard(env('API_GUARD'))->user()->accessApisAll()) {
             return Carbon::parse($date)->toFormattedDateString();
         }
+
         return Carbon::parse($date)->format('Y-m-d H:i:s');
     }
 }

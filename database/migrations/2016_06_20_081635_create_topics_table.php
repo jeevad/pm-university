@@ -1,10 +1,10 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
+
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateTopicsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -34,11 +34,11 @@ class CreateTopicsTable extends Migration
             $table->string('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
             $table->string('slug')->nullable();
-            
+
             // Timestamps
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
-            
+
             // Soft delete
             $table->softDeletes()->index();
         });

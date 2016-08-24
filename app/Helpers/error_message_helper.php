@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Format form validation error messages
+ * Format form validation error messages.
  *
  * @param array $messages
+ *
  * @return array
  */
-if (! function_exists('formatValidationMessages')) {
-
+if (!function_exists('formatValidationMessages')) {
     function formatValidationMessages(Illuminate\Support\MessageBag $messages)
     {
         $errors = [];
@@ -123,29 +123,27 @@ if (! function_exists('formatValidationMessages')) {
             $field = 'articleId';
             $errors[] = getErrorMessage($field, $messages->first($field));
         }
-        
+
         return $errors;
     }
 }
 
-/**
+/*
  * Get error message in array format with internal code
  *
  * @param
  *            $field
- * @param string $message            
+ * @param string $message
  * @return array
  */
-if (! function_exists('getErrorMessage')) {
-
+if (!function_exists('getErrorMessage')) {
     function getErrorMessage($field, $message = '')
     {
         $errorMsg[$field] = [
-            'field' => $field,
-            'message' => $message
+            'field'   => $field,
+            'message' => $message,
         ];
+
         return $errorMsg[$field];
     }
 }
-
-
