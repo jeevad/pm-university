@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Role;
 
 class RoleRepository
 {
-
     /**
      * The Role instance.
      *
@@ -16,7 +16,8 @@ class RoleRepository
     /**
      * Create a new RolegRepository instance.
      *
-     * @param App\Models\Role $role            
+     * @param App\Models\Role $role
+     *
      * @return void
      */
     public function __construct(Role $role)
@@ -37,16 +38,17 @@ class RoleRepository
     /**
      * Update roles.
      *
-     * @param array $inputs            
+     * @param array $inputs
+     *
      * @return void
      */
     public function update($inputs)
     {
         foreach ($inputs as $key => $value) {
             $role = $this->role->where('slug', $key)->firstOrFail();
-            
+
             $role->title = $value;
-            
+
             $role->save();
         }
     }
@@ -56,12 +58,13 @@ class RoleRepository
      *
      * @param
      *            App\Models\User
-     * @return Array
+     *
+     * @return array
      */
     public function getAllSelect()
     {
         $select = $this->all()->pluck('title', 'id');
-        
+
         return compact('select');
     }
 }

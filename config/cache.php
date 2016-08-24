@@ -1,6 +1,7 @@
 <?php
+
 return [
-    
+
     /*
      * |--------------------------------------------------------------------------
      * | Default Cache Store
@@ -11,7 +12,7 @@ return [
      * | not explicitly specified when executing a given caching function.
      * |
      */
-    
+
     'default' => env('CACHE_DRIVER', 'file'),
 
     /*
@@ -26,43 +27,42 @@ return [
     */
 
     'stores' => [
-        
+
         'apc' => [
-            'driver' => 'apc'
+            'driver' => 'apc',
         ],
-        
+
         'array' => [
-            'driver' => 'array'
+            'driver' => 'array',
         ],
-        
+
         'database' => [
-            'driver' => 'database',
-            'table' => 'cache',
-            'connection' => null
+            'driver'     => 'database',
+            'table'      => 'cache',
+            'connection' => null,
         ],
-        
+
         'file' => [
             'driver' => 'file',
-            'path' => storage_path('framework/cache')
+            'path'   => storage_path('framework/cache'),
         ],
-        
+
         'memcached' => [
-            'driver' => 'memcached',
+            'driver'  => 'memcached',
             'servers' => [
                 [
-                    'host' => env('MEMCACHED_HOST', '127.0.0.1'),
-                    'port' => env('MEMCACHED_PORT', 11211),
-                    'weight' => 100
-                ]
-            ]
+                    'host'   => env('MEMCACHED_HOST', '127.0.0.1'),
+                    'port'   => env('MEMCACHED_PORT', 11211),
+                    'weight' => 100,
+                ],
+            ],
         ],
-        
+
         'redis' => [
-            'driver' => 'redis',
-            'connection' => 'default'
-        ]
-    ]
-    ,
+            'driver'     => 'redis',
+            'connection' => 'default',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -75,5 +75,5 @@ return [
     |
     */
 
-    'prefix' => 'pmu'
+    'prefix' => 'pmu',
 ];

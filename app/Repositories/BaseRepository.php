@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Traits\Sluggable;
@@ -22,16 +23,17 @@ abstract class BaseRepository
     public function getNumber()
     {
         $total = $this->model->count();
-        
+
         $new = $this->model->whereSeen(0)->count();
-        
+
         return compact('total', 'new');
     }
 
     /**
      * Destroy a model.
      *
-     * @param int $id            
+     * @param int $id
+     *
      * @return void
      */
     public function destroy($id)
@@ -42,7 +44,8 @@ abstract class BaseRepository
     /**
      * Get Model by id.
      *
-     * @param int $id            
+     * @param int $id
+     *
      * @return App\Models\Model
      */
     public function getById($id)
@@ -51,7 +54,7 @@ abstract class BaseRepository
     }
 
     /**
-     * Get max id
+     * Get max id.
      *
      * @return type
      */

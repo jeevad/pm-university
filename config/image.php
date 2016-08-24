@@ -1,5 +1,6 @@
 <?php
-return array(
+
+return [
     /*
       |--------------------------------------------------------------------------
       | Image Driver
@@ -14,20 +15,20 @@ return array(
      */
 
     'driver' => 'gd',
-    'paths' => [
-        'topics' => 'img/topics',
-        'authors' => 'img/topics/authors'
+    'paths'  => [
+        'topics'  => 'img/topics',
+        'authors' => 'img/topics/authors',
     ],
     'sizes' => [
         'topics' => [
-            'width' => 600,
-            'height' => 400
+            'width'  => 600,
+            'height' => 400,
         ],
         'authors' => [
             'thumbnail' => [
-                'width' => 150,
-                'height' => 100
-            ]
-        ]
-    ]
-);
+                'width'  => 150,
+                'height' => 100,
+            ],
+        ],
+    ],
+];

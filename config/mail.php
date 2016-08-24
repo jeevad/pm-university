@@ -1,6 +1,7 @@
 <?php
+
 return [
-    
+
     /*
      * |--------------------------------------------------------------------------
      * | Mail Driver
@@ -14,7 +15,7 @@ return [
      * | "ses", "sparkpost", "log"
      * |
      */
-    
+
     'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
@@ -55,7 +56,7 @@ return [
     */
     'from' => [
         'address' => env('MAIL_FROM'),
-        'name' => env('MAIL_FROM_NAME')
+        'name'    => env('MAIL_FROM_NAME'),
     ],
     /*
     |--------------------------------------------------------------------------
@@ -107,5 +108,5 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs'
+    'sendmail' => '/usr/sbin/sendmail -bs',
 ];

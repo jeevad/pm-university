@@ -1,6 +1,7 @@
 <?php
+
 return [
-    
+
     /*
      * |--------------------------------------------------------------------------
      * | Default Session Driver
@@ -14,7 +15,7 @@ return [
      * | "memcached", "redis", "array"
      * |
      */
-    
+
     'driver' => env('SESSION_DRIVER', 'file'),
 
     /*
@@ -29,7 +30,7 @@ return [
     */
 
     'lifetime' => 120,
-    
+
     'expire_on_close' => false,
 
     /*
@@ -97,7 +98,7 @@ return [
 
     'lottery' => [
         2,
-        100
+        100,
     ],
 
     /*
@@ -163,5 +164,5 @@ return [
     |
     */
 
-    'http_only' => true
+    'http_only' => true,
 ];

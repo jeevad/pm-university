@@ -1,10 +1,10 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
+
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateArticlesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -29,17 +29,17 @@ class CreateArticlesTable extends Migration
                 ->nullable();
             $table->string('author_name', 200)->nullable();
             $table->mediumText('author_description')->nullable();
-            ;
+
             $table->bigInteger('author_picture_id')
                 ->unusigned()
                 ->nullable();
             $table->integer('sequence')->unsigned();
             $table->string('slug');
-            
+
             // Timestamps
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
-            
+
             // Soft delete
             $table->softDeletes()->index();
         });

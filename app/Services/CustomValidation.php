@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Services;
 
-use Illuminate\Validation\Validator;
 use App\Models\User;
+use Illuminate\Validation\Validator;
 
 class CustomValidation extends Validator
 {
-
     public function validateFullName($attribute, $value, $parameters)
     {
         return preg_match("/^[a-zA-Z\.'\s]+$/", $value);
@@ -20,9 +20,10 @@ class CustomValidation extends Validator
     /**
      * Validator for alphabetic chracters and spaces.
      *
-     * @param type $attribute            
-     * @param type $value            
-     * @param type $parameters            
+     * @param type $attribute
+     * @param type $value
+     * @param type $parameters
+     *
      * @return type
      */
     public function validateAlphaSpaces($attribute, $value, $parameters)
@@ -33,9 +34,10 @@ class CustomValidation extends Validator
     /**
      * Validator for alphabetic chracters, dash, spaces and numbers.
      *
-     * @param type $attribute            
-     * @param type $value            
-     * @param type $parameters            
+     * @param type $attribute
+     * @param type $value
+     * @param type $parameters
+     *
      * @return type
      */
     public function validateAlphaSpacesNum($attribute, $value, $parameters)
@@ -60,11 +62,11 @@ class CustomValidation extends Validator
 
     public function validateDeviceOs($attribute, $value, $parameters)
     {
-        return in_array(strtolower($value), array(
+        return in_array(strtolower($value), [
             'android',
             'ios',
-            'web'
-        ));
+            'web',
+        ]);
     }
 
     public function validateMacAddress($attribute, $value, $parameters)
@@ -78,7 +80,7 @@ class CustomValidation extends Validator
     }
 
     /**
-     * Validates user id
+     * Validates user id.
      *
      * @param
      *            $attribute
@@ -86,16 +88,18 @@ class CustomValidation extends Validator
      *            $value
      * @param
      *            $parameters
+     *
      * @return mixed
      */
     public function validateUserId($attribute, $value, $parameters)
     {
         $user = new User();
+
         return $user->active()->find($value);
     }
 
     /**
-     * Validates complaint id
+     * Validates complaint id.
      *
      * @param
      *            $attribute
@@ -103,16 +107,18 @@ class CustomValidation extends Validator
      *            $value
      * @param
      *            $parameters
+     *
      * @return mixed
      */
     public function validateComplaintId($attribute, $value, $parameters)
     {
         $complaint = new Complaint();
+
         return $complaint->active()->find($value);
     }
 
     /**
-     * Validates complaint current status and latest status
+     * Validates complaint current status and latest status.
      *
      * @param
      *            $attribute
@@ -120,18 +126,20 @@ class CustomValidation extends Validator
      *            $value
      * @param
      *            $parameters
+     *
      * @return bool
      */
     public function validateCurrentStatusId($attribute, $value, $parameters)
     {
         $complaint = new Complaint();
         $status = $complaint->getComplaintStatus((int) $parameters[0]);
+
         return (int) $status->status_id !== (int) $value;
     }
 
     /**
      * Validates complaint status is switchable to another ie.
-     * Complaint can be re-opened when it is in re-solved status
+     * Complaint can be re-opened when it is in re-solved status.
      *
      * @param
      *            $attribute
@@ -139,22 +147,24 @@ class CustomValidation extends Validator
      *            $value
      * @param
      *            $parameters
+     *
      * @return bool
      */
     public function validateIsStatusSwitchable($attribute, $value, $parameters)
     {
         $complaint = new Complaint();
         $status = $complaint->getComplaintStatus((int) $parameters[0]);
-        
+
         $inputStatusId = (int) $value;
         if ($inputStatusId === 5) {
             return (int) $status->status_id === 4;
         }
+
         return true;
     }
 
     /**
-     * Validates comment
+     * Validates comment.
      *
      * @param
      *            $attribute
@@ -162,6 +172,7 @@ class CustomValidation extends Validator
      *            $value
      * @param
      *            $parameters
+     *
      * @return bool
      */
     public function validateCommentDescription($attribute, $value, $parameters)
@@ -170,7 +181,7 @@ class CustomValidation extends Validator
     }
 
     /**
-     * Validates complaint feedback option id
+     * Validates complaint feedback option id.
      *
      * @param
      *            $attribute
@@ -178,53 +189,61 @@ class CustomValidation extends Validator
      *            $value
      * @param
      *            $parameters
+     *
      * @return mixed
      */
     public function validateFeedbackOptionId($attribute, $value, $parameters)
     {
         $feedback = new FeedbackOption();
+
         return $feedback->active()->find($value);
     }
 
     /**
-     * Validates Image file dimensions
+     * Validates Image file dimensions.
      *
-     * @param type $attribute            
-     * @param type $value            
-     * @param type $parameters            
+     * @param type $attribute
+     * @param type $value
+     * @param type $parameters
+     *
      * @return type
      */
     public function validateFileDimension($attribute, $value, $parameters)
     {
         $moduleType = isset($parameters[0]) ? $parameters[0] : 'users';
-        return array_key_exists($value, config('image.sizes.' . $moduleType));
+
+        return array_key_exists($value, config('image.sizes.'.$moduleType));
     }
 
     /**
-     * Validates Image file dimensions
+     * Validates Image file dimensions.
      *
-     * @param type $attribute            
-     * @param type $value            
-     * @param type $parameters            
+     * @param type $attribute
+     * @param type $value
+     * @param type $parameters
+     *
      * @return type
      */
     public function validateCommentOptionId($attribute, $value, $parameters)
     {
         $commentOption = new CommentOption();
+
         return $commentOption->active()->find($value);
     }
 
     /**
-     * Validates Image file dimensions
+     * Validates Image file dimensions.
      *
-     * @param type $attribute            
-     * @param type $value            
-     * @param type $parameters            
+     * @param type $attribute
+     * @param type $value
+     * @param type $parameters
+     *
      * @return type
      */
     public function validateTempFileId($attribute, $value, $parameters)
     {
         $tmpFile = new TemporaryFile();
+
         return $tmpFile->active()->find($value);
     }
 }

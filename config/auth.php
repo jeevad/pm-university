@@ -1,6 +1,7 @@
 <?php
+
 return [
-    
+
     /*
      * |--------------------------------------------------------------------------
      * | Authentication Defaults
@@ -11,10 +12,10 @@ return [
      * | as required, but they're a perfect start for most applications.
      * |
      */
-    
+
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users'
+        'guard'     => 'web',
+        'passwords' => 'users',
     ],
     /*
       |--------------------------------------------------------------------------
@@ -34,13 +35,13 @@ return [
      */
     'guards' => [
         'web' => [
-            'driver' => 'session',
-            'provider' => 'users'
+            'driver'   => 'session',
+            'provider' => 'users',
         ],
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users'
-        ]
+            'driver'   => 'token',
+            'provider' => 'users',
+        ],
     ],
     /*
       |--------------------------------------------------------------------------
@@ -61,8 +62,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class
-        ]
+            'model'  => App\Models\User::class,
+        ],
     ],
     // 'users' => [
     // 'driver' => 'database',
@@ -89,9 +90,9 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'email' => 'auth.emails.password',
-            'table' => 'password_resets',
-            'expire' => 60
-        ]
-    ]
+            'email'    => 'auth.emails.password',
+            'table'    => 'password_resets',
+            'expire'   => 60,
+        ],
+    ],
 ];

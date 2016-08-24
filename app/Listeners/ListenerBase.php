@@ -1,13 +1,11 @@
 <?php
+
 namespace App\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Services\Status;
 
 class ListenerBase
 {
-
     /**
      * The Status instance.
      *
@@ -18,7 +16,8 @@ class ListenerBase
     /**
      * Create the event listener.
      *
-     * @param App\Services\Status $status            
+     * @param App\Services\Status $status
+     *
      * @return void
      */
     public function __construct(Status $status)
