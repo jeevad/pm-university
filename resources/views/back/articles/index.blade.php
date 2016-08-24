@@ -61,8 +61,7 @@
 			<div id="data-table-command-footer"
 				class="bootgrid-footer container-fluid">
 				<div class="row">
-					<div class="col-sm-6">@include('pagination.custom', ['paginator' =>
-						$articles])</div>
+					<div class="col-sm-6">{{ $articles->links() }}</div>
 				</div>
 			</div>
 		</div>

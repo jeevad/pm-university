@@ -22,13 +22,7 @@
 
 	<div class="card">
 		<div class="card-header">
-			<h2>
-				@if (Request::path() == 'admin/product-types/bachelore') Bachelor's degree
-
-				@elseif (Request::path() == 'admin/product-types/master') Master's degree
-				@elseif (Request::path() == 'admin/product-types/specialization')
-				Specialization @else Topics Listing @endif
-			</h2>
+			<h2></h2>
 		</div>
 
 		<div class="card-body table-responsive">
@@ -61,7 +55,7 @@
 									<span class="zmdi zmdi-delete"></span>
 								</button>
 							</form></td>
-							<td><a href="/admin/articles/create?topicId={{$topic->id}}"
+						<td><a href="/admin/articles/create?topicId={{$topic->id}}"
 							class="btn btn-icon" title="Add an article"><span
 								class="zmdi zmdi-plus-circle"></span></a> <a
 							href="/admin/articles?topicId={{$topic->id}}"
@@ -75,8 +69,7 @@
 			<div id="data-table-command-footer"
 				class="bootgrid-footer container-fluid">
 				<div class="row">
-					<div class="col-sm-6">@include('pagination.custom', ['paginator' =>
-						$topics])</div>
+					<div class="col-sm-6">{{ $topics->links() }}</div>
 				</div>
 			</div>
 		</div>
