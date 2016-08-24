@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use Notifiable;
 
     /**
      * The database table used by the model.
@@ -20,62 +23,62 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
     ];
 
     /**
-     * Validation rules to store an user
+     * Validation rules to store an user.
      *
      * @var array
      */
     public static $loginAdminRules = [
-        'user.email' => 'required|exists:users,email',
+        'user.email'    => 'required|exists:users,email',
         'user.password' => 'required',
-        'user.memory' => 'sometimes|boolean'
+        'user.memory'   => 'sometimes|boolean',
     ];
 
     /**
-     * One to Many relation
+     * One to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function channel()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'Channel');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Channel');
     }
 
     /**
-     * One to Many relation
+     * One to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function role()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'Role');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Role');
     }
 
     /**
-     * One to Many relation
+     * One to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function topics()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Topic');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Topic');
     }
 
     /**
-     * One to Many relation
+     * One to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function content()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Content');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Content');
     }
 
     /**
-     * Check media all access
+     * Check media all access.
      *
      * @return bool
      */
@@ -85,7 +88,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Check api all access
+     * Check api all access.
      *
      * @return bool
      */
@@ -95,7 +98,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Check media access one folder
+     * Check media access one folder.
      *
      * @return bool
      */

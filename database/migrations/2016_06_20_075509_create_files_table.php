@@ -1,10 +1,10 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
+
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateFilesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -18,7 +18,7 @@ class CreateFilesTable extends Migration
             // Timestamps
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
-            
+
             // Soft delete
             $table->softDeletes()->index();
         });

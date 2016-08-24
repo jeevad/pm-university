@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Presenters\DatePresenter;
+use Illuminate\Database\Eloquent\Model;
 
-class Content extends Model
+class Post extends Model
 {
-    
     use DatePresenter;
 
     /**
@@ -17,22 +17,22 @@ class Content extends Model
     protected $table = 'content';
 
     /**
-     * Many to Many relation
+     * Many to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\belongToMany
      */
     public function tags()
     {
-        return $this->belongsToMany(env('APP_MODEL_NAMESPACE') . 'Tag');
+        return $this->belongsToMany(env('APP_MODEL_NAMESPACE').'Tag');
     }
 
     /**
-     * One to Many relation
+     * One to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function comments()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'Comment');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE').'Comment');
     }
 }

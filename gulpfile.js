@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+require('laravel-elixir-vue');
 
 /*
  * |-------------------------------------------------------------------------- |
@@ -13,6 +14,7 @@ var bowerDir = vendorDir + 'bower_components/';
 var frontAssets = './resources/assets/front/';
 elixir(function(mix) {
 	// mix.sass('app.scss');
+	mix.sass('app1.scss').webpack('app1.js');
 
 	mix.styles([ frontAssets + 'css/vendor/bootstrap.min.css' ],
 			'public/assets/front/css/vendor.css').styles(
@@ -27,7 +29,8 @@ elixir(function(mix) {
 	 * 'assets/js/front/vendor.js' ]);
 	 */
 	mix.copy('resources/assets/front/images', 'public/assets/front/images');
-	mix.copy('resources/assets/front/images', 'public/build/assets/front/images');
+	mix.copy('resources/assets/front/images',
+			'public/build/assets/front/images');
 	mix.copy('resources/assets/front/fonts', 'public/assets/front/fonts');
 	mix.copy('resources/assets/front/fonts', 'public/build/assets/front/fonts');
 	/**

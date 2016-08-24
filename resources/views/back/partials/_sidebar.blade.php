@@ -16,7 +16,12 @@
 			<li><a href="#"><i class="zmdi zmdi-input-antenna"></i> Privacy
 					Settings</a></li>
 			<li><a href="#"><i class="zmdi zmdi-settings"></i> Settings</a></li>
-			<li><a href="{!! url('logout') !!}"><i class="zmdi zmdi-time-restore"></i> Logout</a></li>
+			<li><a href="{{ url('/logout') }}"
+				onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();"><i
+					class="zmdi zmdi-time-restore"></i> Logout</a>
+			<form id="logout-form" action="{{ url('/logout') }}" method="POST"
+					style="display: none;">{{ csrf_field() }}</form></li>
 		</ul>
 	</div>
 
@@ -38,8 +43,7 @@
 				<li><a href="/admin/topics">List topics</a></li>
 				<li><a href="/admin/topics/create">Add a topic</a></li>
 			</ul></li>
-		<li><a href="#"><i class="zmdi zmdi-format-underlined"></i>
-				Users</a></li>	
-		
+		<li><a href="#"><i class="zmdi zmdi-format-underlined"></i> Users</a></li>
+
 	</ul>
 </aside>

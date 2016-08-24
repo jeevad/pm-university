@@ -1,13 +1,14 @@
 <?php
+
 namespace App\Services;
 
 class Status
 {
-
     /**
-     * Set the login user status
+     * Set the login user status.
      *
-     * @param Illuminate\Auth\Events\Login $login            
+     * @param Illuminate\Auth\Events\Login $login
+     *
      * @return void
      */
     public function setLoginStatus($login)
@@ -16,7 +17,7 @@ class Status
     }
 
     /**
-     * Set the visitor user status
+     * Set the visitor user status.
      *
      * @return void
      */
@@ -26,13 +27,13 @@ class Status
     }
 
     /**
-     * Set the status
+     * Set the status.
      *
      * @return void
      */
     public function setStatus()
     {
-        if (! session()->has('status')) {
+        if (!session()->has('status')) {
             session()->put('status', auth()->check() ? auth()->user()->role->slug : 'visitor');
         }
     }

@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Presenters\DatePresenter;
+use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    
     use DatePresenter;
 
     /**
@@ -17,22 +17,22 @@ class Comment extends Model
     protected $table = 'comments';
 
     /**
-     * One to Many relation
+     * One to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'User');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'User');
     }
 
     /**
-     * One to Many relation
+     * One to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function post()
     {
-        return $this->belongsTo(env('APP_MODEL_NAMESPACE') . 'Topic');
+        return $this->belongsTo(env('APP_MODEL_NAMESPACE').'Topic');
     }
 }

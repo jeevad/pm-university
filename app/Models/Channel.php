@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Channel extends Model
 {
-
     /**
      * The database table used by the model.
      *
@@ -21,12 +21,12 @@ class Channel extends Model
     public $timestamps = false;
 
     /**
-     * One to Many relation
+     * One to Many relation.
      *
      * @return Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function users()
     {
-        return $this->hasMany(env('APP_MODEL_NAMESPACE') . 'User');
+        return $this->hasMany(env('APP_MODEL_NAMESPACE').'User');
     }
 }
