@@ -14,7 +14,7 @@ var bowerDir = vendorDir + 'bower_components/';
 var frontAssets = './resources/assets/front/';
 elixir(function(mix) {
 	// mix.sass('app.scss');
-	mix.sass('app1.scss').webpack('app1.js');
+	// mix.sass('app1.scss').webpack('app1.js');
 
 	mix.styles([ frontAssets + 'css/vendor/bootstrap.min.css' ],
 			'public/assets/front/css/vendor.css').styles(
@@ -71,7 +71,8 @@ elixir(function(mix) {
 							bowerDir
 									+ 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
 							bowerDir + 'chosen/chosen.jquery.js',
-							'vendor/vue.min.js', 'vendor/vue-resource.min.js' ],
+							bowerDir + 'vue/dist/vue.min.js',
+							bowerDir + 'vue-resource/dist/vue-resource.min.js' ],
 					'public/assets/js/vendor.js')
 
 			.scripts([ 'app.min.js' ], 'public/assets/js/app.js')
