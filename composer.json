@@ -10,12 +10,13 @@
 	"require": {
 		"php": ">=5.6.4",
 		"laravel/framework": "5.3.*",
-		"laravelcollective/bus": "5.3.x-dev",
-		"laravelcollective/html": "5.3.x-dev",
+		"laravelcollective/bus": "5.3.*",
+		"laravelcollective/html": "5.3.*",
 		"jlapp/swaggervel": "dev-master",
 		"intervention/image": "^2.3",
 		"predis/predis": "~1.0",
-		"laracasts/flash": "^2.0"
+		"laracasts/flash": "^2.0",
+		"maatwebsite/excel": "^2.1"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",

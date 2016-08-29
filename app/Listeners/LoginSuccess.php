@@ -3,18 +3,18 @@
 namespace App\Listeners;
 
 use Illuminate\Auth\Events\Login;
+use App\Services\Status;
 
-class LoginSuccess extends ListenerBase
+class LoginSuccess
 {
     /**
      * Handle the event.
      *
-     * @param Login $login
-     *
+     * @param  Login  $login
      * @return void
      */
     public function handle(Login $login)
     {
-        $this->status->setLoginStatus($login);
+        Status::setLoginStatus($login);
     }
 }
