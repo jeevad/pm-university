@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
+use App\Services\Status;
 use Illuminate\Auth\Events\Logout;
 
-class LogoutSuccess extends ListenerBase
+class LogoutSuccess
 {
     /**
      * Handle the event.
@@ -15,6 +16,6 @@ class LogoutSuccess extends ListenerBase
      */
     public function handle(Logout $event)
     {
-        $this->status->setVisitorStatus();
+        Status::setVisitorStatus();
     }
 }

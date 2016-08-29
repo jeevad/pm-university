@@ -20,7 +20,7 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         if (session('status') === 'admin' or session('status') === 'super_admin') {
-            return $next($request);
+            return $next ($request);
         }
 
         return redirect()->guest('login');

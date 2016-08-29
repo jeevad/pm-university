@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Storage;
 
 class User extends Authenticatable
 {
@@ -22,8 +23,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+            'password',
+            'remember_token',
     ];
 
     /**
@@ -32,9 +33,9 @@ class User extends Authenticatable
      * @var array
      */
     public static $loginAdminRules = [
-        'user.email'    => 'required|exists:users,email',
-        'user.password' => 'required',
-        'user.memory'   => 'sometimes|boolean',
+            'user.email'    => 'required|exists:users,email',
+            'user.password' => 'required',
+            'user.memory'   => 'sometimes|boolean',
     ];
 
     /**
@@ -78,13 +79,23 @@ class User extends Authenticatable
     }
 
     /**
+     * Get user status.
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->role->slug;
+    }
+
+    /**
      * Check media all access.
      *
      * @return bool
      */
     public function accessMediasAll()
     {
-        return $this->role->slug === 'super_admin' or $this->role->slug === 'admin';
+        return $this->getStatus() === 'super_admin' or $this->getStatus() === 'admin';
     }
 
     /**
@@ -94,7 +105,7 @@ class User extends Authenticatable
      */
     public function accessApisAll()
     {
-        return $this->role->slug === 'super_admin' or $this->role->slug === 'admin';
+        return $this->getStatus() === 'super_admin' or $this->getStatus() === 'admin';
     }
 
     /**
@@ -104,6 +115,23 @@ class User extends Authenticatable
      */
     public function accessMediasFolder()
     {
-        return $this->role->slug != 'user';
+        return $this->getStatus() != 'user';
+    }
+
+    /**
+     * Get user files directory.
+     *
+     * @return string|null
+     */
+    public function getFilesDirectory()
+    {
+        if ($this->role->slug === 'redac') {
+            $folderPath = 'user'.$this->id;
+            if (!in_array($folderPath, Storage::disk('files')->directories())) {
+                Storage::disk('files')->makeDirectory($folderPath);
+            }
+
+            return $folderPath;
+        }
     }
 }

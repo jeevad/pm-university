@@ -11,9 +11,11 @@ class Status
      *
      * @return void
      */
-    public function setLoginStatus($login)
+    public static function setLoginStatus($login)
     {
-        session()->put('status', $login->user->role->slug);
+        session([
+                'status' => $login->user->getStatus(),
+        ]);
     }
 
     /**
@@ -21,9 +23,11 @@ class Status
      *
      * @return void
      */
-    public function setVisitorStatus()
+    public static function setVisitorStatus()
     {
-        session()->put('status', 'visitor');
+        session([
+                'status' => 'visitor',
+        ]);
     }
 
     /**
@@ -31,10 +35,12 @@ class Status
      *
      * @return void
      */
-    public function setStatus()
+    public static function setStatus()
     {
         if (!session()->has('status')) {
-            session()->put('status', auth()->check() ? auth()->user()->role->slug : 'visitor');
+            session([
+                    'status' => auth()->check() ? auth()->user()->getStatus() : 'visitor',
+            ]);
         }
     }
 }
